@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
-  resources :makers, except: [:edit, :update, :destroy]
-  resources :reviews, only: [:new, :create]
+  resources :makers, except: [:edit, :update, :destroy] do
+    resources :reviews, only: [:new, :create]
+  end
   resources :products, only: [:new, :create]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
