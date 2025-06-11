@@ -16,7 +16,12 @@
       <br>
       <%= f.input :accuracy_rating, collection: (1..5).to_a, label: "Did the profile match what you experienced?", input_html: {data: {controller: "star-rating"}} %>
       <br>
-      <%= f.input :products, collection: @products, input_html: {data: {controller: "tom-select"}} %>
+      <%= f.input :products,
+                  collection: @products,
+                  as: :check_boxes,
+                  input_html: { class: "tag-selector" },
+                  item_wrapper_class: 'tag-item' %>
+      <%# <%= f.input :products, collection: @products, input_html: {data: {controller: "tom-select"}} %> %>
 
       <!--<select id="select-state" name="review[product_names]" multiple placeholder="Select a state..." autocomplete="off">
         <option value="">Select a product...</option>
