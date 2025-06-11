@@ -1,2 +1,59 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<%# Hero section %>
+<header class="hero-section position-relative d-flex align-items-center justify-content-center text-white overflow-hidden" style="min-height: 66.67vh;">
+  <%= image_tag "hero_background.jpeg", alt: "Local produce background", class: "hero-background-image position-absolute w-100 h-100 object-fit-cover" %>
+  <div class="hero-content text-center p-4" style="z-index: 1;">
+    <h1 class="display-4 fw-bold mb-3">Map the Makers</h1>
+    <p class="lead mb-4">Discover and buy direct from farmers, butchers, and artisans in your community.</p>
+    <div class="hero-buttons d-flex flex-column flex-sm-row justify-content-center gap-3">
+      <%= link_to "Find a Producer", "#", class: "button primary-button btn btn-lg" %>
+      <%= link_to "Add a Producer", "#", class: "button secondary-button btn btn-lg" %>
+    </div>
+  </div>
+</header>
+
+<section class="how-it-works-section">
+  <h2>How it works</h2>
+
+  <div class="how-it-works-cards">
+    <div class="card">
+      <%# Placeholder for icon, consider using image_tag or an icon font later %>
+      <div class="icon-placeholder"></div>
+      <h3>Explore Diverse Makers</h3>
+      <p>Browse a rich variety of local farmers, butchers, fishermen, and food artisans.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon-placeholder"></div>
+      <h3>Savor Fresh, Local Food</h3>
+      <p>Access high-quality, seasonal produce and products directly from the source.</p>
+    </div>
+
+    <div class="card">
+      <div class="icon-placeholder"></div>
+      <h3>Recommend a Maker</h3>
+      <p>If you know someone in your local community who is a producer, suggest them to Map the Makers and help grow our network of conscious consumers!</p>
+    </div>
+  </div>
+</section>
+
+<section class="cravings-section">
+  <h2>What are you craving?</h2>
+  <div class="categories-list">
+    <%# will loop through @categories or CATEGORIES later %>
+    <div class="category-item">Category 1</div>
+    <div class="category-item">Category 2</div>
+    <div class="category-item">Category 3</div>
+    <div class="category-item">Category 4</div>
+  </div>
+</section>
+
+<section class="popular-producers-section">
+  <h2>Popular Producers</h2>
+  <div class="popular-producers-list">
+    <%# will create an algorithm later to determine which are popular producers %>
+    <div class="producer-placeholder">Producer 1</div>
+    <div class="producer-placeholder">Producer 2</div>
+    <div class="producer-placeholder">Producer 3</div>
+  </div>
+  <%= link_to "Explore producers near you", "#", class: "button primary-button" %>
+</section>
