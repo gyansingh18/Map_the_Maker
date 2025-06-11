@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_10_094847) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_10_103513) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,10 +46,10 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_094847) do
     t.string "name"
     t.string "location"
     t.text "description"
-    t.text "category"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "categories", array: true
     t.index ["user_id"], name: "index_makers_on_user_id"
   end
 
@@ -70,7 +70,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_10_094847) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.text "commment"
+    t.text "comment"
     t.integer "overall_rating"
     t.integer "freshness_rating"
     t.integer "service_rating"
