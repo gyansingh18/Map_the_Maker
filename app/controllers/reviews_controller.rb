@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
   def new
     @review = Review.new
+    @maker = Maker.find(params[:maker_id])
   end
 
   def create
