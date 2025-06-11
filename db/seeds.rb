@@ -34,7 +34,7 @@ types = ["shop", "hut", "shack", "store"]
 locations = ["Canggu", "Ubud", "Uluwatu", "Kuta", "Seminyak"]
 descriptions = ["A nice little shop", "Maker selling their own produce", "Super local maker", "A local legend", "A local maker which has been around for decades"]
 
-maker_image_links = []
+maker_image_links = ["https://images.unsplash.com/photo-1591003659159-54a5579d395e?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]
 
 10.times do
   temp_primary_category = Maker::CATEGORIES.sample
@@ -58,7 +58,7 @@ maker_image_links = []
 
   link = maker_image_links.sample
   file = URI.parse(link).open
-  temp_maker.photo.attach(io: file, filename: "photo.png", content_type: "image/png")
+  temp_maker.photos.attach(io: file, filename: "photo.png", content_type: "image/png")
   temp_maker.save!
 
   makers << temp_maker
