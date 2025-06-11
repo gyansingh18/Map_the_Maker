@@ -1,3 +1,31 @@
 <div class="container text-center">
-  <h3>Add a review about <span class="highlight"><%= @maker.name %></span></h3>
+  <h3 class="mt-2">Add a review about <span class="highlight"><%= @maker.name %></span></h3>
+  <p>test test test</p>
+</div>
+<br>
+<div class="container text-center bg-secondary py-3 w-100">
+  <div class="col-xs-4 form">
+    <%= simple_form_for [@maker, @review] do |f| %>
+      <%= f.input :overall_rating, collection: (1..5).to_a, label: "Overall Experience", input_html: {data: {controller: "star-rating"}} %>
+      <br>
+      <%= f.input :freshness_rating, collection: (1..5).to_a, label: "Products' freshness", input_html: {data: {controller: "star-rating"}} %>
+      <br>
+      <%= f.input :service_rating, collection: (1..5).to_a, label: "Friendliness", input_html: {data: {controller: "star-rating"}} %>
+      <br>
+      <%= f.input :product_range_rating, collection: (1..5).to_a, label: "Product variety?", input_html: {data: {controller: "star-rating"}} %>
+      <br>
+      <%= f.input :accuracy_rating, collection: (1..5).to_a, label: "Did the profile match what you experienced?", input_html: {data: {controller: "star-rating"}} %>
+      <br>
+      <select id="select-state" name="review[product_names]" multiple placeholder="Select a state..." autocomplete="off">
+        <option value="">Select a product...</option>
+        <% @products.each do |product| %>
+          <option value=""><%= product.name %></option>
+        <% end %>
+		  </select>
+      <br>
+      <%= f.input :comment, label: "Add a general comment" %>
+      <br>
+      <%= f.submit "Publish your review", class:"button-primary" %>
+    <% end %>
+  </div>
 </div>

@@ -2,10 +2,11 @@ class ReviewsController < ApplicationController
   def new
     @review = Review.new
     @maker = Maker.find(params[:maker_id])
+    @products = Product.all
   end
 
   def create
-    @review = Review.new(params[review_params])
+    @review = Review.new(review_params)
     @maker = Maker.find(params[:maker_id])
     @user = current_user
     @review.user = @user
