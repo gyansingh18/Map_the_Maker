@@ -12,6 +12,14 @@ class ReviewsController < ApplicationController
     @review.user = @user
     @review.maker = @maker
     if @review.save
+      @product_names = params[:review][:products]
+      @product_names.each do |product|
+        if product != ""
+          @product = Product.find_or_create_by(name: product)
+          ReviewProduct.create(product: @product, review: @review)
+        end
+      end
+      # add the method that Christina sent
       redirect_to maker_path(@maker)
     else
       render :new, status: :unprocessable_entity

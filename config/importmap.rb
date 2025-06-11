@@ -8,6 +8,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "bootstrap", to: "bootstrap.min.js", preload: true
 pin "@popperjs/core", to: "popper.js", preload: true
 pin "star-rating.js" # @4.3.1
-pin "tom-select" # @2.4.3
-pin "@orchidjs/sifter", to: "@orchidjs--sifter.js" # @1.1.0
-pin "@orchidjs/unicode-variants", to: "@orchidjs--unicode-variants.js" # @1.1.2
+pin "tom-select/dist/js/tom-select.complete.min.js", to: "tom-select--dist--js--tom-select.complete.min.js.js" # @2.4.3
