@@ -5,7 +5,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new
+    @review = Review.new(params[review_params])
     @maker = Maker.find(params[:maker_id])
     @user = current_user
     @review.user = @user
@@ -15,5 +15,11 @@ class ReviewsController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  private
+
+  def review_params
+    params.require(:review).permit(:overall_rating, :freshness_rating, :service_rating, :product_range_rating, :accuracy_rating, :comment)
   end
 end
