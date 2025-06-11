@@ -34,7 +34,38 @@ types = ["shop", "hut", "shack", "store"]
 locations = ["Canggu", "Ubud", "Uluwatu", "Kuta", "Seminyak"]
 descriptions = ["A nice little shop", "Maker selling their own produce", "Super local maker", "A local legend", "A local maker which has been around for decades"]
 
-maker_image_links = ["https://images.unsplash.com/photo-1591003659159-54a5579d395e?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"]
+maker_image_links = {
+  "meat" =>[
+    "https://live-production.wcms.abc-cdn.net.au/1b4abc68c6c4fdca870a79508c8ff991?impolicy=wcms_crop_resize&cropH=719&cropW=1280&xPos=0&yPos=0&width=862&height=485",
+    "https://dam.mediacorp.sg/image/upload/s--QMWnmhWZ--/c_crop,h_843,w_1500,x_0,y_123/c_fill,g_auto,h_468,w_830/fl_relative,g_south_east,l_mediacorp:cna:watermark:2021-08:cna,w_0.1/f_auto,q_auto/v1/mediacorp/cna/image/2022/06/01/tiong_bahru_02.jpg?itok=YQxTym9D"],
+  "seafood" => [
+    "https://indonesiaexpat.id/wp-content/uploads/2013/01/Various_tuna_and_mackerel_for_sale_in_Jimbaran.jpg.webp",
+    "https://balibuddies.com/wp-content/uploads/2024/08/Seller-cutting-fishes-at-Jimbaran-Fish-Market-min-1024x768.jpeg"],
+  "vegetables" => [
+    "https://cdn.iklimku.org/wp-content/uploads/2023/11/23160908/IL-MALINO-02.jpg",
+    "https://files.globalgiving.org/pfil/53284/pict_featured_jumbo.jpg?t=1659462732000"],
+  "fruits" => [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2sXgxzcxyB82xbgb-2MrzCZOKntRJnd1Ncw&s",
+    "https://media.istockphoto.com/id/470519520/photo/roadside-fruit-market-in-bali-indonesia.jpg?s=612x612&w=0&k=20&c=w8plqJ6r3okHP9tBFyT8DFRjNanroa4PrOr16M73PhE="],
+  "dairy" => [
+    "https://cdn.antaranews.com/cache/1200x800/2011/03/20110311111242hargasusu080311-3.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBpJVrqJckftsx5JkFntl0dm15kfQGPUsulA&s"],
+  "other" => [
+    "https://anekamarket.com/cdn/shop/files/Inside_1_2048x.jpg?v=1614893803",
+    "https://149346090.v2.pressablecdn.com/wp-content/uploads/2021/09/20210915_ROW_WARUNG_PINTAR_00171-1-scaled.jpg"],
+  "drinks" => [
+    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/67/68/51/empty.jpg?w=1400&h=800&s=1",
+    "https://www.ministryofvillas.com/wp-content/uploads/2018/02/bali-canggu-popular-deli-wine.jpg"],
+  "grains" => [
+    "https://img.jakpost.net/c/2020/03/19/2020_03_19_89936_1584591042._large.jpg",
+    "https://assets.rikolto.org/styles/universal_metatag_opengraph_image/s3/project/images/_mg_8096-2_0.jpg?itok=fqtd9eDa"],
+  "bakery & pastries" => [
+    "https://lh5.googleusercontent.com/p/AF1QipPq4LrxQGpRESWdHlZdM_7oR25gvEaNeqnJlhYR=w408-h306-k-no",
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioUWeX1Sl8pVO5HLtp8wsDrrYyMjDXQ_u4d5RGx-I0Ps3WhIUVpQV824j_mqiUYXudbZJ1SQI2oWrqeuYeK-9QuPNT8G5yxg6SSKUIBNfGItdjV8UOnIDxTuez1tjYpylyWbJGbqtGa6wbtFHlclut8yYEokvoO-NrS9oxUnq8eacyLt-WbKV3/w640-h428/01%20TWN_9661%20Innland%20Bakery%20@%20George%20Town%20in%20Penang%20%5BMalaysia%5D%20.JPG"],
+  "eggs" => [
+    "https://media.licdn.com/dms/image/v2/C4E12AQH1-BSSiaCSnA/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1521635189099?e=1754524800&v=beta&t=Dy4Abfw4OTNFNzx2pvvEE-4ZVzsxzvz9W57e8K1n8AE",
+    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEix85NoybpnxjjHnKcttQvJDoftmapdubKkLELmudVew-8Q69ZSqlO9cUMQ0HHlzqhxfO4J1bj0U3tPGMQaiHf9lz6TDWhL29KIKwR7eNQCzt77Lew3s_AwFTHZlQY5ZFQu7CUrmZxkdjM/s1600/chia-song-kun.jpg"]
+  }
 
 10.times do
   temp_primary_category = Maker::CATEGORIES.sample
@@ -56,7 +87,7 @@ maker_image_links = ["https://images.unsplash.com/photo-1591003659159-54a5579d39
     user: users.sample
   )
 
-  link = maker_image_links.sample
+  link = maker_image_links[temp_categories.sample].sample
   file = URI.parse(link).open
   temp_maker.photos.attach(io: file, filename: "photo.png", content_type: "image/png")
   temp_maker.save!
