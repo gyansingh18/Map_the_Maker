@@ -4,7 +4,7 @@ class MakersController < ApplicationController
   end
 
   def show
-    @maker = Maker.find(params: [maker_id])
+    @maker = Maker.find(params[:id])
   end
 
   def new
@@ -15,7 +15,7 @@ class MakersController < ApplicationController
     @maker = Maker.new(maker_params)
     @maker.user = current_user
     if @maker.save
-      redirect_to maker_path(params: [maker_id])
+      redirect_to maker_path(params[:id])
     else
       render :new, status: :unprocessable_entity
     end
