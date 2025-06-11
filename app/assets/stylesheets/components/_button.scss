@@ -1,6 +1,8 @@
 .button-primary {
   background-color: $primary-color;
   color: $background-color;
+  width:  100%;
+  margin-bottom: 5px;
   border-radius: $border-radius;
   border: 0;
   font-weight: 600;
@@ -10,8 +12,20 @@
 .button-secondary {
   background-color: $background-color;
   color: $primary-color;
+  width:  100%;
   border-radius: $border-radius;
   border-color: $primary-color;
   border: 1px solid;
   padding: 8px;
+  margin-bottom: 5px;
+}
+
+@media(min-width: 440px) {
+  .button-primary {
+    width:  auto;
+  }
+
+  .button-secondary {
+    width:  auto;
+  }
 }
