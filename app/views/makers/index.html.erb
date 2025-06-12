@@ -40,6 +40,12 @@
     </div>
   </div>
   <hr>
+
+  <div class="float-body d-flex justify-content-around align-items-center">
+    <button class="btn button-add"><i class="fa-solid fa-plus"></i> Add </button>
+    <button class="btn button-map"><i class="fa-solid fa-map"></i> Map </button>
+  </div>
+
   <div class="search-results">
     <div class="count-results">
       <% if params[:name].present? || params[:location].present? || params[:category].present? %>
@@ -74,7 +80,9 @@
         </div>
       </div>
     <% end %>
+  </div>
 
+  <div class="footer-placeholder">
   </div>
 
 </div>
