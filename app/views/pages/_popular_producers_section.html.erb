@@ -3,13 +3,33 @@
   <div class="popular-producers-list">
     <% if @popular_makers.present? %>
       <% @popular_makers.each do |maker| %>
-        <div class="producer-placeholder">
-          <%= link_to maker.name, maker_path(maker) %>
+        <div class="producer-card">
+          <%= link_to maker_path(maker) do %>
+            <% if maker.photos.attached? %>
+              <%= image_tag maker.photos.first.url, class: "producer-card-image" %>
+            <% else %>
+              <%= image_tag "default-maker-placeholder.png", class: "producer-card-image" %>
+            <% end %>
+            <div class="producer-card-info">
+              <h3><%= maker.name %></h3>
+              <p class="producer-card-location"><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
+              <% if maker.categories.present? %>
+                <p class="producer-card-categories"><%= maker.categories.join(", ") %></p>
+              <% end %>
+              <p class="producer-card-rating">
+                <% if maker.reviews.present? %>
+                  <i class="fas fa-star"></i> <%= maker.average_rating %> (<%= maker.reviews.count %> reviews)
+                <% else %>
+                  No reviews yet
+                <% end %>
+              </p>
+            </div>
+          <% end %>
         </div>
       <% end %>
     <% else %>
       <div class="producer-placeholder">No popular producers to display yet!</div>
     <% end %>
   </div>
-  <%= link_to "Explore producers near you", "#", class: "button-primary" %>
+  <%= link_to "Explore producers near you", makers_path, class: "button-primary" %>
 </section>
