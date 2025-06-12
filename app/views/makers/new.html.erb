@@ -1,0 +1,15 @@
+<div class ="container"><h1 class ="heading1">Add a Maker</h1>
+<%= simple_form_for @maker do |f| %>
+  <%= f.input :name %>
+  <%= f.input :location %>
+  <%= f.input :categories,
+              collection: Maker::CATEGORIES,
+              as: :check_boxes,
+              input_html: { class: "tag-selector" },
+              item_wrapper_class: 'tag-item' %>
+  <%= f.input :description %>
+  <%= f.input :photos, as: :file, input_html: { multiple: true } %>
+  <%= f.button :submit, "Save", class: "button-primary"
+  %>
+<% end %>
+</div>
