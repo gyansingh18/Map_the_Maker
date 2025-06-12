@@ -13,12 +13,12 @@
                 action: "click->wizard#goToNext",
                 next_step: "1"
               },
-              class: "button-primary review-btn" %>
+              class: "button-primary review-btn-alone" %>
         </div>
       </div>
       <div data-wizard-target="step" class="d-none step-form">
         <%= f.input :freshness_rating, collection: (1..5).to_a, label: "Products' freshness", input_html: {data: {controller: "star-rating"}} %>
-        <div class="mt-4 flex justify-between">
+        <div class="mt-4 d-flex justify-content-around">
             <%= button_tag "Previous", type: "button",
               data: {
                 action: "click->wizard#goToPrevious",
@@ -36,7 +36,7 @@
       </div>
       <div data-wizard-target="step" class="d-none step-form">
        <%= f.input :service_rating, collection: (1..5).to_a, label: "Friendliness", input_html: {data: {controller: "star-rating"}} %>
-        <div class="mt-4 flex justify-between">
+        <div class="mt-4 d-flex justify-content-around">
             <%= button_tag "Previous", type: "button",
               data: {
                 action: "click->wizard#goToPrevious",
@@ -54,7 +54,7 @@
       </div>
       <div data-wizard-target="step" class="d-none step-form">
         <%= f.input :product_range_rating, collection: (1..5).to_a, label: "Product variety?", input_html: {data: {controller: "star-rating"}} %>
-        <div class="mt-4 flex justify-between">
+        <div class="mt-4 d-flex justify-content-around">
             <%= button_tag "Previous", type: "button",
               data: {
                 action: "click->wizard#goToPrevious",
@@ -72,7 +72,7 @@
       </div>
       <div data-wizard-target="step" class="d-none step-form">
         <%= f.input :accuracy_rating, collection: (1..5).to_a, label: "Did the profile match what you experienced?", input_html: {data: {controller: "star-rating"}} %>
-        <div class="mt-4 flex justify-between">
+        <div class="mt-4 d-flex justify-content-around">
             <%= button_tag "Previous", type: "button",
               data: {
                 action: "click->wizard#goToPrevious",
@@ -90,7 +90,7 @@
       </div>
       <div data-wizard-target="step" class="d-none step-form">
         <%= f.input :products, label: "What product did you buy?", collection: @products, input_html: {multiple: true, data: {controller: "tom-select", tom_select_options_value: {tags: true}}}, value_method: :name %>
-        <div class="mt-4 flex justify-between">
+        <div class="mt-4 d-flex justify-content-around">
               <%= button_tag "Previous", type: "button",
                 data: {
                   action: "click->wizard#goToPrevious",
@@ -108,14 +108,14 @@
       </div>
       <div data-wizard-target="step" class="d-none step-form">
         <%= f.input :comment, label: "Add a general comment" %>
-          <div class="mt-4 flex justify-between">
+          <div class="mt-4 d-flex justify-content-around">
               <%= button_tag "Previous", type: "button",
                 data: {
                   action: "click->wizard#goToPrevious",
                   previous_step: "6"
                 },
                 class: "button-secondary review-btn" %>
-          <%= f.submit "Publish your review", class:"button-primary" %>
+          <%= f.submit "Publish", class:"button-primary review-btn" %>
           </div>
       </div>
     <% end %>
