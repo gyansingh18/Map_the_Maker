@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home ]
+  skip_before_action :authenticate_user!, only: [ :home, :index ]
 
   def home
     @popular_makers = Maker.order(Arel.sql('RANDOM()')).limit(5)

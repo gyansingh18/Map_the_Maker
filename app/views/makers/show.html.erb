@@ -1,5 +1,76 @@
 <div class="container">
   <h1><span class="highlight"><%= @maker.name %></span>'s Profile</h1>
+</div>
+
+<div class="container">
+  <div class="container">
+    <img src= https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVzLX5hzFg1Sw9cAHgNnBKojNeV3f9_cHZxA&s px 20 >
+    <br>
+  </div class="container" >
+  <br>
+  <h4><span class="highlight"><%= @maker.name %></span></h4>
+    <p> Location <%= @maker.location %> <p>
+</div>
+
+<div class="container">
+    <p>
+    category 1, category 2 , category 3
+    </p>
+</div>
+
+<br>
+<div class="container">
+    <h4>Aggregrate Review </h4>
+    <p> Cleanliness 3/5</p>
+    <p> Quality 4/5 </p>
+    <p> Value 5/5 </p>
+</div>
+
+<br>
+<div class = "container">
+    <%= link_to "Share with Friends", new_maker_review_path(@maker), class:"button-secondary" %>
+</div>
+
+<br>
+
+</div class="container">
+  <h4> Reviews for: <span class="highlight"><%= @maker.name %></span><h4>
+</div>
+<br>
+<div class="container">
+  <p> <strong> Review 1  <strong> </p>
+   <p> Cleanliness 3/5</p>
+    <p> Quality 3/5 </p>
+    <p> Value 5/5 </p>
+  <p>  'Great Guy would recommend him as a diary farmer' - Mathew <p>
+</div>
+
+<br>
+<div class="container">
+  <p> <strong> Review 2  <strong> </p>
+   <p> Cleanliness 1/5</p>
+    <p> Quality 1/5 </p>
+    <p> Value 1/5 </p>
+  <p> 'Very mean - I don't like him' - Mark <p>
+</div>
+
+<br>
+<div class="container">
+  <p> <strong> Review 3  <strong> </p>
+   <p> Cleanliness 5/5</p>
+    <p> Quality 5/5 </p>
+    <p> Value 5/5 </p>
+  <p> 'Fantastic milk and cookies' - Lucas <p>
+</div>
+
+
+<br>
+<br>
+<br>
+<br>
+
+<div class="container">
+  <h1><span class="highlight"><%= @maker.name %></span>'s Profile</h1>
   <br>
   <h2>Add a review!</h2>
   <%= link_to "Submit", new_maker_review_path(@maker), class:"button-primary" %>
