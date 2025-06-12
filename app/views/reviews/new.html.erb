@@ -1,31 +1,123 @@
-<div class="container text-center">
+<div class="container text-center h-25">
   <h2 class="mt-2">Add a review about <span class="highlight"><%= @maker.name %></span></h2>
 </div>
 <br>
-<div class="container text-center bg-secondary py-3 w-100">
-  <div class="col-xs-4 form">
+<div class="review-form">
+  <div data-controller="wizard" class="col-xs-4 form">
     <%= simple_form_for [@maker, @review] do |f| %>
-      <%= f.input :overall_rating, collection: (1..5).to_a, label: "Overall Experience", input_html: {data: {controller: "star-rating"}} %>
-      <br>
-      <%= f.input :freshness_rating, collection: (1..5).to_a, label: "Products' freshness", input_html: {data: {controller: "star-rating"}} %>
-      <br>
-      <%= f.input :service_rating, collection: (1..5).to_a, label: "Friendliness", input_html: {data: {controller: "star-rating"}} %>
-      <br>
-      <%= f.input :product_range_rating, collection: (1..5).to_a, label: "Product variety?", input_html: {data: {controller: "star-rating"}} %>
-      <br>
-      <%= f.input :accuracy_rating, collection: (1..5).to_a, label: "Did the profile match what you experienced?", input_html: {data: {controller: "star-rating"}} %>
-      <br>
-      <%#= f.input :products,
-                  label: "What product did you buy?",
-                  collection: @products,
-                  as: :check_boxes,
-                  input_html: { class: "tag-selector" },
-                  item_wrapper_class: 'tag-item' %>
-      <%= f.input :products, label: "What product did you buy?", collection: @products, input_html: {multiple: true, data: {controller: "tom-select", tom_select_options_value: {tags: true}}}, value_method: :name %>
-      <br>
-      <%= f.input :comment, label: "Add a general comment" %>
-      <br>
-      <%= f.submit "Publish your review", class:"button-primary" %>
+      <div data-wizard-target="step">
+        <%= f.input :overall_rating, collection: (1..5).to_a, label: "Overall Experience", input_html: {data: {controller: "star-rating"}} %>
+         <div class="mt-4 flex justify-between">
+            <%= button_tag "Next", type: "button",
+              data: {
+                action: "click->wizard#goToNext",
+                next_step: "1"
+              },
+              class: "button-primary review-btn-alone" %>
+        </div>
+      </div>
+      <div data-wizard-target="step" class="d-none step-form">
+        <%= f.input :freshness_rating, collection: (1..5).to_a, label: "Products' freshness", input_html: {data: {controller: "star-rating"}} %>
+        <div class="mt-4 d-flex justify-content-around">
+            <%= button_tag "Previous", type: "button",
+              data: {
+                action: "click->wizard#goToPrevious",
+                previous_step: "1"
+              },
+              class: "button-secondary review-btn" %>
+
+            <%= button_tag "Next", type: "button",
+              data: {
+                action: "click->wizard#goToNext",
+                next_step: "2"
+              },
+              class: "button-primary review-btn" %>
+        </div>
+      </div>
+      <div data-wizard-target="step" class="d-none step-form">
+       <%= f.input :service_rating, collection: (1..5).to_a, label: "Friendliness", input_html: {data: {controller: "star-rating"}} %>
+        <div class="mt-4 d-flex justify-content-around">
+            <%= button_tag "Previous", type: "button",
+              data: {
+                action: "click->wizard#goToPrevious",
+                previous_step: "2"
+              },
+              class: "button-secondary review-btn" %>
+
+            <%= button_tag "Next", type: "button",
+              data: {
+                action: "click->wizard#goToNext",
+                next_step: "3"
+              },
+              class: "button-primary review-btn" %>
+        </div>
+      </div>
+      <div data-wizard-target="step" class="d-none step-form">
+        <%= f.input :product_range_rating, collection: (1..5).to_a, label: "Product variety?", input_html: {data: {controller: "star-rating"}} %>
+        <div class="mt-4 d-flex justify-content-around">
+            <%= button_tag "Previous", type: "button",
+              data: {
+                action: "click->wizard#goToPrevious",
+                previous_step: "3"
+              },
+              class: "button-secondary review-btn" %>
+
+            <%= button_tag "Next", type: "button",
+              data: {
+                action: "click->wizard#goToNext",
+                next_step: "4"
+              },
+              class: "button-primary review-btn" %>
+        </div>
+      </div>
+      <div data-wizard-target="step" class="d-none step-form">
+        <%= f.input :accuracy_rating, collection: (1..5).to_a, label: "Did the profile match what you experienced?", input_html: {data: {controller: "star-rating"}} %>
+        <div class="mt-4 d-flex justify-content-around">
+            <%= button_tag "Previous", type: "button",
+              data: {
+                action: "click->wizard#goToPrevious",
+                previous_step: "4"
+              },
+              class: "button-secondary review-btn" %>
+
+            <%= button_tag "Next", type: "button",
+              data: {
+                action: "click->wizard#goToNext",
+                next_step: "5"
+              },
+              class: "button-primary review-btn" %>
+        </div>
+      </div>
+      <div data-wizard-target="step" class="d-none step-form">
+        <%= f.input :products, label: "What product did you buy?", collection: @products, input_html: {multiple: true, data: {controller: "tom-select", tom_select_options_value: {tags: true}}}, value_method: :name %>
+        <div class="mt-4 d-flex justify-content-around">
+              <%= button_tag "Previous", type: "button",
+                data: {
+                  action: "click->wizard#goToPrevious",
+                  previous_step: "5"
+                },
+                class: "button-secondary review-btn" %>
+
+              <%= button_tag "Next", type: "button",
+                data: {
+                  action: "click->wizard#goToNext",
+                  next_step: "6"
+                },
+                class: "button-primary review-btn" %>
+        </div>
+      </div>
+      <div data-wizard-target="step" class="d-none step-form">
+        <%= f.input :comment, label: "Add a general comment" %>
+          <div class="mt-4 d-flex justify-content-around">
+              <%= button_tag "Previous", type: "button",
+                data: {
+                  action: "click->wizard#goToPrevious",
+                  previous_step: "6"
+                },
+                class: "button-secondary review-btn" %>
+          <%= f.submit "Publish", class:"button-primary review-btn" %>
+          </div>
+      </div>
     <% end %>
   </div>
 </div>

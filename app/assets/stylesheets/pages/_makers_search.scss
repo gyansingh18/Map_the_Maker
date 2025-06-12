@@ -1,4 +1,12 @@
+.search-box {
+  margin: 0px 0px 20px 0px;
+}
+
 .categories-box {
+  margin: 0px 0px 20px 0px;
+}
+
+.category-element {
   display: inline-block;
 }
 
@@ -7,6 +15,18 @@
   position: absolute;
 }
 
-.box-label{
+.box-label {
+  border: 1px solid $font-color;
+  border-radius: 5px;
+  color: $font-color;
+  opacity: 1.0;
+  padding: 5px 7px 5px 7px;
+  margin: 5px 10px 5px 0px;
+  text-transform: capitalize;
+}
 
+.check-box:checked + label {
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  opacity: 1.0;
 }

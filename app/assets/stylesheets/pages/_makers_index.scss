@@ -7,7 +7,7 @@
 }
 
 .middle-box {
-  padding: 0px 0px 7px 0px;
+  padding: 2px 0px 15px 0px;
 }
 
 .bottom-box {
@@ -31,17 +31,61 @@
 }
 
 .star-icon {
-  opacity: 0.6;
-  color: $font-color;
+  opacity: 1.0;
+  color: $secondary-color;
   font-size: larger;
   padding: 0px 2px 0px 0px;
 }
 
 .category-tag {
-  bordeR: 1px solid $font-color;
+  border: 1px solid $font-color;
   border-radius: 5px;
-  opacity: 0.6;
-  color: $font-color;
-  padding: 0px 5px 0px 5px;
-  margin-right: 5px;
+  opacity: 1.0;
+  color: $secondary-color;
+  padding: 5px 7px 5px 7px;
+  margin-right: 10px;
+  text-transform: capitalize;
+}
+
+.float-body {
+  position: sticky;
+  top: 92vh;
+  background-color: $background-color;
+  height: 60px;
+  width:  85%;
+  border-radius: $border-radius;
+  box-shadow: 0px 10px 25px grey;
+  margin: 0px auto;
+}
+
+.button-add {
+  background-color: $background-color;
+  color: $primary-color;
+  border: 1px solid $primary-color;
+  width:  44%;
+  height: 35px;
+  border-radius: $border-radius;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+}
+
+.button-map {
+  background-color: $background-color;
+  color: $secondary-color;
+  border: 1px solid $secondary-color;
+  width:  44%;
+  height: 35px;
+  border-radius: $border-radius;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  top: 50%;
+  left: 50%;
+}
+
+.footer-placeholder {
+  height: 500px;
 }
