@@ -21,7 +21,7 @@
                   as: :check_boxes,
                   input_html: { class: "tag-selector" },
                   item_wrapper_class: 'tag-item' %>
-      <%= f.input :products, collection: @products, input_html: {multiple: true, data: {controller: "tom-select"}}, value_method: :name %>
+      <%= f.input :products, label: "What product did you buy?", collection: @products, input_html: {multiple: true, data: {controller: "tom-select", tom_select_options_value: {tags: true}}}, value_method: :name %>
       <br>
       <%= f.input :comment, label: "Add a general comment" %>
       <br>
