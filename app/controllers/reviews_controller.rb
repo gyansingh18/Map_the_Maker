@@ -19,7 +19,6 @@ class ReviewsController < ApplicationController
           ReviewProduct.create(product: @product, review: @review)
         end
       end
-      # add the method that Christina sent
       redirect_to maker_path(@maker)
     else
       render :new, status: :unprocessable_entity
