@@ -1,0 +1,72 @@
+<div class="reviews-container">
+  <% if @high_rated_reviews.present? %>
+    <% @high_rated_reviews.each do |review| %>
+      <div class="review-card">
+        <div class="review-card-top">
+          <div class="quote-icon-wrapper">
+            <i class="fas fa-quote-left"></i>
+          </div>
+          <div class="quote-text-author">
+            <p class="review-content"><%= review.comment %></p>
+            <span class="review-author">- <%= review.user.present? ? review.user.first_name : "Anonymous" %></span>
+          </div>
+        </div>
+
+        <div class="review-card-bottom">
+          <%= link_to maker_path(review.maker) do %>
+            <% if review.maker.photos.attached? %>
+              <%= image_tag review.maker.photos.first, class: "review-maker-image" %>
+            <% else %>
+              <%= image_tag "https://via.placeholder.com/60", alt: "Maker photo placeholder", class: "review-maker-image" %>
+            <% end %>
+            <div class="review-maker-info">
+              <h3><%= review.maker.name %></h3>
+              <div class="review-maker-details-row">
+                <% if review.maker.location.present? %>
+                  <p class="review-maker-location"><i class="fas fa-map-marker-alt"></i> <%= review.maker.location %></p>
+                <% end %>
+                <div class="review-overall-rating">
+                  <% rating_value = review.overall_rating.to_f %>
+                  <% if rating_value > 0 %>
+                    <i class="fas fa-star"></i> <%= rating_value.round(1) %>
+                  <% else %>
+                    No rating
+                  <% end %>
+                </div>
+              </div>
+              <% if review.maker.categories.present? %>
+                <p class="review-maker-categories"><%= review.maker.categories.join(", ") %></p>
+              <% end %>
+
+              <% if review.respond_to?(:category_ratings) && review.category_ratings.present? %>
+                <div class="review-category-breakdown">
+                  <h4>Review Breakdown:</h4>
+                  <% review.category_ratings.each do |category, rating| %>
+                    <div class="category-rating-item">
+                      <span class="category-label"><%= category.humanize %>:</span>
+                      <span class="category-stars">
+                        <% rating_value = rating.to_f %>
+                        <% 5.times do |i| %>
+                          <% if rating_value >= (i + 1) %>
+                            <i class="fas fa-star"></i>
+                          <% elsif rating_value > i %>
+                            <i class="fas fa-star-half-alt"></i>
+                          <% else %>
+                            <i class="far fa-star"></i>
+                          <% end %>
+                        <% end %>
+                      </span>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+
+            </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="placeholder-message">No high-rated reviews to display yet!</div>
+  <% end %>
+</div>

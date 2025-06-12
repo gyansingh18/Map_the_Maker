@@ -1,5 +1,6 @@
 <section class="popular-producers-section">
   <h2>Popular Producers</h2>
+  <p class="section-description">Explore the most beloved local producers, hand-picked by our community for their quality and dedication.</p>
   <div class="popular-producers-list">
     <% if @popular_makers.present? %>
       <% @popular_makers.each do |maker| %>
@@ -12,17 +13,19 @@
             <% end %>
             <div class="producer-card-info">
               <h3><%= maker.name %></h3>
-              <p class="producer-card-location"><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
+              <div class="producer-card-details-row"> <%# New container for location and rating %>
+                <p class="producer-card-location"><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
+                <div class="producer-card-rating"> <%# Changed from <p> to <div> for more flexible styling %>
+                  <% if maker.reviews.present? %>
+                    <i class="fas fa-star"></i> <%= maker.average_rating %> (<%= maker.reviews.count %> reviews)
+                  <% else %>
+                    No reviews yet
+                  <% end %>
+                </div>
+              </div>
               <% if maker.categories.present? %>
                 <p class="producer-card-categories"><%= maker.categories.join(", ") %></p>
               <% end %>
-              <p class="producer-card-rating">
-                <% if maker.reviews.present? %>
-                  <i class="fas fa-star"></i> <%= maker.average_rating %> (<%= maker.reviews.count %> reviews)
-                <% else %>
-                  No reviews yet
-                <% end %>
-              </p>
             </div>
           <% end %>
         </div>
