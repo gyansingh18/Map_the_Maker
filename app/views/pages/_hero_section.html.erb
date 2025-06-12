@@ -1,11 +1,20 @@
-<header class="hero-section">
-  <%= image_tag "hero-background.jpeg", alt: "Local produce background", class: "hero-background-image" %>
-  <div class="hero-content">
-    <h1>Map the Makers</h1>
-    <p>Buy direct from farmers, butchers, and artisans in your community.</p>
+<header class="hero-section" data-controller="hero-video">
+  <%= video_tag "hero-background-video.mp4", data: { hero_video_target: "video" },
+                autoplay: true,
+                loop: true,
+                muted: true,
+                playsinline: true,
+                poster: image_path("hero-background.jpeg"),
+                class: "hero-background-video" %>
+
+  <div class="hero-content-wrapper">
+    <h1>Buy Local. <br><br>
+    Eat Fresh.<br><br>
+    Support Community.</h1><br><br>
+    <p>We connect with farmers, bakers, and artisans in your community for food that's fresh, sustainable, and truly local.</p><br><br>
     <div class="hero-buttons">
-      <%= link_to "Find a Producer", "#", class: "button-primary" %>
-      <%= link_to "Add a Producer", "#", class:"button-secondary" %>
+      <%= link_to "Find Local Food", "#", class: "button-primary" %>
+      <%= link_to "Recommend a Maker", "#", class:"button-secondary" %>
     </div>
   </div>
 </header>
