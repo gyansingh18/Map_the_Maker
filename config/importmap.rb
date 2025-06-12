@@ -10,4 +10,4 @@ pin "@popperjs/core", to: "popper.js", preload: true
 pin "star-rating.js" # @4.3.1
 # pin "tom-select/dist/js/tom-select.complete.min.js", to: "tom-select--dist--js--tom-select.complete.min.js.js" # @2.4.3
 pin "tom-select" # @2.4.1
-pin "@stimulus-components/scroll-progress", to: "@stimulus-components--scroll-progress.js" # @5.0.0
+
