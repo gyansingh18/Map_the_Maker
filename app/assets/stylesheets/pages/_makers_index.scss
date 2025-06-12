@@ -1,9 +1,29 @@
+.index-maker-card {
+  padding: 20px 0px 20px 0px;
+}
+
+.top-box {
+  padding: 10px 0px 0px 0px;
+}
+
+.middle-box {
+  padding: 0px 0px 7px 0px;
+}
+
+.bottom-box {
+  padding: 0px 0px 0px 0px;
+}
+
 .index-maker-card-photo {
   width: 100%;
-  height: 200px;
+  height: 250px;
   object-fit: cover;
   border-radius: 10px;
   opacity: 1.0;
+}
+
+.name-box {
+  width: 70%;
 }
 
 .star-box {
@@ -13,6 +33,8 @@
 .star-icon {
   opacity: 0.6;
   color: $font-color;
+  font-size: larger;
+  padding: 0px 2px 0px 0px;
 }
 
 .category-tag {
@@ -20,5 +42,6 @@
   border-radius: 5px;
   opacity: 0.6;
   color: $font-color;
-  padding: 0px 3px 0px 3px;
+  padding: 0px 5px 0px 5px;
+  margin-right: 5px;
 }
