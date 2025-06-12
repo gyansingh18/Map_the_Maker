@@ -1,8 +1,8 @@
-<div class="container text-center">
+<div class="container text-center h-25">
   <h2 class="mt-2">Add a review about <span class="highlight"><%= @maker.name %></span></h2>
 </div>
 <br>
-<div class="container text-center bg-secondary py-3 w-100">
+<div class="review-form">
   <div data-controller="wizard" class="col-xs-4 form">
     <%= simple_form_for [@maker, @review] do |f| %>
       <div data-wizard-target="step">
@@ -13,7 +13,7 @@
                 action: "click->wizard#goToNext",
                 next_step: "1"
               },
-              class: "button-primary" %>
+              class: "button-primary review-btn" %>
         </div>
       </div>
       <div data-wizard-target="step" class="d-none step-form">
@@ -24,14 +24,14 @@
                 action: "click->wizard#goToPrevious",
                 previous_step: "1"
               },
-              class: "button-secondary" %>
+              class: "button-secondary review-btn" %>
 
             <%= button_tag "Next", type: "button",
               data: {
                 action: "click->wizard#goToNext",
                 next_step: "2"
               },
-              class: "button-primary" %>
+              class: "button-primary review-btn" %>
         </div>
       </div>
       <div data-wizard-target="step" class="d-none step-form">
@@ -42,14 +42,14 @@
                 action: "click->wizard#goToPrevious",
                 previous_step: "2"
               },
-              class: "button-secondary" %>
+              class: "button-secondary review-btn" %>
 
             <%= button_tag "Next", type: "button",
               data: {
                 action: "click->wizard#goToNext",
                 next_step: "3"
               },
-              class: "button-primary" %>
+              class: "button-primary review-btn" %>
         </div>
       </div>
       <div data-wizard-target="step" class="d-none step-form">
@@ -60,14 +60,14 @@
                 action: "click->wizard#goToPrevious",
                 previous_step: "3"
               },
-              class: "button-secondary" %>
+              class: "button-secondary review-btn" %>
 
             <%= button_tag "Next", type: "button",
               data: {
                 action: "click->wizard#goToNext",
                 next_step: "4"
               },
-              class: "button-primary" %>
+              class: "button-primary review-btn" %>
         </div>
       </div>
       <div data-wizard-target="step" class="d-none step-form">
@@ -78,14 +78,14 @@
                 action: "click->wizard#goToPrevious",
                 previous_step: "4"
               },
-              class: "button-secondary" %>
+              class: "button-secondary review-btn" %>
 
             <%= button_tag "Next", type: "button",
               data: {
                 action: "click->wizard#goToNext",
                 next_step: "5"
               },
-              class: "button-primary" %>
+              class: "button-primary review-btn" %>
         </div>
       </div>
       <div data-wizard-target="step" class="d-none step-form">
@@ -96,14 +96,14 @@
                   action: "click->wizard#goToPrevious",
                   previous_step: "5"
                 },
-                class: "button-secondary" %>
+                class: "button-secondary review-btn" %>
 
               <%= button_tag "Next", type: "button",
                 data: {
                   action: "click->wizard#goToNext",
                   next_step: "6"
                 },
-                class: "button-primary" %>
+                class: "button-primary review-btn" %>
         </div>
       </div>
       <div data-wizard-target="step" class="d-none step-form">
@@ -114,7 +114,7 @@
                   action: "click->wizard#goToPrevious",
                   previous_step: "6"
                 },
-                class: "button-secondary" %>
+                class: "button-secondary review-btn" %>
           <%= f.submit "Publish your review", class:"button-primary" %>
           </div>
       </div>
