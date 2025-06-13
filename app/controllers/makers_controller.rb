@@ -15,6 +15,13 @@ class MakersController < ApplicationController
         end
       end
     end
+
+    @markers = @makers.geocoded.map do |maker|
+      {
+        lat: maker.latitude,
+        lng: maker.longitude
+      }
+    end
   end
 
   def show
@@ -32,6 +39,18 @@ class MakersController < ApplicationController
       redirect_to maker_path(@maker)
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def map
+    @makers = Maker.all
+    @markers = @makers.geocoded.map do |maker|
+      {
+        lat: maker.latitude,
+        lng: maker.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {maker: maker})
+
+      }
     end
   end
 

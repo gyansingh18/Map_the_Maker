@@ -1,0 +1,22 @@
+/* app/assets/stylesheets/components/_map.scss */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.mapbox-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: "Open Sans", sans-serif;
+}

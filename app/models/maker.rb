@@ -5,13 +5,13 @@ class Maker < ApplicationRecord
   validates :categories, presence: true
   validates :name, presence: true
   geocoded_by :location
-  # after_validation :geocode, if: :will_save_change_to_location?
+  after_validation :geocode, if: :will_save_change_to_location?
 
   CATEGORIES = ["meat", "seafood", "vegetables", "fruits", "dairy", "other", "drinks", "grains", "bakery & pastries", "eggs"]
 
   def average_rating
     if reviews.present?
-      reviews.average(:overall_rating).round(2) # Changed to :overall_rating
+      reviews.average(:overall_rating).round(2)
     else
       "No reviews yet"
     end

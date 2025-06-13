@@ -11,3 +11,5 @@ pin "star-rating.js" # @4.3.1
 # pin "tom-select/dist/js/tom-select.complete.min.js", to: "tom-select--dist--js--tom-select.complete.min.js.js" # @2.4.3
 pin "tom-select" # @2.4.1
 
+pin "mapbox-gl", to: "https://ga.jspm.io/npm:mapbox-gl@3.1.2/dist/mapbox-gl.js"
+pin "process", to: "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/browser/process-production.js"

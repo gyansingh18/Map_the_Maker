@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
   resources :makers, except: [:edit, :update, :destroy] do
+    collection do
+      get :map
+    end
     resources :reviews, only: [:new, :create]
   end
   resources :products, only: [:new, :create]
