@@ -16,12 +16,12 @@ class MakersController < ApplicationController
       end
     end
 
-    @markers = @makers.geocoded.map do |maker|
-      {
-        lat: maker.latitude,
-        lng: maker.longitude
-      }
-    end
+    # @markers = @makers.geocoded.map do |maker|
+    #   {
+    #     lat: maker.latitude,
+    #     lng: maker.longitude
+    #   }
+    # end
   end
 
   def show
@@ -50,9 +50,8 @@ class MakersController < ApplicationController
     @markers = @makers.geocoded.map do |maker|
       {
         lat: maker.latitude,
-        lng: maker.longitude,
-        info_window_html: render_to_string(partial: "info_window", locals: {maker: maker})
-
+        lng: maker.longitude
+        # info_window_html: render_to_string(partial: "info_window", locals: {maker: maker })
       }
     end
   end

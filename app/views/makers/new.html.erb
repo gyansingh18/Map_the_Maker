@@ -1,15 +1,22 @@
-<div class ="container"><h1 class ="heading1">Add a Maker</h1>
+<div class ="container sign-up"><h2 class ="heading1">Add a Maker</h2>
 <%= simple_form_for @maker do |f| %>
   <%= f.input :name %>
   <%= f.input :location,
   input_html: {data: {location_autocomplete_target: "location"}, class: "d-none"},
   wrapper_html: {data: {controller: "location-autocomplete", location_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}}
 %>
-  <%= f.input :categories,
-              collection: Maker::CATEGORIES,
-              as: :check_boxes,
-              input_html: { class: "tag-selector" },
-              item_wrapper_class: 'tag-item' %>
+<div id="map" style="height: 300px; width: 100%; margin-top: 1rem;"
+  data-controller="map"
+  data-map-markers-value="<%= @markers.to_json %>"
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+ <div class="categories-box">
+              <%= f.collection_check_boxes(:categories, Maker::CATEGORIES, :to_s, :to_s) do |b| %>
+                <div class="category-element">
+                  <%= b.check_box class:"check-box" %>
+                  <%= b.label class:"box-label" %>
+                </div>
+              <% end %>
+            </div>
   <%= f.input :description %>
   <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   <%= f.button :submit, "Save", class: "button-primary"
