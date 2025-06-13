@@ -19,6 +19,7 @@ class MakersController < ApplicationController
 
   def show
     @maker = Maker.find(params[:id])
+    @reviews = Review.all
     @review = Review.new
     @products = Product.all
   end
