@@ -4,7 +4,6 @@ class Maker < ApplicationRecord
   has_many :reviews
   validates :categories, presence: true
   validates :name, presence: true
-
   geocoded_by :location
   after_validation :geocode, if: :will_save_change_to_location?
 
