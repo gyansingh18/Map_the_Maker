@@ -1,6 +1,12 @@
 class MakersController < ApplicationController
   def index
     @makers = Maker.all
+    @markers = @makers.geocoded.map do |flat|
+      {
+        lat: flat.latitude,
+        lng: flat.longitude
+      }
+    end
   end
 
   def show

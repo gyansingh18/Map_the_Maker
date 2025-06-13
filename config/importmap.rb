@@ -25,3 +25,5 @@ pin "nanoid" # @3.3.11
 pin "subtag" # @0.5.0
 pin "suggestions" # @1.7.1
 pin "xtend" # @4.0.2
+pin "mapbox-gl" # @3.1.2
+pin "process" # @2.1.0
