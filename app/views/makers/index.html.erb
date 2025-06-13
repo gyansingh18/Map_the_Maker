@@ -16,7 +16,11 @@
       <% if results == [] %>
         <% results = ["Search makers"] %>
       <% end %>
-      <%= results.join(", ") %>
+      <% results = results.join(", ") %>
+      <% if results.length >= 30 %>
+        <% results = results[0..30] + "..." %>
+      <% end %>
+      <%= results %>
     </button>
   </div>
 
