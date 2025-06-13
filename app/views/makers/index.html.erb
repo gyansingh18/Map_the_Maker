@@ -2,7 +2,21 @@
 
   <div class="float-search d-flex justify-content-around align-items-center">
     <button type="button" class="btn text-start button-search" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-      <i class="fa-solid fa-magnifying-glass"></i> Search makers
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <% results = [] %>
+      <% if params[:name].present? %>
+        <% results << params[:name].capitalize %>
+      <% end %>
+      <% if params[:location].present? %>
+        <% results << params[:location].capitalize %>
+      <% end %>
+      <% if params[:category] != [""] && params[:category] != nil %>
+        <% results << params[:category].drop(1).map!(&:capitalize).join(", ") %>
+      <% end %>
+      <% if results == [] %>
+        <% results = ["Search makers"] %>
+      <% end %>
+      <%= results.join(", ") %>
     </button>
   </div>
 
