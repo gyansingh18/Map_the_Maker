@@ -12,6 +12,7 @@
 @import "pages/index";
 @import "pages/makers_new";
 @import "components/map";
+@import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
 
 h1 {
   font-size: 42px;
