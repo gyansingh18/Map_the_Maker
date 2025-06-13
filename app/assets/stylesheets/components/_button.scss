@@ -12,6 +12,12 @@
   text-align: center;
 }
 
+.button-primary.review-btn-alone {
+    width: 90%;
+}
+.button-primary.review-btn {
+    width: 40%;
+}
 .button-secondary {
   background-color: $background-color;
   color: $primary-color;
@@ -26,6 +32,10 @@
   text-align: center;
 }
 
+.button-secondary.review-btn {
+  width: 40%;
+}
+
 @media(min-width: 440px) {
   .button-primary {
     width:  auto;
@@ -34,4 +44,8 @@
   .button-secondary {
     width:  auto;
   }
+}
+
+a {
+
 }

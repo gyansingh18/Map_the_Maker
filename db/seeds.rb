@@ -10,7 +10,7 @@ User.destroy_all
 puts "Creating users"
 users = []
 
-first_names = ["Alizee", "Clint", "Ashely", "Gyan", "Jannis"]
+first_names = ["Alizee", "Clint", "Ashley", "Gyan", "Jannis"]
 last_names = ["Apple", "Cucumber", "Avocado", "Garlic", "Jackfruit"]
 
 

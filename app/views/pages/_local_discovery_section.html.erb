@@ -1,0 +1,41 @@
+<section class="local-discovery-section">
+  <div class="container">
+    <h2 class="section-headline">Your Neighborhood, Your Harvest.</h2>
+
+    <%= form_with url: makers_path, method: :get, local: true do |form| %>
+      <div class="search-bar-container">
+        <%= form.text_field :location, placeholder: "Enter your location (e.g., city, postcode)", class: "location-search-input" %>
+        <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
+      </div>
+    <% end %>
+
+    <div class="category-filter-label">Or browse by:</div>
+    <div class="category-icons-container">
+      <div class="category-icon-item">
+        <i class="fas fa-carrot"></i>
+        <span>Vegetables</span>
+      </div>
+      <div class="category-icon-item">
+        <i class="fas fa-cow"></i>
+        <span>Meat</span>
+      </div>
+      <div class="category-icon-item">
+        <i class="fas fa-fish"></i>
+        <span>Seafood</span>
+      </div>
+      <div class="category-icon-item">
+        <i class="fas fa-bread-slice"></i>
+        <span>Baked Goods</span>
+      </div>
+      <div class="category-icon-item">
+        <i class="fas fa-egg"></i>
+        <span>Dairy & Eggs</span>
+      </div>
+      <div class="category-icon-item">
+        <i class="fas fa-seedling"></i>
+        <span>Produce</span>
+      </div>
+    </div>
+  </div>
+
+</section>

@@ -1,16 +1,33 @@
 class MakersController < ApplicationController
   def index
     @makers = Maker.all
-    @markers = @makers.geocoded.map do |flat|
+    if params[:name].present?
+      @makers = @makers.where("name ILIKE ?", "%#{params[:name]}%")
+    end
+    if params[:location].present?
+      @makers = @makers.where("location ILIKE ?", "%#{params[:location]}%")
+    end
+    if params[:category].present?
+      categories_params = params[:category].drop(1)
+      categories_params.each do |category|
+        @makers = @makers.select do |maker|
+          maker.categories.include?(category)
+        end
+      end
+    end
+
+    @markers = @makers.geocoded.map do |maker|
       {
-        lat: flat.latitude,
-        lng: flat.longitude
+        lat: maker.latitude,
+        lng: maker.longitude
       }
     end
   end
 
   def show
     @maker = Maker.find(params[:id])
+    @review = Review.new
+    @products = Product.all
   end
 
   def new
@@ -24,6 +41,18 @@ class MakersController < ApplicationController
       redirect_to maker_path(@maker)
     else
       render :new, status: :unprocessable_entity
+    end
+  end
+
+  def map
+    @makers = Maker.all
+    @markers = @makers.geocoded.map do |maker|
+      {
+        lat: maker.latitude,
+        lng: maker.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {maker: maker})
+
+      }
     end
   end
 

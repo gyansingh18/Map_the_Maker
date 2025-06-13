@@ -1,0 +1,19 @@
+<% ratings = [] %>
+<% rating_sum = 0 %>
+<% maker.reviews.each_with_index do |review, index| %>
+  <% ratings << review.freshness_rating %>
+  <% rating_sum += review.freshness_rating %>
+<% end %>
+<% freshness_rating = rating_sum.fdiv(ratings.count) %>
+<% freshness_rating.floor.times do %>
+  <i class="fa-solid fa-star star-icon"></i>
+<% end %>
+<% post_digit = freshness_rating - freshness_rating.floor %>
+<% post_digit.round(0).times do %>
+  <i class="fa-solid fa-star-half-stroke star-icon"></i>
+<% end %>
+<% reverse_rating = 5 - freshness_rating %>
+<% empty_stars = reverse_rating.round(0) - post_digit.round(0) %>
+<% empty_stars.times do %>
+  <i class="fa-regular fa-star star-icon"></i>
+<% end %>

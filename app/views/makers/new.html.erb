@@ -9,11 +9,14 @@
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
   data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-  <%= f.input :categories,
-              collection: Maker::CATEGORIES,
-              as: :check_boxes,
-              input_html: { class: "tag-selector" },
-              item_wrapper_class: 'tag-item' %>
+ <div class="categories-box">
+              <%= f.collection_check_boxes(:categories, Maker::CATEGORIES, :to_s, :to_s) do |b| %>
+                <div class="category-element">
+                  <%= b.check_box class:"check-box" %>
+                  <%= b.label class:"box-label" %>
+                </div>
+              <% end %>
+            </div>
   <%= f.input :description %>
   <%= f.input :photos, as: :file, input_html: { multiple: true } %>
   <%= f.button :submit, "Save", class: "button-primary"

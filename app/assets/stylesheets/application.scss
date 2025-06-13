@@ -1,3 +1,5 @@
+@import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
+
 // Graphical variables
 @import "config/fonts";
 @import "config/colors";
@@ -11,8 +13,7 @@
 @import "components/index";
 @import "pages/index";
 @import "pages/makers_new";
-@import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
-
+@import "components/map";
 
 h1 {
   font-size: 42px;
@@ -40,4 +41,9 @@ p {
 
 .highlight {
     color: $primary-color;
+  }
+
+
+  .gl-star-rating.gl-star-rating--ltr {
+    justify-content: center;
   }

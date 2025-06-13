@@ -1,10 +1,38 @@
 <section class="popular-producers-section">
   <h2>Popular Producers</h2>
+  <p class="section-description">Explore the most beloved local producers, hand-picked by our community for their quality and dedication.</p>
   <div class="popular-producers-list">
-    <%# will create an algorithm later to determine which are popular producers %>
-    <div class="producer-placeholder">Producer 1</div>
-    <div class="producer-placeholder">Producer 2</div>
-    <div class="producer-placeholder">Producer 3</div>
+    <% if @popular_makers.present? %>
+      <% @popular_makers.each do |maker| %>
+        <div class="producer-card">
+          <%= link_to maker_path(maker) do %>
+            <% if maker.photos.attached? %>
+              <%= image_tag maker.photos.first.url, class: "producer-card-image" %>
+            <% else %>
+              <%= image_tag "default-maker-placeholder.png", class: "producer-card-image" %>
+            <% end %>
+            <div class="producer-card-info">
+              <h3><%= maker.name %></h3>
+              <div class="producer-card-details-row"> <%# New container for location and rating %>
+                <p class="producer-card-location"><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
+                <div class="producer-card-rating"> <%# Changed from <p> to <div> for more flexible styling %>
+                  <% if maker.reviews.present? %>
+                    <i class="fas fa-star"></i> <%= maker.average_rating %> (<%= maker.reviews.count %> reviews)
+                  <% else %>
+                    No reviews yet
+                  <% end %>
+                </div>
+              </div>
+              <% if maker.categories.present? %>
+                <p class="producer-card-categories"><%= maker.categories.join(", ") %></p>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="producer-placeholder">No popular producers to display yet!</div>
+    <% end %>
   </div>
-  <%= link_to "Explore producers near you", "#", class: "button primary-button" %>
+  <%= link_to "Explore producers near you", makers_path, class: "button-primary" %>
 </section>
