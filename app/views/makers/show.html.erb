@@ -32,12 +32,11 @@
 
   </div>
 
-  <br>
-  <div class = "container">
-      <%= link_to "Share", new_maker_review_path(@maker), class:"button-primary" %>
-  </div>
 
-  <br>
+<br>
+<div class = "container">
+    <%= link_to "Share with Friends", "#", class:"button-secondary" %>
+</div>
 
   <br>
     <div class="container">
@@ -78,18 +77,36 @@
 
 
 
-  <br>
-  <br>
-  <br>
-  <br>
 
-  <div class ="align-items-center" >
-    <br>
-    <h2>Add a review!</h2>
-    <br>
-    <%= link_to "Submit", new_maker_review_path(@maker), class:"button-primary" %>
-    <br>
-    <br>
-  </div>
+<br>
+<br>
+<br>
+<br>
+<%# DONT TOUCH !!! %>
+<div class="container">
+  <h1><span class="highlight"><%= @maker.name %></span>'s Profile</h1>
   <br>
+  <h2>Add a review!</h2>
+  <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Submit
+  </button>
+  <%# <%= link_to "Submit", new_maker_review_path(@maker), class:"button-primary" %>
+</div>
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Review <%= @maker.name %>!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <%= render "reviews/new_form" %>
+      </div>
+      <%# <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Understood</button>
+      </div> %>
+    </div>
+  </div>
 </div>
