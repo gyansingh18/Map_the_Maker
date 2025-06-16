@@ -137,6 +137,7 @@ GEM
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
+    event_stream_parser (1.0.0)
     execjs (2.10.0)
     faraday (2.13.1)
       faraday-net_http (>= 2.0, < 3.5)
@@ -191,6 +192,8 @@ GEM
     msgpack (1.8.0)
     multipart-post (2.4.1)
     mutex_m (0.3.0)
+    neighbor (0.6.0)
+      activerecord (>= 7.1)
     net-http (0.6.0)
       uri
     net-imap (0.5.8)
@@ -270,6 +273,10 @@ GEM
       actionpack (>= 5.2)
       railties (>= 5.2)
     rexml (3.4.1)
+    ruby-openai (8.1.0)
+      event_stream_parser (>= 0.3.0, < 2.0.0)
+      faraday (>= 1)
+      faraday-multipart (>= 1)
     rubyzip (2.4.1)
     sassc (2.4.0)
       ffi (~> 1.9)
@@ -332,7 +339,13 @@ GEM
     zeitwerk (2.7.3)
 
 PLATFORMS
+<<<<<<< 44_branding_colors_tests
   arm64-darwin-24
+=======
+
+  arm64-darwin-24
+
+>>>>>>> master
   x86_64-linux-gnu
 
 DEPENDENCIES
@@ -348,9 +361,11 @@ DEPENDENCIES
   geocoder
   importmap-rails (~> 1.2.3)
   jbuilder
+  neighbor
   pg (~> 1.1)
   puma (>= 5.0)
   rails (~> 7.1.5, >= 7.1.5.1)
+  ruby-openai
   sassc-rails
   selenium-webdriver
   simple_form!
