@@ -1,4 +1,5 @@
 class MakersController < ApplicationController
+  before_action :set_maker, only: [:favorite, :unfavorite]
   def index
     @makers = Maker.all
     if params[:name].present?
@@ -56,9 +57,24 @@ class MakersController < ApplicationController
     end
   end
 
+  def favorite
+    current_user.favorite(@maker)
+    redirect_to @maker, alert: "Added to favorites"
+  end
+
+  def unfavorite
+    current_user.unfavorite(@maker)
+    redirect_to @maker, alert: "Removed from favorites"
+  end
+
+
   private
 
   def maker_params
     params.require(:maker).permit(:name, :location, :description, categories: [], photos: [])
+  end
+
+  def set_maker
+    @maker = Maker.find(params[:id])
   end
 end

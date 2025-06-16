@@ -1,5 +1,6 @@
 .index-maker-card {
   padding: 20px 0px 20px 0px;
+  position: relative;
 }
 
 .top-box {
@@ -127,4 +128,9 @@
 
 a {
   text-decoration: none;
+}
+.top-right {
+ position: absolute;
+ top: 24px;
+ right: 16px;
 }

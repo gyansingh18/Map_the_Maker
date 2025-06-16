@@ -62,6 +62,8 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
 end
 
+gem 'acts_as_favoritor'
+
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
@@ -78,3 +80,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "hotwire-rails", "~> 0.1.3"

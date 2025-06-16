@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  acts_as_favoritor
   has_many :makers
   has_many :reviews
   validates :first_name, presence: true
