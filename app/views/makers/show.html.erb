@@ -49,6 +49,24 @@
 
         <h3> Reviews </h3>
 
+         <% if maker.reviews.present? %>
+                     <% @reviews.each do |review| %>
+            <div class = "review-card border rounded p-3 mb-3">
+
+
+              <p>
+                <strong>Rating:</strong>
+                <%=render "shared/star_rating_overall", maker: review.maker%>
+                <p><strong>Reviewer:<strong> <%= review.user.first_name %></p>
+                <p><strong>Comment:<strong> <% review.comment %> </p>
+              </p>
+            </div>
+          <% end %>
+
+                  <% else %>
+                    No reviews yet
+                  <% end %>
+
         <%if @reviews.any?%>
           <% @reviews.each do |review| %>
             <div class = "review-card border rounded p-3 mb-3">
