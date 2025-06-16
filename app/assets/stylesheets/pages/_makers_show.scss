@@ -7,3 +7,42 @@ h4 {
   border: 20 px;
 }
 //This is Ashley's makers_show_scss
+
+  .category-tag {
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  background-color: $primary-color ;
+  opacity: 1.0;
+  color: $background-color;
+  padding: 5px 7px 5px 7px;
+  margin-right: 10px;
+  text-transform: capitalize;
+}
+
+
+.master_review_class {
+background-color:$font-color ;
+padding: 5px 7px 5px 7px;
+color: $background-color;
+border: 20 px;
+margin: mb-1;
+border-radius: 10px;
+
+
+}
+
+
+.master_review_class {
+  .star-icon {
+    color: $background-color;
+  }
+}
+
+.review-card {
+  background-color: $secondary-color;
+  color:$background-color;
+  border-radius: 10px;
+  .star-icon {
+    color: $background-color;
+}
+}
