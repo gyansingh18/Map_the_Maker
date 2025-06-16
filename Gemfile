@@ -78,3 +78,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "solid_cable", "~> 1.0.3"
+
+gem "solid_queue"
