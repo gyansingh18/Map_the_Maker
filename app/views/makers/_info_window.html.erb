@@ -1,9 +1,9 @@
 <%# app/views/makers/_info_window.html.erb %>
 
-<div class="producer-card info-window-producer-card"> <%# Added info-window-producer-card for specific map styling %>
+<div class="producer-card info-window-producer-card">
   <%= link_to maker_path(maker) do %>
-    <% if maker.photos.attached? && maker.photos.any? %> <%# Added maker.photos.any? for robustness %>
-      <%= cl_image_tag maker.photos.first.key, class: "producer-card-image" %> <%# Using cl_image_tag for Cloudinary %>
+    <% if maker.photos.attached? && maker.photos.any? %>
+      <%= cl_image_tag maker.photos.first.key, class: "producer-card-image" %>
     <% else %>
       <%= image_tag "default-maker-placeholder.png", class: "producer-card-image" %>
     <% end %>
@@ -24,4 +24,13 @@
       <% end %>
     </div>
   <% end %>
+
+  <div class="info-window-actions">
+    <button class="btn btn-directions"
+            data-action="click->map#getDirections" <%# This line connects to Stimulus, if you're using it %>
+            data-map-target-lat="<%= maker.latitude %>" <%# Maker's latitude %>
+            data-map-target-lng="<%= maker.longitude %>"> <%# Maker's longitude %>
+      Get Directions
+    </button>
+  </div>
 </div>

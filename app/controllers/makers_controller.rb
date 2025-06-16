@@ -1,15 +1,20 @@
 class MakersController < ApplicationController
   def index
     @makers = Maker.all
-    filter_makers
-    # redirect_to map_makers_path(request.query_parameters)
-
-    if params[:map_search].present? && params[:map_search] == 'true'
-      redirect_to map_makers_path(request.query_parameters)
-    else
-      # No explicit render needed, Rails will render index.html.erb by default
+    if params[:name].present?
+      @makers = @makers.where("name ILIKE ?", "%#{params[:name]}%")
     end
-
+    if params[:location].present?
+      @makers = @makers.where("location ILIKE ?", "%#{params[:location]}%")
+    end
+    if params[:category].present?
+      categories_params = params[:category].drop(1)
+      categories_params.each do |category|
+        @makers = @makers.select do |maker|
+          maker.categories.include?(category)
+        end
+      end
+    end
   end
 
   def show
@@ -33,9 +38,15 @@ class MakersController < ApplicationController
   end
 
   def map
-    @makers = Maker.all
-    filter_makers
-    @markers = @makers.geocoded.map do |maker|
+    # Start with all geocoded makers. This is crucial for map display.
+    @makers = Maker.geocoded
+
+    # Apply map-specific filters to the @makers collection
+    apply_map_filters
+
+    # Now, @makers will be the filtered and geocoded set of makers,
+    # ready to be converted into markers.
+    @markers = @makers.map do |maker|
       {
         lat: maker.latitude,
         lng: maker.longitude,
@@ -43,7 +54,6 @@ class MakersController < ApplicationController
         marker_html: render_to_string(partial: "marker", locals: {maker: maker})
       }
     end
-    # redirect_to map_makers_path
   end
 
   private
@@ -52,20 +62,24 @@ class MakersController < ApplicationController
     params.require(:maker).permit(:name, :location, :description, categories: [], photos: [])
   end
 
-  def filter_makers
+   # NEW private method for map-specific filtering
+  def apply_map_filters
     if params[:name].present?
       @makers = @makers.where("name ILIKE ?", "%#{params[:name]}%")
     end
     if params[:location].present?
-      @makers = @makers.where("location ILIKE ?", "%#{params[:location]}%")
+      # Assuming you have a geocoding setup (like Geocoder gem) and makers have lat/lng
+      # This will filter based on distance from the provided location
+      @makers = @makers.near(params[:location], 50) # Search within 50 miles/km, adjust as needed
     end
     if params[:category].present?
-      categories_params = params[:category].drop(1)
-      categories_params.each do |category|
-        @makers = @makers.select do |maker|
-          maker.categories.include?(category)
-        end
+      categories_to_filter = params[:category].reject(&:blank?)
+      if categories_to_filter.any?
+        # This uses PostgreSQL's array operator to keep it an ActiveRecord::Relation
+        @makers = @makers.where("categories && ARRAY[?]::varchar[]", categories_to_filter)
       end
     end
+    # Add other map-specific filters here (e.g., product, if applicable)
   end
+
 end

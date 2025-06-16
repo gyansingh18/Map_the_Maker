@@ -32,7 +32,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <%= form_with url: makers_path, method: :get, class: "" do |f| %>
+          <%= form_with url: search_path, method: :get, class: "" do |f| %>
             <%= text_field_tag :location,
                   params[:location],
                   class: "form-control search-box",
