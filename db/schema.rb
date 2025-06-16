@@ -55,12 +55,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_16_021527) do
     t.index ["user_id"], name: "index_makers_on_user_id"
   end
 
-  create_table "messages", force: :cascade do |t|
-    t.string "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.string "category"
