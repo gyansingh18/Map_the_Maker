@@ -1,11 +1,13 @@
 .button-primary {
   background-color: $primary-color;
-  color: $background-color;
+  color: $font-color;
   width:  100%;
   margin-bottom: 5px;
   border-radius: $border-radius;
   border: 0;
-  font-weight: 600;
+  font-family: $headers-font;
+  font-weight: 700;
+  font-size: 20px;
   padding: 8px;
   text-decoration: none;
   display: inline-block;
@@ -20,11 +22,13 @@
 }
 .button-secondary {
   background-color: $background-color;
-  color: $primary-color;
+  color: $font-color;
   width:  100%;
+  font-family: $headers-font;
+  font-weight: 700;
+  border: 2px solid;
   border-radius: $border-radius;
-  border-color: $primary-color;
-  border: 1px solid;
+  border-color: $secondary-color;
   padding: 8px;
   margin-bottom: 5px;
   text-decoration: none;
