@@ -1,5 +1,5 @@
 .navbar-lewagon {
-  position: sticky;
+  position: fixed;
   top: 0;
   justify-content: space-between;
   background: $background-color;
@@ -8,6 +8,7 @@
   h1 {
     font-size: 20px;
   }
+  width: 100%;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -16,4 +17,8 @@
 
 .navbar-lewagon .navbar-brand img {
   width: 40px;
+}
+
+.navbar-placeholder {
+  height: 66px;
 }
