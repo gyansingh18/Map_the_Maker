@@ -84,5 +84,4 @@ class MakersController < ApplicationController
     end
     # Add other map-specific filters here (e.g., product, if applicable)
   end
-
 end
