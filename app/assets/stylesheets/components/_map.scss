@@ -10,6 +10,32 @@ html, body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+.float-search {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background-color: $background-color;
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.float-body {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background-color: $background-color;
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
 }
 
 .mapboxgl-popup {
@@ -19,4 +45,60 @@ html, body {
 .mapboxgl-popup-content {
   text-align: center;
   font-family: "Open Sans", sans-serif;
+}
+
+.info-window-producer-card {
+  width: 250px;
+  max-width: 100%;
+  background-color: $background-color;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.info-window-producer-card .producer-card-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.info-window-producer-card .producer-card-info {
+  padding: 10px;
+  text-align: left;
+}
+
+.info-window-producer-card .producer-card-info h3 {
+  font-size: 1.2rem;
+  margin-top: 0;
+  margin-bottom: 5px;
+  color: $font-color;
+}
+
+.info-window-producer-card .producer-card-details-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.info-window-producer-card .producer-card-location,
+.info-window-producer-card .producer-card-rating {
+  font-size: 0.9rem;
+  color: #666;
+  white-space: nowrap;
+}
+
+.info-window-producer-card .producer-card-rating i {
+  color: gold;
+  margin-right: 3px;
+}
+
+.info-window-producer-card .producer-card-categories {
+  font-size: 0.8rem;
+  color: #888;
+  margin-top: 5px;
+  margin-bottom: 0;
 }

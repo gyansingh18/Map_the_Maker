@@ -1,6 +1,6 @@
+<<<<<<< 63_index_design
 <div class="container">
 
-  <div class="float-search d-flex justify-content-around align-items-center">
     <button type="button" class="btn text-start button-search" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
       <i class="fa-solid fa-magnifying-glass"></i>
       <% results = [] %>
@@ -22,22 +22,18 @@
       <% end %>
       <%= results %>
     </button>
-  </div>
+=======
+<%# app/views/makers/index.html.erb %>
+>>>>>>> master
 
+<div class="container">
+  <%= render "search_bar", search_path: makers_path %>
   <div class="top-placeholder">
   </div>
 
-  <div class="float-body d-flex justify-content-around align-items-center">
-    <%= link_to new_maker_path, class: "btn button-add" do %>
-      <i class="fa-solid fa-plus"></i> Add
-    <% end %>
-    <%= link_to map_makers_path, class: "btn button-map" do %>
-      <i class="fa-solid fa-map"></i> Map
-    <% end %>
-  </div>
-
+<<<<<<< 63_index_design
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title" id="staticBackdropLabel">
@@ -70,6 +66,15 @@
         </div>
       </div>
     </div>
+=======
+  <div class="float-body d-flex justify-content-around align-items-center">
+    <%= link_to new_maker_path, class: "btn button-add" do %>
+      <i class="fa-solid fa-plus"></i> Add
+    <% end %>
+    <%= link_to map_makers_path, class: "btn button-map" do %>
+      <i class="fa-solid fa-map"></i> Map
+    <% end %>
+>>>>>>> master
   </div>
 
   <div class="search-results">
@@ -125,3 +130,4 @@
   </div>
 
 </div>
+<%= render "homebar"%>

@@ -1,2 +1,36 @@
-<h2><%= maker.name %></h2>
-<p><%= maker.categories %></p>
+<%# app/views/makers/_info_window.html.erb %>
+
+<div class="producer-card info-window-producer-card">
+  <%= link_to maker_path(maker) do %>
+    <% if maker.photos.attached? && maker.photos.any? %>
+      <%= cl_image_tag maker.photos.first.key, class: "producer-card-image" %>
+    <% else %>
+      <%= image_tag "default-maker-placeholder.png", class: "producer-card-image" %>
+    <% end %>
+    <div class="producer-card-info">
+      <h3><%= maker.name %></h3>
+      <div class="producer-card-details-row">
+        <p class="producer-card-location"><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
+        <div class="producer-card-rating">
+          <% if maker.reviews.present? %>
+            <i class="fas fa-star"></i> <%= maker.average_rating %> (<%= maker.reviews.count %> reviews)
+          <% else %>
+            No reviews yet
+          <% end %>
+        </div>
+      </div>
+      <% if maker.categories.present? %>
+        <p class="producer-card-categories"><%= maker.categories.join(", ") %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="info-window-actions">
+    <button class="btn btn-directions"
+            data-action="click->map#getDirections" <%# This line connects to Stimulus, if you're using it %>
+            data-map-target-lat="<%= maker.latitude %>" <%# Maker's latitude %>
+            data-map-target-lng="<%= maker.longitude %>"> <%# Maker's longitude %>
+      Get Directions
+    </button>
+  </div>
+</div>
