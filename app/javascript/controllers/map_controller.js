@@ -140,7 +140,7 @@ export default class extends Controller {
     for (const coord of coordinates) {
       bounds.extend(coord);
     }
-    this.map.fitBounds(bounds, { padding: 50 });
+    this.map.fitBounds(bounds, { padding: 250 });
   }
 
   #addMarkersToMap() {
