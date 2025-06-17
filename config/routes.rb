@@ -16,7 +16,12 @@ Rails.application.routes.draw do
     post 'unfavorite', on: :member
   end
 
-  resources :questions, only: [:index, :create]
+  resources :questions, only: [:index, :create] do
+    collection do
+      get "reset"
+    end
+  end
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

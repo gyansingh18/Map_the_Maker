@@ -1,4 +1,8 @@
 <div class="container chatbot">
+  <%= link_to makers_path do %>
+    <span class="back-from-chat"><i class="fa-solid fa-arrow-left"></i> Back to makers</span>
+  <% end %>
+
   <h1>Chat with us</h1>
   <div id="questions">
     <%= render @questions %>
@@ -6,3 +10,5 @@
 
   <%= render "form", question: @question %>
 </div>
+
+<%= link_to "Reset conversation", reset_questions_path, class: "button-secondary" %>
