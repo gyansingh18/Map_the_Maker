@@ -1,4 +1,5 @@
 class MakersController < ApplicationController
+  before_action :set_maker, only: [:favorite, :unfavorite]
   skip_before_action :authenticate_user!, only: [:index, :show, :map]
 
   def index
@@ -69,10 +70,25 @@ class MakersController < ApplicationController
     end
   end
 
+  def favorite
+    current_user.favorite(@maker)
+    redirect_to @maker, alert: "Added to favorites"
+  end
+
+  def unfavorite
+    current_user.unfavorite(@maker)
+    redirect_to @maker, alert: "Removed from favorites"
+  end
+
+
   private
 
   def maker_params
     params.require(:maker).permit(:name, :location, :description, categories: [], photos: [])
+  end
+
+  def set_maker
+    @maker = Maker.find(params[:id])
   end
 
    # NEW private method for map-specific filtering
@@ -94,5 +110,6 @@ class MakersController < ApplicationController
     end
     # Add other map-specific filters here (e.g., product, if applicable)
   end
+
 
 end
