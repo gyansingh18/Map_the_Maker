@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_16_074606) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_17_032440) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -43,8 +43,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_16_074606) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-# Could not dump table "makers" because of following StandardError
-#   Unknown type 'vector(1536)' for column 'embedding'
+  create_table "karma_transactions", force: :cascade do |t|
+    t.integer "points_awarded"
+    t.bigint "user_id", null: false
+    t.string "source_type", null: false
+    t.bigint "source_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_type", "source_id"], name: "index_karma_transactions_on_source"
+    t.index ["user_id"], name: "index_karma_transactions_on_user_id"
+  end
+
   create_table "makers", force: :cascade do |t|
     t.string "name"
     t.string "location"
@@ -245,6 +254,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_16_074606) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "karma_transactions", "users"
   add_foreign_key "makers", "users"
   add_foreign_key "questions", "users"
   add_foreign_key "review_products", "products"
