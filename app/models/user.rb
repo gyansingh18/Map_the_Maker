@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  acts_as_favoritor
   has_many :makers, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :questions, dependent: :destroy

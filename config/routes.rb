@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   end
 
   resources :products, only: [:new, :create]
+  resources :makers do
+    post 'favorite', on: :member
+    post 'unfavorite', on: :member
+  end
 
   resources :questions, only: [:index, :create]
 
