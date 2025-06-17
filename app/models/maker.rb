@@ -15,11 +15,45 @@ class Maker < ApplicationRecord
     if reviews.present?
       reviews.average(:overall_rating).round(2)
     else
-      "No reviews yet"
+      "NA"
     end
   end
 
     has_many :reviews, dependent: :destroy
+
+  def average_star_rating_freshness
+     if reviews.present?
+      reviews.average(:freshness_rating).round(2)
+    else
+      "NA"
+    end
+  end
+
+  def average_star_rating_service
+ if reviews.present?
+      reviews.average(:service_rating).round(2)
+    else
+      "NA"
+    end
+  end
+
+  def average_star_rating_product_range
+ if reviews.present?
+      reviews.average(:product_range_rating).round(2)
+    else
+      "NA"
+    end
+  end
+
+
+    def average_star_rating_accuracy
+ if reviews.present?
+      reviews.average(:accuracy_rating).round(2)
+    else
+      "NA"
+    end
+  end
+
 
 
 
