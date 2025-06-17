@@ -1,0 +1,73 @@
+<%# app/views/karma/_karma_tier_progress.html.erb %>
+<%# Local variables expected: all_karma_tiers, user_karma_points, current_karma_tier %>
+
+<div class="karma-card karma-tier-progress-card">
+  <h2 class="section-headline text-center">Karma Tiers</h2>
+
+  <div class="tier-cards-container">
+    <% all_karma_tiers.each do |tier| %>
+      <%
+        # Calculate individual tier progress
+        tier_progress_percentage = 0
+        tier_status_text = ""
+
+        if user_karma_points >= tier[:min_points]
+          # User has met or exceeded this tier's points
+          tier_progress_percentage = 100
+          tier_status_text = "Achieved!"
+        elsif tier == current_karma_tier # This case should ideally not happen if logic is tight, but for safety
+          # This is the current active tier for the user (if points are within it)
+          tier_progress_percentage = 100
+          tier_status_text = "Current"
+        else
+          # Tier is in the future
+          # Find the previous tier to calculate progress within the segment
+          previous_tier_index = all_karma_tiers.find_index { |t| t == tier } - 1
+          previous_tier = previous_tier_index >= 0 ? all_karma_tiers[previous_tier_index] : nil
+
+          if previous_tier && user_karma_points >= previous_tier[:min_points]
+            # User is in a tier before this one, calculate progress towards *this* tier
+            points_needed_for_this_tier_segment = tier[:min_points] - previous_tier[:min_points]
+            points_earned_in_segment = user_karma_points - previous_tier[:min_points]
+
+            if points_needed_for_this_tier_segment > 0
+              tier_progress_percentage = ((points_earned_in_segment.to_f / points_needed_for_this_tier_segment) * 100).round(0)
+              tier_progress_percentage = [tier_progress_percentage, 100].min # Cap at 100%
+            else
+              tier_progress_percentage = 100 # Should not occur if min_points are distinct
+            end
+            tier_status_text = "Progressing..."
+          else
+            # User has not yet reached the previous tier, so 0% for this future tier
+            tier_progress_percentage = 0
+            tier_status_text = "#{tier[:min_points]} pts"
+          end
+        end
+
+        is_current_tier = (tier == current_karma_tier)
+      %>
+
+      <div class="tier-card <%= 'current-tier' if is_current_tier %>">
+        <div class="tier-icon">
+          <%# You can choose different icons here based on tier or just use a generic one %>
+          <i class="fas fa-medal"></i>
+        </div>
+        <h3 class="tier-name"><%= tier[:display_name] %></h3>
+        <p class="tier-points-needed">
+          <% if tier[:min_points] > 0 %>
+            <%= tier[:min_points] %> points
+          <% else %>
+            Start here!
+          <% end %>
+        </p>
+
+        <div class="progress-bar-container compact">
+          <div class="progress-bar <%= 'completed' if tier_progress_percentage == 100 && user_karma_points >= tier[:min_points] %>" style="width: <%= tier_progress_percentage %>%;">
+            <%= tier_progress_percentage %>%
+          </div>
+        </div>
+        <p class="tier-status"><%= tier_status_text %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

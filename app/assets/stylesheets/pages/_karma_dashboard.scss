@@ -1,0 +1,291 @@
+// app/assets/stylesheets/pages/_karma_dashboard.scss
+
+.karma-dashboard-section {
+  padding: 40px 20px; // Consistent padding with your home page sections
+  background-color: $background-color;
+  text-align: center; // For the main headline
+}
+
+.karma-dashboard-section .section-headline {
+  font-size: 2.2em; // Similar to your home page H2
+  margin-bottom: 40px; // More spacing for main headline
+  color: $font-color;
+}
+
+.karma-card { // General styling for the main "cards" on the dashboard
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 30px; // Space between main sections/cards
+  text-align: center; // Default alignment for content inside
+}
+
+.karma-card .section-headline { // Override for sub-headlines within karma-card
+  font-size: 1.8em;
+  margin-bottom: 25px;
+  color: $primary-color; // Or $font-color, depending on desired emphasis
+}
+
+
+/* --- Karma Summary Cards (Overall Points, Reviews, Makers) --- */
+.karma-summary-cards-container {
+  display: flex;
+  flex-wrap: wrap; // Allow wrapping on smaller screens
+  justify-content: center; // Center cards when they wrap
+  gap: 20px; // Space between cards
+  margin-bottom: 40px; // Space below the cards and before the progress bar
+}
+
+.karma-status-card {
+  flex: 1 1 280px; // Allows cards to grow/shrink, with a base of 280px, up to 3 per row on larger screens
+  max-width: 350px; // Max width to prevent cards from becoming too wide
+  background-color: $secondary-color; // Distinct background for these small cards
+  color: $background-color; // White text for contrast
+  border-radius: 8px;
+  padding: 25px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.karma-status-card .icon-wrapper {
+  font-size: 2.5em;
+  color: $accent-color; // Or a bright color for icons
+  margin-bottom: 10px;
+}
+
+.karma-status-card .card-label {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.karma-status-card .card-value {
+  font-size: 2em;
+  font-weight: bold;
+  color: $background-color; // Ensure text stands out
+}
+
+/* --- Progress Bar Styling (adapting from Bootstrap) --- */
+.progress-bar-container {
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden; // Ensures inner bar respects border-radius
+  height: 30px; // Consistent height
+  margin-bottom: 10px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: $primary-color; // Use primary color for progress
+  color: white; // White text on progress bar
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  transition: width 0.5s ease-in-out; // Smooth transition for progress updates
+  border-radius: 5px; // Ensure inner bar also has rounded corners
+}
+
+.progress-bar[aria-valuenow="100"] {
+  background-color: $success-color; // Optional: A different color for 100% completion
+}
+
+
+/* Adjust existing Bootstrap text classes to match home page feel where relevant */
+.text-center { text-align: center; }
+.text-primary { color: $primary-color; }
+.text-success { color: $success-color; } // Define $success-color if you don't have it
+.text-muted { color: #666; }
+.lead { font-size: 1.15em; line-height: 1.5; }
+small { font-size: 0.8em; }
+
+
+// app/assets/stylesheets/pages/_karma_dashboard.scss
+
+// ... (previous styles for .karma-dashboard-section, .karma-card, etc.) ...
+
+/* --- Karma Leaderboard --- */
+.karma-leaderboard-card {
+  // Inherits .karma-card styles for general look
+}
+
+.leaderboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); // Responsive grid columns
+  gap: 20px; // Space between grid items
+  margin-top: 30px; // Space below headline
+}
+
+.leaderboard-item {
+  background-color: #f9f9f9; // Light background for each item
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  text-align: left; // Align text within each card
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120px; // Ensure consistent height for grid items
+  transition: all 0.2s ease-in-out;
+}
+
+.leaderboard-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.leaderboard-rank {
+  font-size: 1.8em;
+  font-weight: bold;
+  color: $primary-color; // Highlight rank number
+  margin-bottom: 10px;
+}
+
+.leaderboard-name {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: $font-color;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 8px; // Space between name and badge
+}
+
+.leaderboard-karma {
+  font-size: 1em;
+  color: $secondary-color;
+  font-weight: bold;
+}
+
+.current-user-highlight {
+  border: 2px solid $accent-color; // Stronger border for current user
+  background-color: lighten($accent-color, 45%); // Slightly lighter background
+  box-shadow: 0 0 0 3px rgba($accent-color, 0.3); // Glow effect
+}
+
+.you-badge {
+  background-color: $primary-color; // Or a distinct color
+  color: white;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 0.75em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* --- Karma Tier Progress Section --- */
+.karma-tier-progress-card {
+  // Inherits .karma-card styles for general look
+}
+
+.tier-cards-container {
+  display: flex;
+  overflow-x: scroll; // Enable horizontal scrolling
+  -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
+  padding-bottom: 20px; // Space for scrollbar
+  gap: 20px; // Space between tier cards
+  margin-top: 30px;
+  justify-content: flex-start; // Start items from the beginning, not centered
+  align-items: stretch; // Ensure cards stretch to fill height if content varies
+}
+
+.tier-card {
+  flex-shrink: 0; // Prevent cards from shrinking
+  width: 250px; // Fixed width for each card
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: all 0.2s ease-in-out;
+  position: relative; // For current-tier indicator
+}
+
+.tier-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tier-icon {
+  font-size: 3em;
+  color: $secondary-color; // Or another distinct color for tier icons
+  margin-bottom: 10px;
+}
+
+.tier-name {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: $primary-color;
+  margin-bottom: 5px;
+}
+
+.tier-points-needed {
+  font-size: 0.9em;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.progress-bar-container.compact {
+  height: 20px; // Smaller progress bar for these cards
+  margin-bottom: 10px;
+  width: 100%; // Ensure it takes full width of card
+}
+
+.progress-bar.completed {
+  background-color: $success-color; // Distinct color for completed tiers
+}
+
+.tier-status {
+  font-size: 0.9em;
+  font-weight: 500;
+  color: $font-color;
+  margin-top: 10px;
+}
+
+.current-tier {
+  border: 3px solid $accent-color; // Stronger border for the current tier
+  box-shadow: 0 0 0 4px rgba($accent-color, 0.2); // A subtle glow
+  // You can also add a background image/pattern or another visual cue here
+}
+
+/* --- Karma Explanation Summary (if you want to style it to match cards) --- */
+.karma-explanation-summary {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.karma-explanation-summary h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: $font-color;
+}
+
+.karma-explanation-summary p {
+  font-size: 1em;
+  color: #555;
+  line-height: 1.6;
+}
+
+.karma-explanation-summary a {
+  color: $primary-color;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.karma-explanation-summary a:hover {
+  text-decoration: underline;
+}

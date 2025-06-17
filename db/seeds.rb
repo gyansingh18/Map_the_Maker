@@ -1,18 +1,17 @@
 puts "Creating seeds"
 
 puts "Destroying everything"
+ReviewProduct.destroy_all
+Product.destroy_all
 Review.destroy_all
 Maker.destroy_all
 User.destroy_all
-Product.destroy_all
-ReviewProduct.destroy_all
 
 puts "Creating users"
 users = []
 
 first_names = ["Alizee", "Clint", "Ashley", "Gyan", "Jannis"]
 last_names = ["Apple", "Cucumber", "Avocado", "Garlic", "Jackfruit"]
-
 
 first_names.each_with_index do |first_name, index|
   temp_user = User.create!(
@@ -117,7 +116,6 @@ makers.each do |maker|
 
     reviews << temp_review
   end
-
 end
 
 puts "Created #{reviews.count} reviews"
