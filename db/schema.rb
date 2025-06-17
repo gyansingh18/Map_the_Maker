@@ -43,6 +43,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_17_063302) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+<<<<<<< 43_homepage_update
+=======
   create_table "karma_transactions", force: :cascade do |t|
     t.integer "points_awarded"
     t.bigint "user_id", null: false
@@ -72,6 +74,7 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_17_063302) do
     t.index ["scope"], name: "index_favorites_on_scope"
   end
 
+>>>>>>> master
   create_table "makers", force: :cascade do |t|
     t.string "name"
     t.string "location"
