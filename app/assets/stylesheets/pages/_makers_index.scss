@@ -3,13 +3,13 @@
 }
 
 .top-box {
-  padding: 10px 0px 0px 0px;
-  color: $font-color;
+  padding: 10px 0px 1px 0px;
+  color: $secondary-color;
 }
 
 .middle-box {
   padding: 2px 0px 15px 0px;
-  color: $font-color;
+  color: $secondary-color;
 }
 
 .bottom-box {
@@ -35,7 +35,7 @@
   padding: 0px 2px 0px 0px;
 }
 
-.category-tag {
+.category-tag-index {
   border: 1px solid $secondary-color;
   border-radius: 5px;
   opacity: 1.0;
@@ -64,7 +64,8 @@
 }
 
 .footer-placeholder {
-  height: 500px;
+  height: 770px;
+  padding-top: 350px;
 }
 
 .count-results {
