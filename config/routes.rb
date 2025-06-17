@@ -9,11 +9,14 @@ Rails.application.routes.draw do
     resources :reviews, only: [:new, :create]
 
   end
+
   resources :products, only: [:new, :create]
   resources :makers do
     post 'favorite', on: :member
     post 'unfavorite', on: :member
   end
+
+  resources :questions, only: [:index, :create]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

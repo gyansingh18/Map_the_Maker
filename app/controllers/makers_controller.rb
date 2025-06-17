@@ -1,5 +1,7 @@
 class MakersController < ApplicationController
   before_action :set_maker, only: [:favorite, :unfavorite]
+  skip_before_action :authenticate_user!, only: [:index, :show, :map]
+
   def index
     @makers = Maker.all
     if params[:name].present?
