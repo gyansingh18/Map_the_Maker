@@ -43,17 +43,6 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_17_063302) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "karma_transactions", force: :cascade do |t|
-    t.integer "points_awarded"
-    t.bigint "user_id", null: false
-    t.string "source_type", null: false
-    t.bigint "source_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["source_type", "source_id"], name: "index_karma_transactions_on_source"
-    t.index ["user_id"], name: "index_karma_transactions_on_user_id"
-  end
-
   create_table "favorites", force: :cascade do |t|
     t.string "favoritable_type", null: false
     t.bigint "favoritable_id", null: false
@@ -70,6 +59,17 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_17_063302) do
     t.index ["favoritor_id", "favoritor_type"], name: "fk_favorites"
     t.index ["favoritor_type", "favoritor_id"], name: "index_favorites_on_favoritor"
     t.index ["scope"], name: "index_favorites_on_scope"
+  end
+
+  create_table "karma_transactions", force: :cascade do |t|
+    t.integer "points_awarded"
+    t.bigint "user_id", null: false
+    t.string "source_type", null: false
+    t.bigint "source_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_type", "source_id"], name: "index_karma_transactions_on_source"
+    t.index ["user_id"], name: "index_karma_transactions_on_user_id"
   end
 
   create_table "makers", force: :cascade do |t|

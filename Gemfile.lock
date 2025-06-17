@@ -368,8 +368,8 @@ PLATFORMS
   arm-linux-gnu
   arm-linux-musl
   arm64-darwin
-  x86_64-darwin
   arm64-darwin-24
+  x86_64-darwin
   x86_64-linux-gnu
   x86_64-linux-musl
 
