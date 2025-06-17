@@ -1,4 +1,6 @@
 class MakersController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:index, :show, :map]
+
   def index
     @makers = Maker.all
     if params[:name].present?
@@ -19,6 +21,7 @@ class MakersController < ApplicationController
 
   def show
     @maker = Maker.find(params[:id])
+    @reviews = Review.all
     @review = Review.new
     @products = Product.all
   end

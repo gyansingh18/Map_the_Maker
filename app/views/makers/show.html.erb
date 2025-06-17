@@ -20,63 +20,48 @@
         </div>
 
   <br>
-  <div class="<div class="top-box d-flex justify-content-between align-items-center>
+  <div class="master_review_class">
 
       <h4>  <strong> Reviews <strong> </h4>
-      <h4> Overall Rating <%= render "shared/star_rating_overall", maker: @maker %>  </p>
+      <h4><strong><%= render "shared/star_rating_overall", maker: @maker %><strong>  </p>
         <br>
-        <p> Freshness Rating <%= render "shared/star_rating_freshness", maker: @maker %></p>
-        <p> Service Rating <%= render "shared/star_rating_service", maker: @maker %></p>
-        <p> Product Range Rating <%= render "shared/star_rating_product_range", maker: @maker %></p>
-        <p> Accuracy Rating <%= render "shared/star_rating_accuracy", maker: @maker %></p>
+        <p> Freshness  <%= render "shared/star_rating_freshness", maker: @maker %></p>
+        <p> Service  <%= render "shared/star_rating_service", maker: @maker %></p>
+        <p> Product Range  <%= render "shared/star_rating_product_range", maker: @maker %></p>
+        <p> Accuracy <%= render "shared/star_rating_accuracy", maker: @maker %></p>
 
   </div>
 
 
 <br>
 <div class = "container">
-    <%= link_to "Share with Friends", "#", class:"button-secondary" %>
+    <%= link_to "Share", "#", class:"button-primary" %>
 </div>
 
   <br>
     <div class="container">
       <div class="<div class="top-box d-flex justify-content-between align-items-center>
 
-      <h4>  <strong> <%= @maker.name %>'s Reviews  <strong> </h4>
-        <p> <%= render "shared/star_rating_overall", maker: @maker %></p>
-
         <br>
 
         <h3> Reviews </h3>
 
-         <% if maker.reviews.present? %>
-                     <% @reviews.each do |review| %>
-            <div class = "review-card border rounded p-3 mb-3">
-
-
-              <p>
-                <strong>Rating:</strong>
-                <%=render "shared/star_rating_overall", maker: review.maker%>
-                <p><strong>Reviewer:<strong> <%= review.user.first_name %></p>
-                <p><strong>Comment:<strong> <% review.comment %> </p>
-              </p>
-            </div>
-          <% end %>
-
-                  <% else %>
-                    No reviews yet
-                  <% end %>
-
-        <%if @reviews.any?%>
+        <h4>  <strong> <%= @maker.name %>'s Reviews  <strong> </h4>
+        <br>
+        <%if @reviews %>
           <% @reviews.each do |review| %>
             <div class = "review-card border rounded p-3 mb-3">
 
 
               <p>
-                <strong>Rating:</strong>
+                <strong></strong>
                 <%=render "shared/star_rating_overall", maker: review.maker%>
-                <p><strong>Reviewer:<strong> <%= review.user.first_name %></p>
-                <p><strong>Comment:<strong> <% review.comment %> </p>
+                <% if review.comment %>
+
+                <p>  <em>"<%= review.comment %>"</em> </p>
+                   <% end %>
+
+                <p><strong><strong> <%= review.user.first_name %></p>
               </p>
             </div>
           <% end %>
@@ -98,11 +83,11 @@
 
 <br>
 <br>
-<br>
-<br>
+
 <%# DONT TOUCH !!! %>
 <div class="container">
   <h1><span class="highlight"><%= @maker.name %></span>'s Profile</h1>
+  <br>
   <br>
   <h2>Add a review!</h2>
   <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">

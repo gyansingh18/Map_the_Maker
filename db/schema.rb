@@ -45,6 +45,19 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_16_074606) do
 
 # Could not dump table "makers" because of following StandardError
 #   Unknown type 'vector(1536)' for column 'embedding'
+  create_table "makers", force: :cascade do |t|
+    t.string "name"
+    t.string "location"
+    t.text "description"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "categories", array: true
+    t.float "latitude"
+    t.float "longitude"
+    t.vector "embedding", limit: 1536
+    t.index ["user_id"], name: "index_makers_on_user_id"
+  end
 
   create_table "products", force: :cascade do |t|
     t.string "name"
