@@ -1,4 +1,5 @@
 class Maker < ApplicationRecord
+  acts_as_favoritable
   has_many_attached :photos
   belongs_to :user
   has_many :reviews

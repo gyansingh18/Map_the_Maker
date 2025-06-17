@@ -34,8 +34,36 @@
 
 
 <br>
-<div class = "container">
-    <%= link_to "Share", "#", class:"button-primary" %>
+<!-- Button trigger modal -->
+<button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Share
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-none">
+        <h2 class="modal-title" id="exampleModalLabel">Share...</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-footer">
+
+      <a  href="https://wa.me/?text=<%= ERB::Util.url_encode(request.original_url)%>" target="_blank"><i class="fa-brands fa-whatsapp fa-5x" style="color: #25D366;"></i> </a>
+     <a  href="https://twitter.com/intent/tweet?url=<%= ERB::Util.url_encode(request.original_url) %>" target="_blank"><i class="fa-brands fa-x-twitter fa-5x" style="color: #1DA1F2;"></i> </a>
+     <a  href="https://www.facebook.com/sharer/sharer.php?u=<%= ERB::Util.url_encode(request.original_url) %>" target="_blank"><i class="fa-brands fa-facebook fa-5x" style="color: #1877F2;"> </i></a>
+      <a href = "#"  onclick ="copyLink()"><i class="fa-solid fa-link fa-5x" style="color: #6c757d;"></i> </a>
+     <script>
+      function copyLink(){
+        const url = window.location.href;
+        navigator.clipboard.writeText(url)
+        alert("Link copied!")
+      }
+      </script>
+      </div>
+    </div>
+  </div>
 </div>
 
   <br>
