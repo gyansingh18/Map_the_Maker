@@ -8,9 +8,9 @@ class Maker < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_location?
   has_neighbors :embedding
   after_create :set_embedding
-  
+
   CATEGORIES = ["meat", "seafood", "vegetables", "fruits", "dairy", "other", "drinks", "grains", "bakery & pastries", "eggs"]
-  
+
   def average_rating
     if reviews.present?
       reviews.average(:overall_rating).round(2)
@@ -18,6 +18,11 @@ class Maker < ApplicationRecord
       "No reviews yet"
     end
   end
+
+    has_many :reviews, dependent: :destroy
+
+
+
 
 
   private
