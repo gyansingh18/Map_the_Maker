@@ -1,123 +1,25 @@
+<%# app/views/karma/dashboard.html.erb %>
+
 <div class="container my-5">
   <div class="row">
-    <div class="col-md-10 offset-md-1">
-      <h1 class="text-center mb-4">Your Karma Dashboard</h1>
+    <div class="col-lg-10 offset-lg-1 col-md-12">
+      <h1 class="text-center mb-5 display-4 fw-bold">Your Karma Dashboard</h1>
 
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <h2 class="card-title">Your Karma Progress</h2>
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <h3 class="mb-0">Karma Points: <span class="badge bg-success"><%= @user_karma_points %></span></h3>
-            <h3 class="mb-0">Rank: <span class="badge bg-info"><%= @user_rank %></span></h3>
-          </div>
+      <%= render 'karma/user_karma_summary',
+          user_karma_points: @user_karma_points,
+          current_karma_tier: @current_karma_tier,
+          next_karma_tier: @next_karma_tier,
+          progress_percentage: @progress_percentage,
+          user_rank: @user_rank,
+          user: @user # Pass @user as 'user' for comparison in leaderboard partial
+      %>
 
-          <p class="lead">
-            Current Tier: <strong><%= @current_karma_tier[:display_name] %></strong>
-          </p>
+      <%= render 'karma/karma_leaderboard',
+          top_users: @top_users,
+          user: @user # Pass @user as 'user' for comparison in leaderboard partial
+      %>
 
-          <% if @next_karma_tier %>
-            <p>
-              Next Tier: <strong><%= @next_karma_tier[:display_name] %></strong>
-              (<%= @next_karma_tier[:min_points] %> Karma Points)
-            </p>
-            <div class="progress" style="height: 25px;">
-              <div class="progress-bar bg-warning" role="progressbar" style="width: <%= @progress_percentage %>%;" aria-valuenow="<%= @progress_percentage %>" aria-valuemin="0" aria-valuemax="100">
-                <%= @progress_percentage %>%
-              </div>
-            </div>
-            <p class="text-muted text-end mt-1"><small><%= @next_karma_tier[:min_points] - @user_karma_points %> points to go!</small></p>
-          <% else %>
-            <p class="text-success lead">
-              Congratulations! You are a <%= @current_karma_tier[:display_name] %> – you've reached the highest tier!
-            </p>
-          <% end %>
-        </div>
-      </div>
-
-      <div class="card mb-4 shadow-sm">
-        <div class="card-body">
-          <h2 class="card-title text-center mb-3">What is Karma?</h2>
-
-          <p class="lead text-center">
-            Karma on Map the Makers is our way of celebrating <strong>you</strong>, our amazing community members!
-            Every time you contribute to building a richer, more accurate, and helpful resource for conscious consumers in Indonesia,
-            you earn Karma points.
-          </p>
-
-          <p class="text-center mb-5">
-            Think of Karma as your personal impact score – the more you contribute, the more your Karma grows,
-            and the more you help others discover incredible local food producers!
-          </p>
-
-          <h3 class="mb-3">How to Earn Karma</h3>
-          <p>
-            Earning Karma is simple! Every action you take to improve Map the Makers helps our community and earns you valuable points:
-          </p>
-          <ul>
-            <li>
-              <strong>Add a New Maker:</strong> Help us grow our network! When you successfully add a new farmer,
-              butcher, fisherman, or other local producer to Map the Makers, you'll earn Karma points.
-              <p class="text-muted mt-1"><em>Karma Points: <%= KarmaConfig::POINTS_FOR_ADDING_MAKER %> points.</em></p>
-            </li>
-            <li>
-              <strong>Write a Review:</strong> Share your experiences! Your honest reviews help others make informed decisions.
-              <p class="text-muted mt-1"><em>Karma Points: <%= KarmaConfig::POINTS_FOR_SUBMITTING_REVIEW %> points.</em></p>
-            </li>
-            <li>
-              <strong>Confirm Data Accuracy (Coming Soon!):</strong> Help us keep our information fresh and reliable.
-              If you notice outdated details or can verify existing data, you'll earn Karma.
-            </li>
-            <li>
-              <strong>Participate in Missions (Coming Soon!):</strong> Engage in special challenges and community events.
-              These could be anything from adding a certain number of makers in a week to joining local clean-up initiatives.
-            </li>
-          </ul>
-
-          <h3 class="mb-3">Karma Tiers: Become a Local Hero!</h3>
-          <p>
-            As your Karma points grow, you'll unlock special tiers, publicly recognizing your dedication and impact.
-            Each tier comes with unique badges displayed on your profile.
-          </p>
-          <p>Here are the initial tiers:</p>
-          <ul>
-            <% KarmaConfig::TIERS.each do |key, tier| %>
-              <li><strong><%= tier[:display_name] %>:</strong> <%= tier[:min_points] %>+ Karma Points</li>
-            <% end %>
-          </ul>
-          <p class="text-muted"><em>Note: Karma point thresholds for each tier may be adjusted as the community grows.</em></p>
-
-          <h3 class="mb-3">What Does Karma Do?</h3>
-          <p>Beyond the satisfaction of helping your community, Karma offers:</p>
-          <ul>
-            <li><strong>Recognition:</strong> Your Karma points and tier badge will be visible on your profile, showcasing your contributions.</li>
-            <li><strong>Influence:</strong> Higher Karma tiers may unlock special privileges in the future, such as early access to new features or the ability to vote on community initiatives.</li>
-            <li><strong>Community Connection:</strong> Karma helps highlight the most active and helpful members, fostering a stronger community around local food.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="card shadow-sm">
-        <div class="card-body">
-          <h2 class="card-title">Top 10 Karma Leaders</h2>
-          <% if @top_users.any? %>
-            <ul class="list-group list-group-flush">
-              <% @top_users.each_with_index do |user, index| %>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                  <div>
-                    <strong><%= index + 1 %>. <%= user.email %></strong>
-                    <% if user == @user %>
-                      <span class="badge bg-primary ms-2">You</span>
-                    <% end %>
-                  </div>
-                  <span class="badge bg-secondary rounded-pill"><%= user.karma_points %> Karma</span>
-                </li>
-              <% end %>
-            </ul>
-          <% else %>
-            <p class="text-muted">No Karma leaders yet. Be the first to earn points!</p>
-          <% end %>
-        </div>
-      </div>
+      <%= render 'karma/karma_explanation_summary' %>
 
     </div>
   </div>

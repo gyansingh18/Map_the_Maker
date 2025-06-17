@@ -1,0 +1,33 @@
+<%# app/views/karma/_user_karma_summary.html.erb %>
+<%# Local variables expected: user_karma_points, current_karma_tier, next_karma_tier, progress_percentage, user_rank, user %>
+
+<div class="card mb-5 shadow-lg border-0 rounded-3">
+  <div class="card-body p-4 p-md-5">
+    <h2 class="card-title text-center mb-4 text-primary">Your Karma Progress</h2>
+    <div class="d-flex flex-column flex-md-row justify-content-around align-items-center mb-4">
+      <h3 class="mb-2 mb-md-0">Karma Points: <span class="badge bg-success fs-5 px-3 py-2 rounded-pill"><%= user_karma_points %></span></h3>
+      <h3 class="mb-2 mb-md-0">Global Rank: <span class="badge bg-info fs-5 px-3 py-2 rounded-pill"><%= user_rank %></span></h3>
+    </div>
+
+    <p class="lead text-center mb-3">
+      Current Tier: <strong><%= current_karma_tier[:display_name] %></strong>
+    </p>
+
+    <% if next_karma_tier %>
+      <p class="text-center mb-2">
+        Next Tier: <strong><%= next_karma_tier[:display_name] %></strong>
+        (<%= next_karma_tier[:min_points] %> Karma Points)
+      </p>
+      <div class="progress mb-2" style="height: 30px;">
+        <div class="progress-bar bg-warning text-dark fw-bold" role="progressbar" style="width: <%= progress_percentage %>%;" aria-valuenow="<%= progress_percentage %>" aria-valuemin="0" aria-valuemax="100">
+          <%= progress_percentage %>%
+        </div>
+      </div>
+      <p class="text-muted text-end"><small><%= next_karma_tier[:min_points] - user_karma_points %> points to go!</small></p>
+    <% else %>
+      <p class="text-success lead text-center mt-4">
+        <strong>Congratulations! You are a <%= current_karma_tier[:display_name] %> – you've reached the highest tier!</strong>
+      </p>
+    <% end %>
+  </div>
+</div>

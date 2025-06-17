@@ -1,18 +1,17 @@
 puts "Creating seeds"
 
 puts "Destroying everything"
-User.destroy_all
-Maker.destroy_all
+ReviewProduct.destroy_all
 Product.destroy_all
 Review.destroy_all
-ReviewProduct.destroy_all
+Maker.destroy_all
+User.destroy_all
 
 puts "Creating users"
 users = []
 
 first_names = ["Alizee", "Clint", "Ashley", "Gyan", "Jannis"]
 last_names = ["Apple", "Cucumber", "Avocado", "Garlic", "Jackfruit"]
-
 
 first_names.each_with_index do |first_name, index|
   temp_user = User.create!(
@@ -67,7 +66,7 @@ maker_image_links = {
     "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEix85NoybpnxjjHnKcttQvJDoftmapdubKkLELmudVew-8Q69ZSqlO9cUMQ0HHlzqhxfO4J1bj0U3tPGMQaiHf9lz6TDWhL29KIKwR7eNQCzt77Lew3s_AwFTHZlQY5ZFQu7CUrmZxkdjM/s1600/chia-song-kun.jpg"]
   }
 
-10.times do
+25.times do
   temp_primary_category = Maker::CATEGORIES.sample
   temp_name = "#{first_names.sample}'s #{temp_primary_category} #{types.sample}"
 
@@ -117,7 +116,6 @@ makers.each do |maker|
 
     reviews << temp_review
   end
-
 end
 
 puts "Created #{reviews.count} reviews"

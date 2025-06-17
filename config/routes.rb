@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
+
+  get '/karma_info', to: 'pages#karma', as: :karma_info
   get '/karma', to: 'karma#dashboard', as: :karma_dashboard
+
   resources :makers, except: [:edit, :update, :destroy] do
     collection do
       get :map
