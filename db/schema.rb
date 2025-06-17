@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2025_06_16_021527) do
+ActiveRecord::Schema[7.1].define(version: 2025_06_16_074606) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "vector"
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -42,6 +43,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_16_021527) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+# Could not dump table "makers" because of following StandardError
+#   Unknown type 'vector(1536)' for column 'embedding'
   create_table "makers", force: :cascade do |t|
     t.string "name"
     t.string "location"
@@ -52,13 +55,8 @@ ActiveRecord::Schema[7.1].define(version: 2025_06_16_021527) do
     t.string "categories", array: true
     t.float "latitude"
     t.float "longitude"
+    t.vector "embedding", limit: 1536
     t.index ["user_id"], name: "index_makers_on_user_id"
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.string "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|

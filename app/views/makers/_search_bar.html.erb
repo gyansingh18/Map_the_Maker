@@ -1,6 +1,4 @@
-<<<<<<< 63_index_design
-<div class="container">
-
+<div class="float-search d-flex justify-content-around align-items-center">
     <button type="button" class="btn text-start button-search" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
       <i class="fa-solid fa-magnifying-glass"></i>
       <% results = [] %>
@@ -22,18 +20,10 @@
       <% end %>
       <%= results %>
     </button>
-=======
-<%# app/views/makers/index.html.erb %>
->>>>>>> master
-
-<div class="container">
-  <%= render "search_bar", search_path: makers_path %>
-  <div class="top-placeholder">
   </div>
 
-<<<<<<< 63_index_design
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
           <h1 class="modal-title" id="staticBackdropLabel">
@@ -42,7 +32,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <%= form_with url: makers_path, method: :get, class: "" do |f| %>
+          <%= form_with url: search_path, method: :get, class: "" do |f| %>
             <%= text_field_tag :location,
                   params[:location],
                   class: "form-control search-box",
@@ -66,55 +56,4 @@
         </div>
       </div>
     </div>
-=======
-  <div class="float-body d-flex justify-content-around align-items-center">
-    <%= link_to new_maker_path, class: "btn button-add" do %>
-      <i class="fa-solid fa-plus"></i> Add
-    <% end %>
-    <%= link_to map_makers_path, class: "btn button-map" do %>
-      <i class="fa-solid fa-map"></i> Map
-    <% end %>
->>>>>>> master
   </div>
-
-  <div class="search-results">
-    <div class="count-results">
-      <% if params[:name].present? || params[:location].present? || params[:category].present? %>
-        <% if @makers.count > 1 %>
-          <h3><span class="highlight"><%= @makers.count  %></span> makers found </h3>
-        <% elsif @makers.count == 1   %>
-          <h3><span class="highlight"><%= @makers.count  %></span> maker found </h3>
-        <% else %>
-          <h3>No makers found, but have you ever tried
-          <a href="https://bali-surf-c272322c7844.herokuapp.com/">surfing</a>?<h3>
-        <% end %>
-      <% end %>
-    </div>
-    <% @makers.each do |maker| %>
-      <%= link_to maker_path(maker)  do %>
-        <div class="index-maker-card">
-          <%= cl_image_tag maker.photos[0].key, class: "index-maker-card-photo" %>
-          <div class="top-box">
-            <p class="h3 mb-0"><%= maker.name %></p>
-          </div>
-          <div class="middle-box d-flex justify-content-between align-items-center">
-            <p class="mb-0"><%= maker.location %></p>
-            <div class="star-box d-flex justify-content-end">
-              <%= render "shared/star_rating_overall", maker: maker %>
-            </div>
-          </div>
-          <div class="bottom-box">
-            <% maker.categories.each do |category| %>
-              <span class="category-tag"><%= category %></span>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  </div>
-
-  <div class="footer-placeholder">
-  </div>
-
-</div>
-<%= render "homebar"%>
