@@ -296,6 +296,11 @@
   text-align: center;
 }
 
+.video-mockup video {
+  margin-top: 30px;
+  width: 100%;
+}
+
 .how-it-works-section .section-headline {
   margin-bottom: 30px;
 }
@@ -614,4 +619,14 @@
   padding: 15px 30px;
   font-size: 1.1em;
   border-radius: 8px;
+}
+
+
+.footer {
+  background-color: $secondary-color;
+  color: $background-color;
+  font-weight: 300;
+  height: 15%;
+  align-content: center;
+  border: none;
 }

@@ -1,6 +1,6 @@
 <section class="how-it-works-section">
   <div class="container">
-    <h1>How it works</h1>
+    <h2>How it works</h2>
     <div class="steps-container">
       <div class="step-item">
         <div class="step-icon">
@@ -23,6 +23,15 @@
         <h3>Contribute</h3>
         <p>Add your favorite producers and help grow the map.</p>
       </div>
+    </div>
+    <div class="video-mockup">
+      <%= video_tag "mockup_video.mp4",
+          autoplay: true,
+          loop: true,
+          muted: true,
+          playsinline: true,
+          poster: image_path("mockup_img.png")
+        %>
     </div>
   </div>
 </section>
