@@ -1,102 +1,133 @@
-<div class="container p-3">
+<div class="container p-3 mb-5">
   <div class="index-maker-card">
-          <%= cl_image_tag @maker.photos[0].key, class: "index-maker-card-photo" %>
-          <div class="top-box d-flex justify-content-between align-items-center">
-            <div class="name-box">
-              <p class="h4 mb-1"><%= @maker.name %>  </p>
-            </div>
-            <div class="star-box d-flex justify-content-end">
-              <%= render "shared/star_rating_overall", maker: @maker %>
-            </div>
-          </div>
-          <div class="middle-box">
-            <p class="mb-0"><%= @maker.location %></p>
-          </div>
-          <div class="bottom-box">
-            <% @maker.categories.each do |category| %>
-              <span class="category-tag"><%= category.capitalize %></span>
-            <% end %>
-          </div>
-        </div>
+    <%= cl_image_tag @maker.photos[0].key, class: "index-maker-card-photo" %>
+    <div class="top-box d-flex justify-content-between align-items-center">
+      <div class="name-box">
+        <p class="h4 mb-1"><%= @maker.name %>  </p>
+      </div>
+      <div class="star-box d-flex justify-content-end">
+        <%= render "shared/star_rating_overall", maker: @maker %>
+      </div>
+    </div>
+    <div class="middle-box">
+      <p class="mb-0"><%= @maker.location %></p>
+    </div>
+    <div class="bottom-box">
+      <% @maker.categories.each do |category| %>
+        <span class="category-tag"><%= category.capitalize %></span>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="mapbox-maker">
+    <div class="mapbox-container"
+        data-controller="map"
+        data-map-markers-value="<%= @markers.to_json %>"
+        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
+    <%= render "search_bar", search_path: map_makers_path %>
+
+    <div class="fixed-bottom float-body d-flex justify-content-around align-items-center">
+      <%= link_to new_maker_path, class: "btn button-add" do %>
+        <i class="fa-solid fa-plus"></i> Add
+      <% end %>
+      <%= link_to makers_path, class: "btn button-map" do %>
+        <i class="fa-solid fa-list"></i> List
+      <% end %>
+    </div>
+  </div>
 
   <br>
   <div class="master_review_class">
-
-      <h4>  <strong> Reviews <strong> </h4>
-      <h4><strong><%= render "shared/star_rating_overall", maker: @maker %><strong>  </p>
-        <br>
-        <p> Freshness  <%= render "shared/star_rating_freshness", maker: @maker %></p>
-        <p> Service  <%= render "shared/star_rating_service", maker: @maker %></p>
-        <p> Product Range  <%= render "shared/star_rating_product_range", maker: @maker %></p>
-        <p> Accuracy <%= render "shared/star_rating_accuracy", maker: @maker %></p>
-
+    <h4>  <strong> Reviews <strong> </h4>
+    <h4><strong><%= render "shared/star_rating_overall", maker: @maker %><strong>  </p>
+    <br>
+    <p> Freshness  <%= render "shared/star_rating_freshness", maker: @maker %> <%= @maker.average_star_rating_freshness %></p>
+    <p> Service  <%= render "shared/star_rating_service", maker: @maker %> <%=@maker.average_star_rating_service %></p>
+    <p> Product Range  <%= render "shared/star_rating_product_range", maker: @maker %><%=@maker.average_star_rating_product_range %></p>
+    <p> Accuracy <%= render "shared/star_rating_accuracy", maker: @maker %> <%=@maker.average_star_rating_accuracy%></p>
   </div>
 
 
 <br>
-<div class = "container">
-    <%= link_to "Share", "#", class:"button-primary" %>
-</div>
+<!-- Button trigger modal -->
+<button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Share
+</button>
 
-  <br>
-    <div class="container">
-      <div class="<div class="top-box d-flex justify-content-between align-items-center>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header border-none">
+        <h2 class="modal-title" id="exampleModalLabel">Share...</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
 
-        <br>
+      <div class="modal-footer">
 
-        <h3> Reviews </h3>
-
-        <h4>  <strong> <%= @maker.name %>'s Reviews  <strong> </h4>
-        <br>
-        <%if @reviews %>
-          <% @reviews.each do |review| %>
-            <div class = "review-card border rounded p-3 mb-3">
-
-
-              <p>
-                <strong></strong>
-                <%=render "shared/star_rating_overall", maker: review.maker%>
-                <% if review.comment %>
-
-                <p>  <em>"<%= review.comment %>"</em> </p>
-                   <% end %>
-
-                <p><strong><strong> <%= review.user.first_name %></p>
-              </p>
-            </div>
-          <% end %>
-    <% else %>
-
-    <p> No reviews yet for this maker.</p>
-    <% end %>
-
+      <a  href="https://wa.me/?text=<%= ERB::Util.url_encode(request.original_url)%>" target="_blank"><i class="fa-brands fa-whatsapp fa-5x" style="color: #25D366;"></i> </a>
+     <a  href="https://twitter.com/intent/tweet?url=<%= ERB::Util.url_encode(request.original_url) %>" target="_blank"><i class="fa-brands fa-x-twitter fa-5x" style="color: #1DA1F2;"></i> </a>
+     <a  href="https://www.facebook.com/sharer/sharer.php?u=<%= ERB::Util.url_encode(request.original_url) %>" target="_blank"><i class="fa-brands fa-facebook fa-5x" style="color: #1877F2;"> </i></a>
+      <a href = "#"  onclick ="copyLink()"><i class="fa-solid fa-link fa-5x" style="color: #6c757d;"></i> </a>
+     <script>
+      function copyLink(){
+        const url = window.location.href;
+        navigator.clipboard.writeText(url)
+        alert("Link copied!")
+      }
+      </script>
       </div>
     </div>
-
-
-
-
-
-
-
-
-
-<br>
-<br>
-
-<%# DONT TOUCH !!! %>
-<div class="container">
-  <h1><span class="highlight"><%= @maker.name %></span>'s Profile</h1>
-  <br>
-  <br>
-  <h2>Add a review!</h2>
-  <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-    Submit
-  </button>
-  <%# <%= link_to "Submit", new_maker_review_path(@maker), class:"button-primary" %>
+  </div>
 </div>
 
-<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+  <br>
+  <%= link_to "Share on Social Media", "#", class:"button-primary" %>
+
+  <div class="">
+    <br>
+    <h3> Reviews </h3>
+
+    <h4>  <strong> <%= @maker.name %>'s Reviews  <strong> </h4>
+    <br>
+    <%if @reviews %>
+      <% @reviews.each do |review| %>
+        <div class = "review-card border rounded p-3 mb-3">
+          <p>
+            <%=render "shared/star_rating_overall", maker: review.maker%>
+            <% if review.comment %>
+              <p><em>"<%= review.comment %>"</em> </p>
+            <% end %>
+            <p><strong><strong> <%= review.user.first_name %></p>
+          </p>
+        </div>
+      <% end %>
+    <% else %>
+      <p> No reviews yet for this maker.</p>
+    <% end %>
+  </div>
+
+  <br>
+
+  <%# <div class="review_box mb-5"> %>
+  <br>
+  <h2 class="text-center">Add a review!</h2>
+
+  <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#addReview">
+    Submit
+  </button>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+</div>
+
+<%# </div> %>
+<%# DONT TOUCH !!! %>
+<div class="modal fade" id="addReview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
