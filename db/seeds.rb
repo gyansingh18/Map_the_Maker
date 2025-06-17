@@ -66,7 +66,7 @@ maker_image_links = {
     "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEix85NoybpnxjjHnKcttQvJDoftmapdubKkLELmudVew-8Q69ZSqlO9cUMQ0HHlzqhxfO4J1bj0U3tPGMQaiHf9lz6TDWhL29KIKwR7eNQCzt77Lew3s_AwFTHZlQY5ZFQu7CUrmZxkdjM/s1600/chia-song-kun.jpg"]
   }
 
-25.times do
+10.times do
   temp_primary_category = Maker::CATEGORIES.sample
   temp_name = "#{first_names.sample}'s #{temp_primary_category} #{types.sample}"
 
