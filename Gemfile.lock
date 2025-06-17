@@ -339,7 +339,17 @@ GEM
     zeitwerk (2.7.3)
 
 PLATFORMS
+<<<<<<< HEAD
   arm64-darwin-24
+=======
+<<<<<<< 44_branding_colors_tests
+  arm64-darwin-24
+=======
+
+  arm64-darwin-24
+
+>>>>>>> master
+>>>>>>> a65cf91e8ad2cdc890d72a2d4943b25b40db22bb
   x86_64-linux-gnu
 
 DEPENDENCIES
