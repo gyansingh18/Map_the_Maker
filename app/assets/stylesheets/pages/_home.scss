@@ -294,7 +294,7 @@
 
 .how-it-works-section {
   padding: 40px 20px;
-  background-color: white;
+  background-color: $background-color;
   text-align: center;
 }
 
@@ -302,6 +302,10 @@
   color: $font-color;
   margin-bottom: 30px;
   font-size: 1.6em;
+}
+
+.why-it-matters {
+  
 }
 
 .steps-container {
