@@ -17,13 +17,6 @@ class MakersController < ApplicationController
         end
       end
     end
-
-    # @markers = @makers.geocoded.map do |maker|
-    #   {
-    #     lat: maker.latitude,
-    #     lng: maker.longitude
-    #   }
-    # end
   end
 
   def show
@@ -48,12 +41,20 @@ class MakersController < ApplicationController
   end
 
   def map
-    @makers = Maker.all
-    @markers = @makers.geocoded.map do |maker|
+    # Start with all geocoded makers. This is crucial for map display.
+    @makers = Maker.geocoded
+
+    # Apply map-specific filters to the @makers collection
+    apply_map_filters
+
+    # Now, @makers will be the filtered and geocoded set of makers,
+    # ready to be converted into markers.
+    @markers = @makers.map do |maker|
       {
         lat: maker.latitude,
-        lng: maker.longitude
-        # info_window_html: render_to_string(partial: "info_window", locals: {maker: maker })
+        lng: maker.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {maker: maker}),
+        marker_html: render_to_string(partial: "marker", locals: {maker: maker})
       }
     end
   end
@@ -63,4 +64,25 @@ class MakersController < ApplicationController
   def maker_params
     params.require(:maker).permit(:name, :location, :description, categories: [], photos: [])
   end
+
+   # NEW private method for map-specific filtering
+  def apply_map_filters
+    if params[:name].present?
+      @makers = @makers.where("name ILIKE ?", "%#{params[:name]}%")
+    end
+    if params[:location].present?
+      # Assuming you have a geocoding setup (like Geocoder gem) and makers have lat/lng
+      # This will filter based on distance from the provided location
+      @makers = @makers.near(params[:location], 50) # Search within 50 miles/km, adjust as needed
+    end
+    if params[:category].present?
+      categories_to_filter = params[:category].reject(&:blank?)
+      if categories_to_filter.any?
+        # This uses PostgreSQL's array operator to keep it an ActiveRecord::Relation
+        @makers = @makers.where("categories && ARRAY[?]::varchar[]", categories_to_filter)
+      end
+    end
+    # Add other map-specific filters here (e.g., product, if applicable)
+  end
+
 end
