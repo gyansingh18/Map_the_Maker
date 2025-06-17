@@ -1,4 +1,5 @@
 class MakersController < ApplicationController
+  before_action :set_maker, only: [:favorite, :unfavorite]
   skip_before_action :authenticate_user!, only: [:index, :show, :map]
 
   def index
@@ -21,9 +22,19 @@ class MakersController < ApplicationController
 
   def show
     @maker = Maker.find(params[:id])
-    @reviews = Review.all
+    @reviews = @maker.reviews.order(created_at: :desc).limit(3)
     @review = Review.new
     @products = Product.all
+
+    @makers = [@maker]
+    @markers = @makers.map do |maker|
+      {
+        lat: maker.latitude,
+        lng: maker.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {maker: maker}),
+        marker_html: render_to_string(partial: "marker", locals: {maker: maker})
+      }
+    end
   end
 
   def new
@@ -59,10 +70,25 @@ class MakersController < ApplicationController
     end
   end
 
+  def favorite
+    current_user.favorite(@maker)
+    redirect_to makers_path, alert: "Added to favorites"
+  end
+
+  def unfavorite
+    current_user.unfavorite(@maker)
+    redirect_to makers_path, alert: "Removed from favorites"
+  end
+
+
   private
 
   def maker_params
     params.require(:maker).permit(:name, :location, :description, categories: [], photos: [])
+  end
+
+  def set_maker
+    @maker = Maker.find(params[:id])
   end
 
    # NEW private method for map-specific filtering
@@ -84,4 +110,9 @@ class MakersController < ApplicationController
     end
     # Add other map-specific filters here (e.g., product, if applicable)
   end
+<<<<<<< 43_homepage_update
+=======
+
+
+>>>>>>> master
 end

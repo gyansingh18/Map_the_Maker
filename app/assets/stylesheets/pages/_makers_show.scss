@@ -20,19 +20,20 @@ h4 {
 }
 
 
-.master_review_class {
-background-color:$font-color ;
-padding: 5px 7px 5px 7px;
-color: $background-color;
-border: 20 px;
-margin: mb-1;
-border-radius: 10px;
 
 
-}
+
+
 
 
 .master_review_class {
+  background-color:$font-color ;
+  padding: 5px 7px 5px 7px;
+  color: $background-color;
+  border: 20 px;
+  margin: mb-1;
+  border-radius: 10px;
+
   .star-icon {
     color: $background-color;
   }
@@ -45,4 +46,36 @@ border-radius: 10px;
   .star-icon {
     color: $background-color;
 }
+}
+
+.review_box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-bottom: 1rem;
+}
+
+// .review_button {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   height: 100%;
+//   margin-top:0.5rem;
+// }
+
+.mapbox-maker {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  padding: 0rem;
+
+  .mapbox-container {
+    width: 100%;
+    height: 200px;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
 }
