@@ -30,7 +30,7 @@ class ChatbotService
     #   results << { role: "assistant", content: question.ai_answer || "" }
     # end
     # return results
-    
+
     questions = @question.user.questions
     results = []
 
@@ -56,7 +56,9 @@ class ChatbotService
         input: @question.user_question
       }
     )
+
     question_embedding = response['data'][0]['embedding']
+
     return Maker.nearest_neighbors(
       :embedding, question_embedding,
       distance: "euclidean"
