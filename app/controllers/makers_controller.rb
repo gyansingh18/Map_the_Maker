@@ -35,7 +35,7 @@ class MakersController < ApplicationController
     @maker = Maker.new(maker_params)
     @maker.user = current_user
     if @maker.save
-      redirect_to maker_path(@maker)
+      redirect_to maker_path(@maker ,auto_click: true)
     else
       render :new, status: :unprocessable_entity
     end
