@@ -10,9 +10,11 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  # This is a workaround for there being no RegistrationsController for Devise
-  def after_database_authentication
-    add_karma_points(:signed_up) unless KarmaTransaction.exists?(user: self, source_type: nil, action_type: :signed_up)
+  after_create :give_user_first_points
+
+  # # This is a workaround for there being no RegistrationsController for Devise
+  def give_user_first_points
+    add_karma_points(:signed_up, source: self)
   end
 
   def add_karma_points(action_type, source: nil)
