@@ -32,7 +32,7 @@
 </div>
 
 
-  <div class="index-maker-card">
+  <div class="show-maker-card">
     <div class="card-image-wrapper">
       <%= cl_image_tag @maker.photos[0].key, class: "card-image-top" %>
     </div>
@@ -53,7 +53,7 @@
 
     <div class="bottom-box">
       <% @maker.categories.each do |category| %>
-        <span class="category-tag"><%= category.capitalize %></span>
+        <span class="show-category-tag"><%= category.capitalize %></span>
       <% end %>
     </div>
   </div>
