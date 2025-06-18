@@ -96,11 +96,15 @@ html, body {
   white-space: nowrap;
 }
 
-.info-window-producer-card .producer-card-rating i {
-  color: gold;
+.info-window-producer-card .producer-card-location i {
+  color: $secondary-color;
   margin-right: 3px;
 }
 
+.info-window-producer-card .producer-card-rating i {
+  color: $primary-color;
+  margin-right: 3px;
+}
 .info-window-producer-card .producer-card-categories {
   font-size: 0.8rem;
   color: #888;

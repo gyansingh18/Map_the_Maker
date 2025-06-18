@@ -76,60 +76,6 @@ export default class extends Controller {
     }
   };
 
-  // add destination circle to the map
-  map.addLayer({
-    'id': 'destination-circle',
-    'type': 'circle',
-    'source': {
-      'type': 'geojson',
-      'data': {
-        'type': 'FeatureCollection',
-        'features': [
-          {
-            'type': 'Feature',
-            'properties': {},
-            'geometry': {
-              'type': 'Point',
-              'coordinates': defaultEnd
-            }
-          }
-        ]
-      }
-    },
-    'paint': {
-      'circle-radius': 10,
-      'circle-color': '#f30'
-    }
-  });
-
-  // make an initial directions request on load
-  getRoute(defaultEnd);
-
-  map.on('click', (event) => {
-  const coords = Object.keys(event.lngLat).map(
-    (key) => event.lngLat[key]
-  );
-  const end = {
-    'type': 'FeatureCollection',
-    'features': [
-      {
-        'type': 'Feature',
-        'properties': {},
-        'geometry': {
-          'type': 'Point',
-          'coordinates': coords
-        }
-      }
-    ]
-  };
-
-  map.getSource('destination-circle').setData(end);
-
-  getRoute(coords);
-});
-});
-  }
-
   #fetchDirections(origin, destination) {
     const query = `https://api.mapbox.com/directions/v5/mapbox/driving/${origin[0]},${origin[1]};${destination[0]},${destination[1]}?alternatives=true&annotations=duration%2Cdistance&geometries=geojson&language=en&overview=full&steps=true&access_token=${mapboxgl.accessToken}`;
 

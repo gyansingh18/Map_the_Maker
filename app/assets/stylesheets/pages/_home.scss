@@ -230,7 +230,10 @@
   align-items: center;
 }
 
-.producer-card-location i,
+.producer-card-location i {
+  margin-right: 5px;
+  color: $secondary-color;
+}
 .producer-card-rating i {
   margin-right: 5px;
   color: #FFD700; /* Gold for map marker and stars */
