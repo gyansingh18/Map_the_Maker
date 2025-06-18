@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :makers, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :questions, dependent: :destroy
+  has_many :karma_transactions, dependent: :destroy
   validates :first_name, presence: true
   validates :last_name, presence: true
   # Include default devise modules. Others available are:
