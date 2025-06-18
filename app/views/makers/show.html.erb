@@ -1,9 +1,40 @@
 <div class="container p-3 mb-5">
+  <div class="secondary_header_maker_show d-flex justify-content-between align-items-center mb-3">
+  <!-- Maker Name -->
+  <div class="maker-name">
+    <h2 class="mb-0"><%= @maker.name %></h2>
+  </div>
+
+  <!-- Heart and Share -->
+  <div class="header-icons d-flex align-items-center">
+    <!-- Heart -->
+    <% if user_signed_in? %>
+      <% if current_user.favorited?(@maker) %>
+        <%= link_to unfavorite_maker_path(@maker), data: { turbo_method: :post }, class: "ms-3" do %>
+          <i class="fa-solid fa-heart fa-xl" style="color: #d01111;"></i>
+        <% end %>
+      <% else %>
+        <%= link_to favorite_maker_path(@maker), data: { turbo_method: :post }, class: "ms-3" do %>
+          <i class="fa-solid fa-heart fa-xl" style="color: #d6d6d6;"></i>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_session_path, class: "ms-3" do %>
+        <i class="fa-solid fa-heart fa-xl" style="color: #d6d6d6;"></i>
+      <% end %>
+    <% end %>
+
+    <!-- Share -->
+    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="ms-3">
+      <i class="fa-solid fa-link fa-xl" style="color: #6c757d;"></i>
+    </a>
+  </div>
+</div>
+
+
   <div class="index-maker-card">
     <div class="card-image-wrapper">
-      <% if @maker.photos.any? %>
-        <%= cl_image_tag @maker.photos[0].key, class: "card-image-top" %>
-      <% end %>
+      <%= cl_image_tag @maker.photos[0].key, class: "card-image-top" %>
     </div>
 
     <div class="top-box d-flex justify-content-between align-items-center">
@@ -19,6 +50,7 @@
         <span class ="ms-1"><%=@maker.average_rating%></span>
       </div>
     </div>
+
     <div class="bottom-box">
       <% @maker.categories.each do |category| %>
         <span class="category-tag"><%= category.capitalize %></span>
@@ -46,15 +78,13 @@
 
   <br>
   <div class="master_review_class">
-    <% if @maker.reviews.any? %>
-      <h4>  <strong> Ratings </strong> </h4>
-      <h4><span class = "review-overall-stars"> <strong><%= render "shared/star_rating_overall", maker: @maker %></strong><span></h4></p>
-      <br>
-      <p> Freshness  <%= render "shared/star_rating_freshness", maker: @maker %> <%= @maker.average_star_rating_freshness %></p>
-      <p> Service  <%= render "shared/star_rating_service", maker: @maker %> <%=@maker.average_star_rating_service %></p>
-      <p> Product Range  <%= render "shared/star_rating_product_range", maker: @maker %><%=@maker.average_star_rating_product_range %></p>
-      <p> Accuracy <%= render "shared/star_rating_accuracy", maker: @maker %> <%=@maker.average_star_rating_accuracy%></p>
-     <% end %>
+    <h4>  <strong> Ratings </strong> </h4>
+    <h4><span class = "review-overall-stars"> <strong><%= render "shared/star_rating_overall", maker: @maker %></strong><span></h4></p>
+    <br>
+    <p> Freshness  <%= render "shared/star_rating_freshness", maker: @maker %> <%= @maker.average_star_rating_freshness %></p>
+    <p> Service  <%= render "shared/star_rating_service", maker: @maker %> <%=@maker.average_star_rating_service %></p>
+    <p> Product Range  <%= render "shared/star_rating_product_range", maker: @maker %><%=@maker.average_star_rating_product_range %></p>
+    <p> Accuracy <%= render "shared/star_rating_accuracy", maker: @maker %> <%=@maker.average_star_rating_accuracy%></p>
   </div>
 
   <br>
@@ -96,6 +126,7 @@
   <div class="">
     <br>
     <h3> Reviews </h3>
+
     <h5>  <strong> What people are saying about <span class="maker-highlight"><%= @maker.name %></span></strong></h5>
     <br>
     <%if @reviews.any? %>
@@ -107,6 +138,7 @@
           <% if review.comment.present?%>
             <p class="review-quote"><em>"<%= review.comment %>" </em></p>
             <% end %>
+
             <p class ="review-footer">- <cite><%= review.user.first_name%></cite></p>
 
         </div>
@@ -120,17 +152,16 @@
 
   <%# <div class="review_box mb-5"> %>
   <br>
-  <h2>Add a review!</h2>
-    <% unless @maker.reviews.any? %>
-      <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-controller="auto-click">
-        Submit
-      </button>
-    <% else %>
-      <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-        Submit
-      </button>
-    <% end %>
-  <%# <%= link_to "Submit", new_maker_review_path(@maker), class:"button-primary" %>
+  <h2 class="text-center">Add a review!</h2>
+
+  <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#addReview">
+    Submit
+  </button>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 </div>
 
 <%# </div> %>
@@ -139,11 +170,7 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <% if @maker.reviews.any?%>
         <h5 class="modal-title" id="staticBackdropLabel">Review <%= @maker.name %>!</h5>
-        <%else%>
-        <h5 class="modal-title" id="staticBackdropLabel">Leave your first Review to <%= @maker.name %>!</h5>
-        <%end%>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
