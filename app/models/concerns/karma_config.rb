@@ -3,7 +3,8 @@
 module KarmaConfig
 
   POINTS_FOR_ADDING_MAKER = 50
-  POINTS_FOR_SUBMITTING_REVIEW = 10
+  POINTS_FOR_SUBMITTING_REVIEW = 25
+  POINTS_FOR_SIGNING_UP = 10
 
   TIERS = {
     community_contributor: { min_points: 0, display_name: "Community Contributor" },

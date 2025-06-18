@@ -1,0 +1,30 @@
+<%# Local variables expected: user %>
+
+<div class="karma-transactions-card">
+  <h2>Your Karma History</h2>
+  <div class="transaction-list-container">
+    <% if user.karma_transactions.any? %>
+      <table class="transaction-table">
+        <thead>
+          <tr>
+            <th>Description</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% user.karma_transactions.order(created_at: :desc).each do |transaction| %>
+            <tr>
+              <td>
+                <strong><%= transaction.user.first_name %></strong>
+                <%= render_karma_transaction_description(transaction) %>
+              </td>
+              <td class="points-earned">+<%= transaction.points_awarded %> Karma</td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p class="no-transactions-message">No transactions recorded yet. Start contributing to earn Karma!</p>
+    <% end %>
+  </div>
+</div>
