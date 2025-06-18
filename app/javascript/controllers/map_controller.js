@@ -74,10 +74,10 @@ export default class extends Controller {
     } else {
       alert("Your browser does not support Geolocation. Cannot provide directions.");
     }
-  }
+  };
 
   #fetchDirections(origin, destination) {
-    const query = `https://api.mapbox.com/directions/v5/mapbox/driving/${origin[0]},${origin[1]};${destination[0]},${destination[1]}?steps=true&geometries=geojson&access_token=${mapboxgl.accessToken}`;
+    const query = `https://api.mapbox.com/directions/v5/mapbox/driving/${origin[0]},${origin[1]};${destination[0]},${destination[1]}?alternatives=true&annotations=duration%2Cdistance&geometries=geojson&language=en&overview=full&steps=true&access_token=${mapboxgl.accessToken}`;
 
     console.log("Fetching directions with query:", query);
 
@@ -103,6 +103,7 @@ export default class extends Controller {
         console.error("Error fetching directions from Mapbox:", error);
         alert("There was an error getting directions. Please check your internet connection and try again.");
       });
+
   }
 
   #addRouteToMap(route) {
@@ -129,7 +130,7 @@ export default class extends Controller {
         'line-cap': 'round'
       },
       'paint': {
-        'line-color': '#3887be',
+        'line-color': '#DEA82B',
         'line-width': 5,
         'line-opacity': 0.75
       }
