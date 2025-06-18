@@ -1,33 +1,43 @@
 <%# app/views/karma/_user_karma_summary.html.erb %>
-<%# Local variables expected: user_karma_points, current_karma_tier, next_karma_tier, progress_percentage, user_rank, user %>
 
-<div class="card mb-5 shadow-lg border-0 rounded-3">
-  <div class="card-body p-4 p-md-5">
-    <h2 class="card-title text-center mb-4 text-primary">Your Karma Progress</h2>
-    <div class="d-flex flex-column flex-md-row justify-content-around align-items-center mb-4">
-      <h3 class="mb-2 mb-md-0">Karma Points: <span class="badge bg-success fs-5 px-3 py-2 rounded-pill"><%= user_karma_points %></span></h3>
-      <h3 class="mb-2 mb-md-0">Global Rank: <span class="badge bg-info fs-5 px-3 py-2 rounded-pill"><%= user_rank %></span></h3>
+<div class="karma-summary-card">
+  <div class="karma-summary-header">
+    <div class="main-icon-wrapper">
+      <i class="fas fa-star"></i> <%# You can choose a different icon here if you prefer %>
+      <%# Optionally, add a numbered badge here if it makes sense, e.g., for user's rank %>
+      <%# <span class="step-number"><%= user_rank %></span> %>
+    </div>
+    <h2>Your Karma Summary</h2>
+    <span class="karma-rank">Rank: <%= user_rank %></span>
+  </div>
+
+  <div class="karma-stats-grid">
+    <div class="karma-stat-item points">
+      <p><%= user_karma_points %></p>
+      <p>Total Karma Points</p>
     </div>
 
-    <p class="lead text-center mb-3">
-      Current Tier: <strong><%= current_karma_tier[:display_name] %></strong>
-    </p>
+    <div class="karma-stat-item tier">
+      <p><%= current_karma_tier[:display_name] %></p>
+      <p>Current Tier</p>
+    </div>
+  </div>
 
-    <% if next_karma_tier %>
-      <p class="text-center mb-2">
-        Next Tier: <strong><%= next_karma_tier[:display_name] %></strong>
-        (<%= next_karma_tier[:min_points] %> Karma Points)
-      </p>
-      <div class="progress mb-2" style="height: 30px;">
-        <div class="progress-bar bg-warning text-dark fw-bold" role="progressbar" style="width: <%= progress_percentage %>%;" aria-valuenow="<%= progress_percentage %>" aria-valuemin="0" aria-valuemax="100">
-          <%= progress_percentage %>%
-        </div>
+  <% if next_karma_tier.present? %>
+    <div class="karma-progress-section">
+      <h3>Progress to <%= next_karma_tier[:display_name] %></h3>
+      <div class="progress-bar-container">
+        <div class="progress-bar" style="width: <%= progress_percentage %>%"></div>
       </div>
-      <p class="text-muted text-end"><small><%= next_karma_tier[:min_points] - user_karma_points %> points to go!</small></p>
-    <% else %>
-      <p class="text-success lead text-center mt-4">
-        <strong>Congratulations! You are a <%= current_karma_tier[:display_name] %> – you've reached the highest tier!</strong>
+      <p class="progress-text">
+        <%= progress_percentage %>% towards <%= next_karma_tier[:min_points] %> points
       </p>
-    <% end %>
+    </div>
+  <% end %>
+
+  <div class="karma-cta">
+    <p>
+      Keep contributing to unlock new tiers and become a <span class="highlight"><%= KarmaConfig::TIERS.values.last[:display_name] %></span>!
+    </p>
   </div>
 </div>

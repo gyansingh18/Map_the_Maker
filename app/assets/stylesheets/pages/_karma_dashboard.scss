@@ -1,291 +1,391 @@
 // app/assets/stylesheets/pages/_karma_dashboard.scss
 
-.karma-dashboard-section {
-  padding: 40px 20px; // Consistent padding with your home page sections
-  background-color: $background-color;
-  text-align: center; // For the main headline
-}
+// --- Mixins for Reusable Styles (Updated/New) ---
 
-.karma-dashboard-section .section-headline {
-  font-size: 2.2em; // Similar to your home page H2
-  margin-bottom: 40px; // More spacing for main headline
+// Mixin for general card styling, updated to match homepage
+@mixin card-style() {
+  background-color: $background-color; // Match homepage card background
+  border-radius: 10px; // Match homepage border-radius
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Match homepage shadow
+  padding: 30px 20px; // Match homepage padding
   color: $font-color;
+  margin-bottom: 25px; // Consistent spacing between cards
 }
 
-.karma-card { // General styling for the main "cards" on the dashboard
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  margin-bottom: 30px; // Space between main sections/cards
-  text-align: center; // Default alignment for content inside
+// Mixin for card hover effect (keeping this as it's a good touch)
+@mixin card-hover-effect {
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.03); // Slightly less aggressive scale than before
+  }
 }
 
-.karma-card .section-headline { // Override for sub-headlines within karma-card
-  font-size: 1.8em;
-  margin-bottom: 25px;
-  color: $primary-color; // Or $font-color, depending on desired emphasis
-}
-
-
-/* --- Karma Summary Cards (Overall Points, Reviews, Makers) --- */
-.karma-summary-cards-container {
+// Mixin for the icon circle container (from homepage)
+@mixin icon-circle($size: 70px, $bg-color: $secondary-color) {
+  position: relative;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background-color: $bg-color;
   display: flex;
-  flex-wrap: wrap; // Allow wrapping on smaller screens
-  justify-content: center; // Center cards when they wrap
-  gap: 20px; // Space between cards
-  margin-bottom: 40px; // Space below the cards and before the progress bar
-}
-
-.karma-status-card {
-  flex: 1 1 280px; // Allows cards to grow/shrink, with a base of 280px, up to 3 per row on larger screens
-  max-width: 350px; // Max width to prevent cards from becoming too wide
-  background-color: $secondary-color; // Distinct background for these small cards
-  color: $background-color; // White text for contrast
-  border-radius: 8px;
-  padding: 25px 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  text-align: center;
-}
-
-.karma-status-card .icon-wrapper {
-  font-size: 2.5em;
-  color: $accent-color; // Or a bright color for icons
-  margin-bottom: 10px;
-}
-
-.karma-status-card .card-label {
-  font-size: 1.1em;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-.karma-status-card .card-value {
-  font-size: 2em;
-  font-weight: bold;
-  color: $background-color; // Ensure text stands out
-}
-
-/* --- Progress Bar Styling (adapting from Bootstrap) --- */
-.progress-bar-container {
-  width: 100%;
-  background-color: #e0e0e0;
-  border-radius: 5px;
-  overflow: hidden; // Ensures inner bar respects border-radius
-  height: 30px; // Consistent height
-  margin-bottom: 10px;
-}
-
-.progress-bar {
-  height: 100%;
-  background-color: $primary-color; // Use primary color for progress
-  color: white; // White text on progress bar
-  display: flex;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  transition: width 0.5s ease-in-out; // Smooth transition for progress updates
-  border-radius: 5px; // Ensure inner bar also has rounded corners
 }
 
-.progress-bar[aria-valuenow="100"] {
-  background-color: $success-color; // Optional: A different color for 100% completion
+// Mixin for the icon itself (from homepage)
+@mixin icon-style($size: 2.8em, $color: white) {
+  font-size: $size;
+  color: $color;
 }
 
-
-/* Adjust existing Bootstrap text classes to match home page feel where relevant */
-.text-center { text-align: center; }
-.text-primary { color: $primary-color; }
-.text-success { color: $success-color; } // Define $success-color if you don't have it
-.text-muted { color: #666; }
-.lead { font-size: 1.15em; line-height: 1.5; }
-small { font-size: 0.8em; }
-
-
-// app/assets/stylesheets/pages/_karma_dashboard.scss
-
-// ... (previous styles for .karma-dashboard-section, .karma-card, etc.) ...
-
-/* --- Karma Leaderboard --- */
-.karma-leaderboard-card {
-  // Inherits .karma-card styles for general look
-}
-
-.leaderboard-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); // Responsive grid columns
-  gap: 20px; // Space between grid items
-  margin-top: 30px; // Space below headline
-}
-
-.leaderboard-item {
-  background-color: #f9f9f9; // Light background for each item
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  text-align: left; // Align text within each card
+// Mixin for the numbered badge overlay (from homepage)
+@mixin numbered-badge($size: 30px, $bg-color: $primary-color, $text-color: white) {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: $bg-color;
+  color: $text-color;
+  border-radius: 50%;
+  width: $size;
+  height: $size;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  min-height: 120px; // Ensure consistent height for grid items
-  transition: all 0.2s ease-in-out;
-}
-
-.leaderboard-item:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-.leaderboard-rank {
-  font-size: 1.8em;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9em;
   font-weight: bold;
-  color: $primary-color; // Highlight rank number
-  margin-bottom: 10px;
+  border: 2px solid white;
 }
 
-.leaderboard-name {
-  font-size: 1.1em;
+// Mixin for main card headings (h2 on dashboard, h3 on homepage)
+@mixin card-main-heading($text-color: $primary-color) {
+  font-size: 1.3em; // Match homepage step-item h3
+  color: $text-color;
+  margin-bottom: 10px; // Match homepage
+  font-weight: 700; // Ensuring it's bold
+}
+
+// Mixin for sub-headings (e.g., "Progress to..." "Recent Activity")
+@mixin card-sub-heading {
+  font-size: 1.1em; // Slightly smaller than card-main-heading
+  color: $font-color;
   font-weight: 600;
-  color: $font-color;
-  margin-bottom: 5px;
-  display: flex;
-  align-items: center;
-  gap: 8px; // Space between name and badge
+  margin-bottom: 0.75rem;
 }
 
-.leaderboard-karma {
-  font-size: 1em;
-  color: $secondary-color;
-  font-weight: bold;
-}
 
-.current-user-highlight {
-  border: 2px solid $accent-color; // Stronger border for current user
-  background-color: lighten($accent-color, 45%); // Slightly lighter background
-  box-shadow: 0 0 0 3px rgba($accent-color, 0.3); // Glow effect
-}
-
-.you-badge {
-  background-color: $primary-color; // Or a distinct color
-  color: white;
-  padding: 4px 8px;
-  border-radius: 5px;
-  font-size: 0.75em;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-/* --- Karma Tier Progress Section --- */
-.karma-tier-progress-card {
-  // Inherits .karma-card styles for general look
-}
-
-.tier-cards-container {
-  display: flex;
-  overflow-x: scroll; // Enable horizontal scrolling
-  -webkit-overflow-scrolling: touch; // Smooth scrolling on iOS
-  padding-bottom: 20px; // Space for scrollbar
-  gap: 20px; // Space between tier cards
-  margin-top: 30px;
-  justify-content: flex-start; // Start items from the beginning, not centered
-  align-items: stretch; // Ensure cards stretch to fill height if content varies
-}
-
-.tier-card {
-  flex-shrink: 0; // Prevent cards from shrinking
-  width: 250px; // Fixed width for each card
-  background-color: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  transition: all 0.2s ease-in-out;
-  position: relative; // For current-tier indicator
-}
-
-.tier-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.tier-icon {
-  font-size: 3em;
-  color: $secondary-color; // Or another distinct color for tier icons
-  margin-bottom: 10px;
-}
-
-.tier-name {
-  font-size: 1.4em;
-  font-weight: bold;
-  color: $primary-color;
-  margin-bottom: 5px;
-}
-
-.tier-points-needed {
-  font-size: 0.9em;
-  color: #666;
-  margin-bottom: 15px;
-}
-
-.progress-bar-container.compact {
-  height: 20px; // Smaller progress bar for these cards
-  margin-bottom: 10px;
-  width: 100%; // Ensure it takes full width of card
-}
-
-.progress-bar.completed {
-  background-color: $success-color; // Distinct color for completed tiers
-}
-
-.tier-status {
-  font-size: 0.9em;
-  font-weight: 500;
-  color: $font-color;
-  margin-top: 10px;
-}
-
-.current-tier {
-  border: 3px solid $accent-color; // Stronger border for the current tier
-  box-shadow: 0 0 0 4px rgba($accent-color, 0.2); // A subtle glow
-  // You can also add a background image/pattern or another visual cue here
-}
-
-/* --- Karma Explanation Summary (if you want to style it to match cards) --- */
-.karma-explanation-summary {
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  margin-bottom: 30px;
-  text-align: center;
-}
-
-.karma-explanation-summary h2 {
-  font-size: 1.8em;
-  margin-bottom: 20px;
+// Mixin for general paragraph text (from homepage)
+@mixin text-paragraph {
+  font-size: 1em; // Match homepage
+  line-height: 1.5; // Match homepage
   color: $font-color;
 }
 
-.karma-explanation-summary p {
-  font-size: 1em;
-  color: #555;
-  line-height: 1.6;
+// **NEW MIXIN:** For smaller text
+@mixin text-sm {
+  font-size: 0.875em; // Typically 14px if base is 16px
+  line-height: 1.4;
+  color: lighten($font-color, 20%);
 }
 
-.karma-explanation-summary a {
-  color: $primary-color;
-  text-decoration: none;
+// --- Component Styles using New Mixins ---
+
+.karma-dashboard-section {
+  padding: 40px 20px; // Match homepage section padding
+  background-color: $background-color; // Overall dashboard background
+  text-align: center; // For the main dashboard title
+    margin-bottom: 25px; // Consistent spacing between cards
+
+}
+
+// Overall page heading (Your Karma Dashboard)
+.karma-page-title {
+  font-size: 2em; // A bit larger for the main page title
   font-weight: bold;
+  color: $font-color;
+  margin-bottom: 40px; // More space below the main title
 }
 
-.karma-explanation-summary a:hover {
-  text-decoration: underline;
+.karma-summary-card {
+  @include card-style(); // Apply updated card style
+  @include card-hover-effect; // Keep hover effect
+
+  .karma-summary-header {
+    display: flex;
+    flex-direction: column; // Stack elements vertically for better icon placement
+    align-items: center;
+    margin-bottom: 1.5rem; // Adjust margin
+
+    .main-icon-wrapper { // Wrapper for the icon and optional number
+      @include icon-circle(); // Main icon circle
+      margin-bottom: 15px; // Space between icon and text
+      i {
+        @include icon-style($size: 3.5em); // Slightly larger icon for main summary
+      }
+    }
+
+    h2 {
+      @include card-main-heading($text-color: $font-color); // Card title using homepage h3 style
+      margin-bottom: 0.5rem;
+    }
+
+    .karma-rank {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: $primary-color;
+    }
+  }
+
+  .karma-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 1.5rem; // Added top margin for spacing below header
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .karma-stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); // Smaller shadow for inner items
+
+      &.points {
+        background-color: lighten($primary-color, 45%);
+        p:first-child {
+          font-size: 3em; // Slightly smaller than before for balance
+          font-weight: 800;
+          color: darken($primary-color, 10%);
+        }
+      }
+
+      &.tier {
+        background-color: lighten($secondary-color, 45%);
+        p:first-child {
+          font-size: 1.8em; // Slightly smaller than before
+          font-weight: 700;
+          color: darken($secondary-color, 10%);
+        }
+      }
+
+      p:last-child {
+        font-size: 0.9em; // Match step-item p font size
+        color: $font-color;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .karma-progress-section {
+    margin-top: 1.5rem; // Adjusted margin
+
+    h3 {
+      @include card-sub-heading; // Apply sub-heading mixin
+      text-align: center; // Center progress heading
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      background-color: lighten($font-color, 65%);
+      border-radius: 9999px;
+      height: 1rem;
+
+      .progress-bar {
+        background-color: $primary-color;
+        height: 1rem;
+        border-radius: 9999px;
+      }
+    }
+
+    .progress-text {
+      @include text-sm; // Now this mixin is defined
+      margin-top: 0.5rem;
+      text-align: right;
+    }
+  }
+
+  .karma-cta {
+    text-align: center;
+    margin-top: 1.5rem;
+
+    p {
+      @include text-paragraph; // Apply paragraph mixin
+      .highlight {
+        font-weight: 700;
+        color: $primary-color;
+      }
+    }
+  }
+}
+
+.karma-transactions-card {
+  @include card-style(); // Apply updated card style
+  @include card-hover-effect; // Add hover effect
+  margin-bottom: 25px; // Ensure explicit bottom margin for separation
+
+  h2 {
+    @include card-main-heading($text-color: $font-color); // Card title using homepage h3 style
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .transaction-list-container {
+    overflow-x: auto;
+  }
+
+  .transaction-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+    color: $font-color;
+
+    th, td {
+      padding: 0.8rem 0.75rem; // Slightly adjusted padding
+      text-align: left;
+      border-bottom: 1px solid lighten($font-color, 75%);
+    }
+
+    th {
+      font-weight: 600;
+      color: $secondary-color;
+      white-space: nowrap;
+      padding-top: 0;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    tbody tr:nth-child(odd) {
+      background-color: #fcfcfc;
+    }
+
+    .points-earned {
+      font-weight: 600;
+      color: darken($primary-color, 5%);
+    }
+  }
+
+  .no-transactions-message {
+    text-align: center;
+    @include text-paragraph; // Use paragraph mixin
+    padding: 2rem;
+    font-style: italic;
+  }
+}
+
+.karma-leaderboard-card {
+  @include card-style(); // Apply updated card style
+  @include card-hover-effect; // Add hover effect
+  border: 1px solid lighten($primary-color, 35%); // Specific border for leaderboard (keep this)
+
+  h2 {
+    @include card-main-heading($text-color: $font-color); // Card title using homepage h3 style
+    text-align: center;
+  }
+
+  .leaderboard-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .leaderboard-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px dashed lighten($font-color, 70%);
+    @include text-paragraph; // Apply paragraph mixin
+
+    // Special styling for 1st, 2nd, 3rd (keep these)
+    &:first-child {
+      .leaderboard-rank, .leaderboard-name, .leaderboard-points {
+        font-weight: 700;
+        color: $primary-color;
+      }
+      .leaderboard-rank::before { content: "🥇 "; }
+    }
+    &:nth-child(2) { .leaderboard-rank::before { content: "🥈 "; } }
+    &:nth-child(3) { .leaderboard-rank::before { content: "🥉 "; } }
+
+    &:last-child { border-bottom: none; }
+
+    &.current-user {
+      background-color: lighten($secondary-color, 45%);
+      border-radius: 0.25rem;
+      padding: 0.75rem 0.5rem;
+      margin: 0.5rem 0;
+      border: 1px solid lighten($secondary-color, 30%);
+      .leaderboard-rank, .leaderboard-name, .leaderboard-points {
+        color: darken($secondary-color, 5%);
+        font-weight: 700;
+      }
+    }
+
+    .leaderboard-rank {
+      font-weight: 500;
+      width: 2rem;
+      text-align: right;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .leaderboard-name {
+      flex-grow: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-right: 1rem;
+    }
+
+    .leaderboard-points {
+      font-weight: 600;
+      color: $primary-color;
+      flex-shrink: 0;
+    }
+  }
+
+  .leaderboard-footer-note {
+    text-align: center;
+    margin-top: 1.5rem;
+    @include text-sm; // Now this mixin is defined
+  }
+}
+
+.karma-explanation-card {
+  @include card-style(); // Apply updated card style
+  @include card-hover-effect; // Add hover effect
+
+  h2 {
+    @include card-main-heading($text-color: $font-color); // Card title using homepage h3 style
+    font-size: 1.75rem; // Keep this larger for the main explanation title
+    text-align: center;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    @include text-paragraph; // Apply paragraph mixin
+    text-align: center;
+  }
+
+  .karma-info-link {
+    display: block;
+    text-align: center;
+    margin-top: 1.5rem;
+    a {
+      font-weight: 600;
+      color: $primary-color;
+      text-decoration: none;
+      transition: color 0.2s ease-in-out;
+
+      &:hover {
+        color: darken($primary-color, 10%);
+        text-decoration: underline;
+      }
+    }
+  }
 }
