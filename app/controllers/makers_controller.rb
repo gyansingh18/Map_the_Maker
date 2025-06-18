@@ -45,8 +45,9 @@ class MakersController < ApplicationController
     @maker = Maker.new(maker_params)
     @maker.user = current_user
     if @maker.save
+      redirect_to maker_path(@maker ,auto_click: true)
+
       current_user.add_karma_points(:maker_added, source: @maker)
-      redirect_to maker_path(@maker)
     else
       render :new, status: :unprocessable_entity
     end

@@ -1,12 +1,14 @@
 puts "Creating seeds"
 
 puts "Destroying everything"
+
 KarmaTransaction.destroy_all
 ReviewProduct.destroy_all
 Product.destroy_all
 Review.destroy_all
 Maker.destroy_all
 User.destroy_all
+
 
 puts "Creating users"
 users = []

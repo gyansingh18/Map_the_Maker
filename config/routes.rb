@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "pages#home"
+  unauthenticated :user do
+    root to: "pages#home"
+  end
+  authenticated :user do
+    root to: "makers#index", as: :authenticated_root
+  end
+  resources :makers, except: [:edit, :update, :destroy] do
 
   get '/karma_info', to: 'pages#karma', as: :karma_info
   get '/karma', to: 'karma#dashboard', as: :karma_dashboard
