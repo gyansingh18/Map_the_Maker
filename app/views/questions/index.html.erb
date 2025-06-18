@@ -1,4 +1,15 @@
 <div class="container chatbot">
+  <div class="chat-top-buttons d-flex justify-content-between">
+    <%= link_to makers_path do %>
+    <span class="back-from-chat"><i class="fa-solid fa-arrow-left"></i> Back to makers</span>
+  <% end %>
+
+  <%= link_to reset_questions_path do %>
+    <i class="fa-solid fa-arrows-spin"></i> Restart conversation
+  <% end %>
+  </div>
+
+
   <h1>Chat with us</h1>
   <div id="questions">
     <%= render @questions %>
