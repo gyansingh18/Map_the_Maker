@@ -102,3 +102,9 @@ html, body {
   margin-top: 5px;
   margin-bottom: 0;
 }
+
+.mapsearch {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
