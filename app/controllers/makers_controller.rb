@@ -74,12 +74,12 @@ class MakersController < ApplicationController
 
   def favorite
     current_user.favorite(@maker)
-    redirect_to makers_path, alert: "Added to favorites"
+    redirect_to request.referer&.include?(maker_path(@maker)) ? maker_path(@maker) : makers_path, notice: "Added to favorites"
   end
 
   def unfavorite
     current_user.unfavorite(@maker)
-    redirect_to makers_path, alert: "Removed from favorites"
+    redirect_to request.referer&.include?(maker_path(@maker)) ? maker_path(@maker) : makers_path, notice: "Removed from favorites"
   end
 
 
