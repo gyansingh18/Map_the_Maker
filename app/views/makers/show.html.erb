@@ -1,4 +1,37 @@
 <div class="container p-3 mb-5">
+  <div class="secondary_header_maker_show d-flex justify-content-between align-items-center mb-3">
+  <!-- Maker Name -->
+  <div class="maker-name">
+    <h2 class="mb-0"><%= @maker.name %></h2>
+  </div>
+
+  <!-- Heart and Share -->
+  <div class="header-icons d-flex align-items-center">
+    <!-- Heart -->
+    <% if user_signed_in? %>
+      <% if current_user.favorited?(@maker) %>
+        <%= link_to unfavorite_maker_path(@maker), data: { turbo_method: :post }, class: "ms-3" do %>
+          <i class="fa-solid fa-heart fa-xl" style="color: #d01111;"></i>
+        <% end %>
+      <% else %>
+        <%= link_to favorite_maker_path(@maker), data: { turbo_method: :post }, class: "ms-3" do %>
+          <i class="fa-solid fa-heart fa-xl" style="color: #d6d6d6;"></i>
+        <% end %>
+      <% end %>
+    <% else %>
+      <%= link_to new_user_session_path, class: "ms-3" do %>
+        <i class="fa-solid fa-heart fa-xl" style="color: #d6d6d6;"></i>
+      <% end %>
+    <% end %>
+
+    <!-- Share -->
+    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="ms-3">
+      <i class="fa-solid fa-link fa-xl" style="color: #6c757d;"></i>
+    </a>
+  </div>
+</div>
+
+
   <div class="index-maker-card">
     <div class="card-image-wrapper">
       <%= cl_image_tag @maker.photos[0].key, class: "card-image-top" %>
@@ -96,9 +129,9 @@
 
     <h5>  <strong> What people are saying about <span class="maker-highlight"><%= @maker.name %></span></strong></h5>
     <br>
-    <%if @reviews.any? %>
+    <%if @maker.reviews.any? %>
 
-      <% @reviews.each do |review| %>
+      <% @maker.reviews.each do |review| %>
         <div class = "review-card border rounded p-3 mb-3">
           <%= render "shared/star_rating_overall", maker: review.maker%>
 

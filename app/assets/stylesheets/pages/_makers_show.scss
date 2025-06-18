@@ -150,3 +150,51 @@ h4 {
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   }
 }
+
+
+
+.secondary_header_maker_show {
+  padding: 0.5rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+
+  .maker-name h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $font-color; // or #333 if not defined
+  }
+
+  .header-icons i {
+    transition: transform 0.2s ease;
+    cursor: pointer;
+  }
+
+  .header-icons i:hover {
+    transform: scale(1.2);
+  }
+}
+
+
+
+.secondary_header_maker_show {
+  padding: 0.5rem 1rem;
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  border: 1px solid #e0e0e0;
+
+  .maker-name h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $font-color; // or #333 if not defined
+  }
+
+  .header-icons i {
+    transition: transform 0.2s ease;
+    cursor: pointer;
+  }
+
+  .header-icons i:hover {
+    transform: scale(1.2);
+  }
+}
