@@ -1,0 +1,58 @@
+<div class="container my-5">
+  <h1 class="text-center mb-4">What is Karma?</h1>
+
+  <p class="lead text-center">
+    Karma on Map the Makers is our way of celebrating <strong>you</strong>, our amazing community members!
+    Every time you contribute to building a richer, more accurate, and helpful resource for conscious consumers in Indonesia,
+    you earn Karma points.
+  </p>
+  <p class="text-center mb-5">
+    Think of Karma as your personal impact score – the more you contribute, the more your Karma grows,
+    and the more you help others discover incredible local food producers!
+  </p>
+
+  <h2 class="mb-3">How to Earn Karma</h2>
+  <p>
+    Earning Karma is simple! Every action you take to improve Map the Makers helps our community and earns you valuable points:
+  </p>
+  <ul>
+    <li>
+      <strong>Add a New Maker:</strong> Help us grow our network! When you successfully add a new farmer,
+      butcher, fisherman, or other local producer to Map the Makers, you'll earn Karma points.
+      <p class="text-muted mt-1"><em>Karma Points: <%= KarmaConfig::POINTS_FOR_ADDING_MAKER %> points.</em></p>
+    </li>
+    <li>
+      <strong>Write a Review:</strong> Share your experiences! Your honest reviews help others make informed decisions.
+      <p class="text-muted mt-1"><em>Karma Points: <%= KarmaConfig::POINTS_FOR_SUBMITTING_REVIEW %> points.</em></p>
+    </li>
+    <li>
+      <strong>Confirm Data Accuracy (Coming Soon!):</strong> Help us keep our information fresh and reliable.
+      If you notice outdated details or can verify existing data, you'll earn Karma.
+    </li>
+    <li>
+      <strong>Participate in Missions (Coming Soon!):</strong> Engage in special challenges and community events.
+      These could be anything from adding a certain number of makers in a week to joining local clean-up initiatives.
+    </li>
+  </ul>
+
+  <h2 class="mb-3">Karma Tiers: Become a Local Hero!</h2>
+  <p>
+    As your Karma points grow, you'll unlock special tiers, publicly recognizing your dedication and impact.
+    Each tier comes with unique badges displayed on your profile.
+  </p>
+  <p>Here are the initial tiers:</p>
+  <ul>
+    <% KarmaConfig::TIERS.each do |key, tier| %>
+      <li><strong><%= tier[:display_name] %>:</strong> <%= tier[:min_points] %>+ Karma Points</li>
+    <% end %>
+  </ul>
+  <p class="text-muted"><em>Note: Karma point thresholds for each tier may be adjusted as the community grows.</em></p>
+
+  <h2 class="mb-3">What Does Karma Do?</h2>
+  <p>Beyond the satisfaction of helping your community, Karma offers:</p>
+  <ul>
+    <li><strong>Recognition:</strong> Your Karma points and tier badge will be visible on your profile, showcasing your contributions.</li>
+    <li><strong>Influence:</strong> Higher Karma tiers may unlock special privileges in the future, such as early access to new features or the ability to vote on community initiatives.</li>
+    <li><strong>Community Connection:</strong> Karma helps highlight the most active and helpful members, fostering a stronger community around local food.</li>
+  </ul>
+</div>

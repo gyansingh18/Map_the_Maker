@@ -1,6 +1,6 @@
 <div class="container">
 
-   <%= render "search_bar", search_path: makers_path %>
+  <%= render "search_bar", search_path: makers_path %>
 
   <div class="search-results">
     <div class="count-results">
@@ -16,6 +16,7 @@
         <% end %>
       <% end %>
     </div>
+
     <% @makers.each do |maker| %>
       <%= link_to maker_path(maker)  do %>
         <div class="index-maker-card">

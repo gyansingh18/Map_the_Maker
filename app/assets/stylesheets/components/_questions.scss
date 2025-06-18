@@ -1,7 +1,7 @@
 .chatbot {
   background: $background-color;
   margin-top: 9px;
-  height: calc(100vh - 75px);
+  height: calc(100vh - 144px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -53,4 +53,12 @@
       margin-bottom: 0;
     }
   }
+}
+
+.back-from-chat {
+  margin-left: 1rem;
+}
+
+.chat-top-buttons {
+  padding-top: 10px;
 }

@@ -13,6 +13,7 @@ export default class extends Controller {
   activePopup = null;
 
   connect() {
+    console.log("stimulus map")
     mapboxgl.accessToken = this.apiKeyValue
 
     this.map = new mapboxgl.Map({

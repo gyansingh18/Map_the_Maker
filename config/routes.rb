@@ -1,22 +1,30 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: "pages#home"
-  resources :makers, except: [:edit, :update, :destroy] do
 
+  get '/karma_info', to: 'pages#karma', as: :karma_info
+  get '/karma', to: 'karma#dashboard', as: :karma_dashboard
+
+  resources :makers, except: [:edit, :update, :destroy] do
     collection do
       get :map
     end
     resources :reviews, only: [:new, :create]
-
   end
 
   resources :products, only: [:new, :create]
+
   resources :makers do
     post 'favorite', on: :member
     post 'unfavorite', on: :member
   end
 
-  resources :questions, only: [:index, :create]
+  resources :questions, only: [:index, :create] do
+    collection do
+      get "reset"
+    end
+  end
+
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

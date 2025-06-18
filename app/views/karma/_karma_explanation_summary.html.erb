@@ -1,0 +1,17 @@
+<%# app/views/karma/_karma_explanation_summary.html.erb %>
+<%# No local variables needed here, as it's static content with KarmaConfig %>
+
+<div class="card mb-4 shadow-sm">
+  <div class="card-body text-center">
+    <h2 class="card-title">What is Karma?</h2>
+    <p class="card-text">
+      Karma on Map the Makers is our way of celebrating **you**, our amazing community members! Every time you contribute to building a richer, more accurate, and helpful resource, you earn Karma points.
+    </p>
+    <p>
+      <small>
+        <%# Ensure karma_info_path route is defined if you uncomment this %>
+        <%= link_to "Learn more about Karma and tiers", karma_info_path %>
+      </small>
+    </p>
+  </div>
+</div>
