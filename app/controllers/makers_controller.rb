@@ -22,9 +22,19 @@ class MakersController < ApplicationController
 
   def show
     @maker = Maker.find(params[:id])
-    @reviews = Review.all
+    @reviews = @maker.reviews.order(created_at: :desc).limit(3)
     @review = Review.new
     @products = Product.all
+
+    @makers = [@maker]
+    @markers = @makers.map do |maker|
+      {
+        lat: maker.latitude,
+        lng: maker.longitude,
+        info_window_html: render_to_string(partial: "info_window", locals: {maker: maker}),
+        marker_html: render_to_string(partial: "marker", locals: {maker: maker})
+      }
+    end
   end
 
   def new
@@ -36,6 +46,8 @@ class MakersController < ApplicationController
     @maker.user = current_user
     if @maker.save
       redirect_to maker_path(@maker ,auto_click: true)
+
+      current_user.add_karma_points(:maker_added, source: @maker)
     else
       render :new, status: :unprocessable_entity
     end
@@ -100,6 +112,4 @@ class MakersController < ApplicationController
     end
     # Add other map-specific filters here (e.g., product, if applicable)
   end
-
-
 end

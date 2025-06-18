@@ -10,4 +10,8 @@ class PagesController < ApplicationController
 
     @high_rated_reviews = @high_rated_reviews.includes(:user, :maker)
   end
+
+  def karma
+  end
+
 end

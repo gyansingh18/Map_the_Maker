@@ -1,0 +1,26 @@
+<%# app/views/karma/dashboard.html.erb %>
+
+<section class="karma-dashboard-section">
+  <div class="container">
+    <h1 class="karma-page-title">Your Karma Dashboard</h1>
+
+    <%= render "user_karma_summary",
+        user_karma_points: @user_karma_points,
+        current_karma_tier: @current_karma_tier,
+        next_karma_tier: @next_karma_tier,
+        progress_percentage: @progress_percentage,
+        user_rank: @user_rank,
+        user: @user
+    %>
+
+    <%= render "karma_transactions", user: @user %>
+
+    <%= render "karma_leaderboard",
+        top_users: @top_users,
+        user: @user
+    %>
+
+    <%= render "karma_explanation_summary" %>
+
+  </div>
+</section>

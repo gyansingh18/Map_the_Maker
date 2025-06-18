@@ -1,0 +1,25 @@
+<%# app/views/karma/_karma_leaderboard.html.erb %>
+
+<div class="karma-leaderboard-card">
+  <h2>Top Karma Contributors</h2> <%# This h2 will use the new card-main-heading mixin %>
+
+  <ul class="leaderboard-list">
+    <% if top_users.any? %>
+      <% top_users.each_with_index do |top_user, index| %>
+        <li class="leaderboard-item <%= 'current-user' if top_user == user %>">
+          <span class="leaderboard-rank"><%= index + 1 %>.</span>
+          <span class="leaderboard-name"><%= top_user.first_name || "Anonymous User" %></span>
+          <span class="leaderboard-points"><%= top_user.karma_points %> Karma</span>
+        </li>
+      <% end %>
+    <% else %>
+      <li class="leaderboard-item no-leaders">
+        <p class="text-center text-gray-500 italic">No leaders yet! Be the first to earn Karma!</p>
+      </li>
+    <% end %>
+  </ul>
+
+  <p class="leaderboard-footer-note">
+    Karma points are updated regularly. Keep contributing to climb the ranks!
+  </p>
+</div>

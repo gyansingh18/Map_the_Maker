@@ -1,6 +1,6 @@
 <div class="container">
 
-   <%= render "search_bar", search_path: makers_path %>
+  <%= render "search_bar", search_path: makers_path %>
 
   <div class="search-results">
     <div class="count-results">
@@ -16,43 +16,48 @@
         <% end %>
       <% end %>
     </div>
+
     <% @makers.each do |maker| %>
-      <%= link_to maker_path(maker)  do %>
-        <div class="index-maker-card">
-          <%= cl_image_tag maker.photos[0].key, class: "index-maker-card-photo" %>
-          <div class ="top-right">
-            <% if user_signed_in? %>
-              <% if current_user.favorited?(maker) %>
-                <%= link_to  unfavorite_maker_path(maker), class: "big-heart", data: {turbo_method: :post} do%>
-                  <i class="fa-solid fa-heart fa-2xl" style="color: #d01111;"></i>
-                <% end %>
-              <% else %>
-                <%= link_to  favorite_maker_path(maker),  class: "big-heart", data: {turbo_method: :post} do%>
-                  <i class="fa-solid fa-heart fa-2xl" style="color: #d6d6d6;"></i>
-                <% end %>
-              <%end %>
+      <div class = "full-card">
+
+        <div class = "hearts">
+          <% if user_signed_in? %>
+            <% if current_user.favorited?(maker) %>
+              <%= link_to  unfavorite_maker_path(maker), class: "big-heart", data: {turbo_method: :post} do %>
+                <i class="fa-solid fa-heart fa-2xl" style="color: #d01111;"></i>
+              <% end %>
             <% else %>
-              <%= link_to new_user_session_path,  class: "big-heart", data: {turbo_method: :post} do%>
+              <%= link_to  favorite_maker_path(maker),  class: "big-heart", data: {turbo_method: :post} do %>
                 <i class="fa-solid fa-heart fa-2xl" style="color: #d6d6d6;"></i>
               <% end %>
             <% end %>
-          </div>
-          <div class="top-box">
-            <p class="h3 mb-0"><%= maker.name %></p>
-          </div>
-          <div class="middle-box d-flex justify-content-between align-items-center">
-            <p class="mb-0"><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
-            <div class="star-box d-flex justify-content-end">
-              <%= render "shared/star_rating_overall", maker: maker %>
+          <% else %>
+            <%= link_to new_user_session_path,  class: "big-heart", data: {turbo_method: :post} do %>
+              <i class="fa-solid fa-heart fa-2xl" style="color: #d6d6d6;"></i>
+            <% end %>
+          <% end %>
+        </div>
+
+        <%= link_to maker_path(maker)  do %>
+          <div class="index-maker-card">
+            <%= cl_image_tag maker.photos[0].key, class: "index-maker-card-photo" %>
+            <div class="top-box">
+              <p class="h3 mb-0"><%= maker.name %></p>
+            </div>
+            <div class="middle-box d-flex justify-content-between align-items-center ">
+              <p class="mb-0"><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
+              <div class="star-box d-flex justify-content-end align-items-center">
+                <%= render "shared/star_rating_overall", maker: maker %> &nbsp <%= maker.average_rating %>
+              </div>
+            </div>
+            <div class="bottom-box">
+              <% maker.categories.each do |category| %>
+                <span class="category-tag-index"><%= category %></span>
+              <% end %>
             </div>
           </div>
-          <div class="bottom-box">
-            <% maker.categories.each do |category| %>
-              <span class="category-tag-index"><%= category %></span>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+        <% end %>
+      </div>
     <% end %>
   </div>
 

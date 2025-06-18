@@ -21,6 +21,11 @@ class QuestionsController < ApplicationController
     end
   end
 
+  def reset
+    current_user.questions.destroy_all
+    redirect_to questions_path
+  end
+
   private
 
   def question_params
