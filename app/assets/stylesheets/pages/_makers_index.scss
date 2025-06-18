@@ -1,16 +1,19 @@
 .index-maker-card {
   padding: 20px 0px 20px 0px;
+}
+
+.full-card {
   position: relative;
 }
 
 .top-box {
   padding: 10px 0px 1px 0px;
-  color: $secondary-color;
+  color: $font-color;
 }
 
 .middle-box {
   padding: 2px 0px 15px 0px;
-  color: $secondary-color;
+  color: $font-color;
 }
 
 .bottom-box {
@@ -26,7 +29,7 @@
 }
 
 .star-box {
-  width: 20%;
+  width: 50%;
 }
 
 .star-icon {
@@ -37,10 +40,10 @@
 }
 
 .category-tag-index {
-  border: 1px solid $secondary-color;
+  border: 1px solid $font-color;
   border-radius: 5px;
   opacity: 1.0;
-  color: $secondary-color;
+  color: $font-color;
   padding: 5px 7px 5px 7px;
   margin-right: 10px;
   text-transform: capitalize;
@@ -56,7 +59,7 @@
   border-radius: $border-radius-xl;
   font-weight: 600;
   text-decoration: none;
-  box-shadow: 0px 10px 15px lightgrey;
+  box-shadow: 0 5px 13px 0px rgba(0, 0, 0, 0.2);
   margin: 0px auto;
   z-index: 1;
 
@@ -79,8 +82,8 @@ a {
   text-decoration: none;
   color: $font-color;
 }
-.top-right {
+.hearts {
  position: absolute;
- top: 24px;
- right: 16px;
+ top: 32px;
+ right: 12px;
 }
