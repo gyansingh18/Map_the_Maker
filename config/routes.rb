@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   authenticated :user do
     root to: "makers#index", as: :authenticated_root
   end
-  resources :makers, except: [:edit, :update, :destroy] do
 
   get '/karma_info', to: 'pages#karma', as: :karma_info
   get '/karma', to: 'karma#dashboard', as: :karma_dashboard
