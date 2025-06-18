@@ -1,25 +1,25 @@
 <%# app/views/karma/_karma_leaderboard.html.erb %>
-<%# Local variables expected: top_users, user (current_user) %>
 
-<div class="card shadow-lg border-0 rounded-3">
-  <div class="card-body p-4 p-md-5">
-    <h2 class="card-title text-center mb-4 text-primary">Top 10 Karma Leaders</h2>
+<div class="karma-leaderboard-card">
+  <h2>Top Karma Contributors</h2> <%# This h2 will use the new card-main-heading mixin %>
+
+  <ul class="leaderboard-list">
     <% if top_users.any? %>
-      <ul class="list-group list-group-flush">
-        <% top_users.each_with_index do |leader, index| %>
-          <li class="list-group-item d-flex justify-content-between align-items-center py-3">
-            <div>
-              <strong><%= index + 1 %>. <%= leader.email %></strong>
-              <% if leader == user %> <%# 'user' here is the current_user %>
-                <span class="badge bg-primary ms-2">You</span>
-              <% end %>
-            </div>
-            <span class="badge bg-secondary rounded-pill fs-6 px-3 py-1"><%= leader.karma_points %> Karma</span>
-          </li>
-        <% end %>
-      </ul>
+      <% top_users.each_with_index do |top_user, index| %>
+        <li class="leaderboard-item <%= 'current-user' if top_user == user %>">
+          <span class="leaderboard-rank"><%= index + 1 %>.</span>
+          <span class="leaderboard-name"><%= top_user.first_name || "Anonymous User" %></span>
+          <span class="leaderboard-points"><%= top_user.karma_points %> Karma</span>
+        </li>
+      <% end %>
     <% else %>
-      <p class="text-muted text-center">No Karma leaders yet. Be the first to earn points!</p>
+      <li class="leaderboard-item no-leaders">
+        <p class="text-center text-gray-500 italic">No leaders yet! Be the first to earn Karma!</p>
+      </li>
     <% end %>
-  </div>
+  </ul>
+
+  <p class="leaderboard-footer-note">
+    Karma points are updated regularly. Keep contributing to climb the ranks!
+  </p>
 </div>
