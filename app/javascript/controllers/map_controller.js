@@ -74,6 +74,60 @@ export default class extends Controller {
     } else {
       alert("Your browser does not support Geolocation. Cannot provide directions.");
     }
+  };
+
+  // add destination circle to the map
+  map.addLayer({
+    'id': 'destination-circle',
+    'type': 'circle',
+    'source': {
+      'type': 'geojson',
+      'data': {
+        'type': 'FeatureCollection',
+        'features': [
+          {
+            'type': 'Feature',
+            'properties': {},
+            'geometry': {
+              'type': 'Point',
+              'coordinates': defaultEnd
+            }
+          }
+        ]
+      }
+    },
+    'paint': {
+      'circle-radius': 10,
+      'circle-color': '#f30'
+    }
+  });
+
+  // make an initial directions request on load
+  getRoute(defaultEnd);
+
+  map.on('click', (event) => {
+  const coords = Object.keys(event.lngLat).map(
+    (key) => event.lngLat[key]
+  );
+  const end = {
+    'type': 'FeatureCollection',
+    'features': [
+      {
+        'type': 'Feature',
+        'properties': {},
+        'geometry': {
+          'type': 'Point',
+          'coordinates': coords
+        }
+      }
+    ]
+  };
+
+  map.getSource('destination-circle').setData(end);
+
+  getRoute(coords);
+});
+});
   }
 
   #fetchDirections(origin, destination) {
@@ -103,6 +157,7 @@ export default class extends Controller {
         console.error("Error fetching directions from Mapbox:", error);
         alert("There was an error getting directions. Please check your internet connection and try again.");
       });
+
   }
 
   #addRouteToMap(route) {

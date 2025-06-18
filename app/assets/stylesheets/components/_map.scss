@@ -127,3 +127,16 @@ html, body {
 .mapboxgl-popup-close-button {
   color: $background-color;
 }
+
+#instructions {
+  position: absolute;
+  margin: 20px;
+  height: 60vh;
+  width: 25%;
+  top: 20%;
+  bottom: 20%;
+  padding: 20px;
+  background-color: #ffffff66;
+  overflow-y: scroll;
+  font-family: sans-serif;
+}
