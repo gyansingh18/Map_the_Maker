@@ -1,5 +1,10 @@
 <div class="homebar">
   <div class="homebutton">
+    <%= link_to makers_path do %>
+      <i class="fa-solid fa-list-ul"></i> <p>Makers</p>
+    <% end %>
+  </div>
+  <div class="homebutton">
     <%= link_to map_makers_path do %>
       <i class="fa-solid fa-map homeicon"></i> <p>Map</p>
     <% end %>
@@ -15,6 +20,8 @@
     <% end %>
   </div>
   <div class="homebutton">
-    <i class="fa-solid fa-medal"></i><p>Karma (no link)</p>
+    <%= link_to karma_dashboard_path do %>
+      <i class="fa-solid fa-medal"></i><p>Karma</p>
+    <% end %>
   </div>
 </div>
