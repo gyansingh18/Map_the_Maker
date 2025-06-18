@@ -8,10 +8,10 @@ html, body {
 
 .mapbox-container {
   width: 100vw;
-  height: 100vh;
+  height: 77vh;
   overflow: hidden;
   position: relative;
-  z-index: 1;
+  z-index: 0;
 }
 
 .float-search {
@@ -40,18 +40,23 @@ html, body {
 
 .mapboxgl-popup {
   max-width: 200px;
+  padding: 0;
+  border-radius: 5%;
+
 }
 
 .mapboxgl-popup-content {
-  text-align: center;
-  font-family: "Open Sans", sans-serif;
+  // text-align: center;
+  // font-family: "Open Sans", sans-serif;
+  padding: 0;
+  border-radius: 5%;
 }
 
 .info-window-producer-card {
   width: 250px;
   max-width: 100%;
   background-color: $background-color;
-  border-radius: 8px;
+  border-radius: 5px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
   text-decoration: none;
@@ -91,14 +96,51 @@ html, body {
   white-space: nowrap;
 }
 
-.info-window-producer-card .producer-card-rating i {
-  color: gold;
+.info-window-producer-card .producer-card-location i {
+  color: $secondary-color;
   margin-right: 3px;
 }
 
+.info-window-producer-card .producer-card-rating i {
+  color: $primary-color;
+  margin-right: 3px;
+}
 .info-window-producer-card .producer-card-categories {
   font-size: 0.8rem;
   color: #888;
   margin-top: 5px;
   margin-bottom: 0;
+}
+
+.mapsearch {
+  position: fixed;
+  top: 10px;
+  z-index: 20;
+}
+
+.bottom-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+}
+
+.mapboxgl-canvas {
+  position: static !important;
+}
+
+.mapboxgl-popup-close-button {
+  color: $background-color;
+}
+
+#instructions {
+  position: absolute;
+  margin: 20px;
+  height: 60vh;
+  width: 25%;
+  top: 20%;
+  bottom: 20%;
+  padding: 20px;
+  background-color: #ffffff66;
+  overflow-y: scroll;
+  font-family: sans-serif;
 }
