@@ -129,9 +129,9 @@
 
     <h5>  <strong> What people are saying about <span class="maker-highlight"><%= @maker.name %></span></strong></h5>
     <br>
-    <%if @reviews.any? %>
+    <%if @maker.reviews.any? %>
 
-      <% @reviews.each do |review| %>
+      <% @maker.reviews.each do |review| %>
         <div class = "review-card border rounded p-3 mb-3">
           <%= render "shared/star_rating_overall", maker: review.maker%>
 
