@@ -1,27 +1,37 @@
 <div class="homebar">
-  <div class="homebutton">
+  <div class="homebutton d-flex justify-content-center align-items-end">
     <%= link_to makers_path do %>
-      <i class="fa-solid fa-list-ul"></i> <p>Makers</p>
+      <div class="<%= 'highlight-gold' if params["controller"] == 'makers' && params["action"] == 'index'  %>">
+        <i class="fa-solid fa-list-ul"></i> <p class="mb-0">Makers</p>
+      </div>
     <% end %>
   </div>
-  <div class="homebutton">
+  <div class="homebutton d-flex justify-content-center align-items-end">
     <%= link_to map_makers_path do %>
-      <i class="fa-solid fa-map homeicon"></i> <p>Map</p>
+      <div class="<%= 'highlight-gold' if params["controller"] == 'makers' && params["action"] == 'map' %>">
+        <i class="fa-solid fa-map homeicon"></i> <p class="mb-0">Map</p>
+      </div>
     <% end %>
   </div>
-  <div class="homebutton">
+  <div class="homebutton d-flex justify-content-center align-items-end">
     <%= link_to new_maker_path do %>
-      <i class="fa-solid fa-plus homeicon"></i> <p>Add</p>
+      <div class="<%= 'highlight-gold' if params["controller"] == 'makers' && params["action"] == 'new' %>">
+        <i class="fa-solid fa-plus homeicon"></i> <p class="mb-0">Add</p>
+      </div>
     <% end %>
   </div>
-  <div class="homebutton">
+  <div class="homebutton d-flex justify-content-center align-items-end">
     <%= link_to questions_path do %>
-      <i class="fa-solid fa-robot"></i><p>Chat</p>
+      <div class="<%= 'highlight-gold' if params["controller"] == 'questions' && params["action"] == 'index' %>">
+        <i class="fa-solid fa-robot"></i><p class="mb-0">Chat</p>
+      </div>
     <% end %>
   </div>
-  <div class="homebutton">
-    <%= link_to questions_path do %>
-      <i class="fa-solid fa-medal"></i><p>Karma</p>
+  <div class="homebutton d-flex justify-content-center align-items-end">
+    <%= link_to karma_dashboard_path do %>
+      <div class="<%= 'highlight-gold' if params["controller"] == 'karma' && params["action"] == 'dashboard' %>">
+        <i class="fa-solid fa-medal"></i><p class="mb-0">Karma</p>
+      </div>
     <% end %>
   </div>
 </div>
