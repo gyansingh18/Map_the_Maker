@@ -34,7 +34,7 @@ class ChatbotService
     questions = @question.user.questions
     results = []
 
-    system_text = "You are an assistant for a website that helps users discover local producers of grocery items. You should help the user discover producers (called makers) with the closest match to their request. Do not bold any text in the response. Here are the makers and information on them that you should use to answer the user's questions: "
+    system_text = "You are an assistant for a website that helps users discover local producers of grocery items. You should help the user discover producers (called makers) with the closest match to their request. Do not bold any text in the response. Do not directly cite data but paraphrase it. Here are the makers and information on them that you should use to answer the user's questions: "
 
     nearest_makers.each do |maker|
       system_text += "** maker #{maker.id}: name: #{maker.name}, description: #{maker.description}, location: #{maker.location}, offered product categories: #{maker.categories}, reviews by users: **"
