@@ -10,25 +10,29 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  def add_karma_points(action_type)
-    points = case action_type
-             when :maker_added
-               KarmaConfig::POINTS_FOR_ADDING_MAKER
-             when :review_submitted
-               KarmaConfig::POINTS_FOR_SUBMITTING_REVIEW
-             when :signed_up
-               KarmaConfig::POINTS_FOR_SIGNING_UP
-             else
-               0 # Default to 0 if the action_type is not recognized
-             end
-    increment!(:karma_points, points) if points > 0
+  # This is a workaround for there being no RegistrationsController for Devise
+  def after_database_authentication
+    add_karma_points(:signed_up) unless KarmaTransaction.exists?(user: self, source_type: nil, action_type: :signed_up)
   end
 
-  after_create :set_initial_karma
+  def add_karma_points(action_type, source: nil)
+    points_to_award = case action_type
+                      when :maker_added
+                        KarmaConfig::POINTS_FOR_ADDING_MAKER
+                      when :review_submitted
+                        KarmaConfig::POINTS_FOR_SUBMITTING_REVIEW
+                      when :signed_up
+                        KarmaConfig::POINTS_FOR_SIGNING_UP
+                      else
+                        0
+                      end
 
-  private
-
-  def set_initial_karma
-    add_karma_points(:signed_up)
+    if points_to_award > 0
+      KarmaTransaction.create!(
+        user: self,
+        points_awarded: points_to_award,
+        source: source
+      )
+    end
   end
 end
