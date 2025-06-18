@@ -87,7 +87,6 @@
   color: lighten($font-color, 20%);
 }
 
-
 // --- Component Styles using New Mixins ---
 
 .karma-dashboard-section {
@@ -105,7 +104,6 @@
   color: $font-color;
   margin-bottom: 40px; // More space below the main title
 }
-
 
 .karma-summary-card {
   @include card-style(); // Apply updated card style
@@ -226,6 +224,7 @@
 .karma-transactions-card {
   @include card-style(); // Apply updated card style
   @include card-hover-effect; // Add hover effect
+  margin-bottom: 25px; // Ensure explicit bottom margin for separation
 
   h2 {
     @include card-main-heading($text-color: $font-color); // Card title using homepage h3 style
