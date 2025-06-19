@@ -1,42 +1,43 @@
-<div class="container p-3 mb-5">
-  <div class="secondary_header_maker_show d-flex justify-content-between align-items-center mb-2 p-0">
+<div class="container p-3">
+  <div class="secondary_header_maker_show d-flex justify-content-between align-items-center my-3 p-0">
   <!-- Maker Name -->
-  <div class="maker-name">
-    <h2 class="mb-0"><%= @maker.name %></h2>
-  </div>
+    <div class="maker-name">
+      <h2 class="mb-0"><%= @maker.name %></h2>
+    </div>
 
-  <!-- Heart and Share -->
-  <div class="header-icons d-flex align-items-center mb-0">
-    <!-- Heart -->
-    <% if user_signed_in? %>
-      <% if current_user.favorited?(@maker) %>
-        <%= link_to unfavorite_maker_path(@maker), data: { turbo_method: :post }, class: "ms-3" do %>
-          <i class="fa-solid fa-heart fa-xl" style="color: #d01111;"></i>
+    <!-- Heart and Share -->
+    <div class="header-icons d-flex align-items-center mb-0">
+      <!-- Heart -->
+      <% if user_signed_in? %>
+        <% if current_user.favorited?(@maker) %>
+          <%= link_to unfavorite_maker_path(@maker), data: { turbo_method: :post }, class: "ms-3" do %>
+            <i class="fa-solid fa-heart fa-xl" style="color: #d01111;"></i>
+          <% end %>
+        <% else %>
+          <%= link_to favorite_maker_path(@maker), data: { turbo_method: :post }, class: "ms-3" do %>
+            <i class="fa-solid fa-heart fa-xl" style="color: #d6d6d6;"></i>
+          <% end %>
         <% end %>
       <% else %>
-        <%= link_to favorite_maker_path(@maker), data: { turbo_method: :post }, class: "ms-3" do %>
+        <%= link_to new_user_session_path, class: "ms-3" do %>
           <i class="fa-solid fa-heart fa-xl" style="color: #d6d6d6;"></i>
         <% end %>
       <% end %>
-    <% else %>
-      <%= link_to new_user_session_path, class: "ms-3" do %>
-        <i class="fa-solid fa-heart fa-xl" style="color: #d6d6d6;"></i>
-      <% end %>
-    <% end %>
 
-    <!-- Share -->
-    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="ms-3">
-      <i class="fa-solid fa-share-from-square" style="color: #2D4E34;"></i>
-    </a>
+      <!-- Share -->
+      <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="ms-3">
+        <i class="fa-solid fa-share-from-square" style="color: #2D4E34;"></i>
+      </a>
+    </div>
   </div>
 </div>
 
+<div>
+  <%= cl_image_tag @maker.photos[0].key, class: "maker-image" %>
+</div>
 
+<div class="container p-3 mb-5">
   <div class="show-maker-card">
-    <div class="card-image-wrapper">
-      <%= cl_image_tag @maker.photos[0].key, class: "card-image-top mb-3" %>
-    </div>
-
     <div class="middle-box d-flex justify-content-between align-items-center mb-2">
       <p class="p-0 mb-0 location-text"><i class="fa-solid fa-location-dot" style="color: #2D4E34;"></i> <%= @maker.location %> </p>
       <div class ="rating-box d-flex align-items-center">
