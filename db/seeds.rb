@@ -1,173 +1,378 @@
-puts "Creating seeds"
+# db/seeds.rb
 
-puts "Destroying everything"
-
+# Clear existing data to prevent duplicates on re-seeding
+puts "Cleaning up database..."
 KarmaTransaction.destroy_all
 ReviewProduct.destroy_all
-Product.destroy_all
 Review.destroy_all
 Maker.destroy_all
+Product.destroy_all
 User.destroy_all
+puts "Database cleaned!"
 
+# --- Constants for data generation ---
+CATEGORIES = ["meat", "seafood", "vegetables", "fruits", "dairy", "drinks", "grains", "bakery & pastries", "eggs"]
 
-puts "Creating users"
-users = []
+SHOP_TYPES = [
+  "shop", "hut", "shack", "store", "warung", "kios",
+  "gerai", "lapak", "boutique", "market stall", "pop-up",
+  "co-op", "depot", "corner"
+]
 
-first_names = ["Alizee", "Clint", "Ashley", "Gyan", "Jannis"]
-last_names = ["Apple", "Cucumber", "Avocado", "Garlic", "Jackfruit"]
+MAKER_NAMES_BASE = [
+  "Adi", "Budi", "Citra", "Dewi", "Eka", "Fajar", "Gita", "Hendra", "Intan", "Joko",
+  "Kartika", "Lukman", "Maya", "Nadia", "Putra", "Rini", "Santi", "Tomi", "Umar",
+  "Vina", "Wahyu", "Yanto", "Zahra", "Andi", "Ani"
+]
 
+MAKER_LOCATIONS = [
+  "Canggu, Bali, Indonesia", "Ubud, Bali, Indonesia", "Uluwatu, Bali, Indonesia",
+  "Kuta, Bali, Indonesia", "Seminyak, Bali, Indonesia", "Denpasar, Bali, Indonesia",
+  "Sanur, Bali, Indonesia", "Nusa Dua, Bali, Indonesia", "Jimbaran, Bali, Indonesia",
+  "Tabanan, Bali, Indonesia", "Singaraja, Bali, Indonesia", "Lovina, Bali, Indonesia",
+  "Amed, Bali, Indonesia", "Sidemen, Bali, Indonesia", "Kintamani, Bali, Indonesia",
+  "Bedugul, Bali, Indonesia", "Padangbai, Bali, Indonesia", "Candidasa, Bali, Indonesia",
+  "Pupuan, Bali, Indonesia", "Bangli, Bali, Indonesia"
+]
+
+MAKER_DESCRIPTIONS_BASE = [
+  "Cultivating organic produce with care, from our family farm directly to you.",
+  "Harvested fresh daily from our sustainable permaculture gardens in Bali.",
+  "Crafting high-quality, local meat products from ethically raised livestock.",
+  "Bringing the freshest catch from our boats in the pristine Balinese waters.",
+  "Producing small-batch artisanal dairy goods from happy, free-roaming cows.",
+  "Dedicated to traditional Balinese rice cultivation, honoring ancient methods.",
+  "Offering premium selections of tropical fruits grown in our island orchards.",
+  "Hand-picked spices from our lush gardens, enhancing every culinary creation.",
+  "Ethical beekeeping practices yield pure, raw Balinese honey from island blossoms.",
+  "Carefully roasted Arabica beans sourced directly from our Kintamani coffee estate.",
+  "Our passion for honest food drives our commitment to sustainable farming.",
+  "Bringing you the true essence of Bali's rich agricultural harvest, nurtured by hand.",
+  "Committed to natural and chemical-free cultivation for wholesome ingredients.",
+  "Ensuring freshness and quality, our products go directly from our hands to yours.",
+  "Rooted in tradition, we grow for the future of Bali's culinary heritage.",
+  "Experience the authentic taste of island produce, grown with generations of knowledge.",
+  "Nurturing the land and enriching the plate with every item we offer.",
+  "Family-owned and operated, dedicated to excellence in every aspect of our production.",
+  "Specializing in unique Balinese heirloom varieties, preserving our island's biodiversity.",
+  "Our dedication ensures the freshest ingredients, from our fields to your kitchen."
+]
+
+IMAGE_FILENAMES = [
+  "bakery_mehmet-uzut-obMFCck7DqQ-unsplash.jpeg",
+  "bakery_wu-yi-uTGFjtFeenY-unsplash.jpeg",
+  "bakery_yusong-he-zt_KPBJBVPY-unsplash.jpeg",
+  "dairy_paul-harris-H00UTOYLULY-unsplash.jpeg",
+  "drinks_bram-wouters-Dc2fwveqbDQ-unsplash.jpeg",
+  "drinks_sonaal-bangera-Wa9dHWRDNwo-unsplash.jpeg",
+  "eggs_gurth-bramall-FJaZ_bh_pGU-unsplash.jpeg",
+  "eggs_kelvin-zyteng-5yWmvGipjRw-unsplash.jpeg",
+  "fruit_carl-campbell-XuKZZQiZRVk-unsplash.jpeg",
+  "fruit_meritt-thomas-qVNSANBjYdI-unsplash.jpeg",
+  "fruit_quang-nguyen-vinh-aWROBaEVLyQ-unsplash.jpeg",
+  "grains_daniel-bernard-QQrIwDtOj4c-unsplash.jpeg",
+  "grains_nathan-cima-n2sy8zlngYo-unsplash.jpeg",
+  "grains_quang-nguyen-vinh-8yLDASB9jHs-unsplash.jpeg",
+  "other_chelaxy-designs-jRi4Ww7jj10-unsplash.jpeg",
+  "other_duy-ngo-U2_SHtC7cP4-unsplash.jpeg",
+  "seafood_harrison-chang-yv_WM9tRZgs-unsplash.jpeg",
+  "seafood_mche-lee-y3ieHcnC99k-unsplash.jpeg",
+  "seafood_ruslan-bardash-mcXGXFBUwis-unsplash.jpeg",
+  "vegetables_harshal-more-44ESruq0puM-unsplash.jpeg",
+  "vegetables_quang-nguyen-vinh-T24GHpD_814-unsplash.jpeg"
+]
+
+ASHLEY_MESSAGES = [
+  "Perth's isolation guarantees it's always ahead of the rest... of Western Australia.",
+  "The best feature of Perth Airport is its direct flights to cities that actually have vibrant nightlife.",
+  "Sure, Perth gets more sunshine, but Sydney gets more *excitement*.",
+  "Western Australia's mineral wealth mostly leaves its cultural scene in the dust.",
+  "Quokkas are undeniably charming, but they can't fill Perth's public transport gaps.",
+  "You're closer to Jakarta from Perth than you are to Melbourne, which says a lot about its connectivity within Australia.",
+  "For a city with so much land, Perth certainly feels like it spreads itself thin.",
+  "The Fremantle Doctor helps cool things down, mostly the general enthusiasm for Perth's city center after dark.",
+  "While Margaret River wines are good, they still haven't quite eclipsed the fame of those from the Eastern states.",
+  "Perth's 'untouched' nature is great, if you don't mind the extensive travel required to get to any other major Australian city.",
+  "Exploring cultural diversity in Perth might sometimes lead you to an abundance of local 'Bogan' hotspots.",
+  "For those seeking truly refined experiences, remember that a significant portion of Perth's population resides south of the river.",
+  "The charm of Western Australia includes its vibrant 'Bogan' subculture, a truly unique national export.",
+  "Visiting Perth often means choosing between the 'sophistication' north of the river and the 'authenticity' south of it.",
+  "Perth's character is truly distinct, especially when you encounter its endearing 'Bogan' population."
+]
+
+def ashley_message
+  ASHLEY_MESSAGES.sample
+end
+
+# --- Create Users --- #
+puts "Creating users..."
+first_names = ["Alizee", "Clint", "Ashley", "Gyan", "Jannis", "Dani", "Christina", "Vince"]
+last_names = ["Apple", "Cucumber", "Avocado", "Garlic", "Jackfruit", "Durian", "Cherry", "Vanilla"]
+
+users = [] # Initialize users array to store created user objects
 first_names.each_with_index do |first_name, index|
   temp_user = User.create!(
     first_name: first_name,
     last_name: last_names[index],
-    email: "#{first_name}.#{last_names[index]}@gmail.com",
+    email: "#{first_name.downcase}.#{last_names[index].downcase}@gmail.com", # Ensure email is lowercase
     password: "superstrong"
   )
-  users << temp_user
+  users << temp_user # Add the created user to the users array
+  puts "  Created user: #{temp_user.first_name} #{temp_user.last_name}"
+
+end
+puts "#{users.count} users created!"
+puts "(Perth is full of huge Bogans)"
+
+# --- Helper for possessive form ---
+def possessive(name)
+  name.end_with?('s') ? "#{name}'" : "#{name}'s"
 end
 
-puts "Created #{users.count} users"
+# --- Prepare Maker Data ---
+puts "Preparing maker data..."
+makers_data = []
 
-puts "Creating makers"
-makers = []
+# Shuffle base names and locations to ensure variety
+shuffled_base_names = MAKER_NAMES_BASE.shuffle
+shuffled_locations = MAKER_LOCATIONS.shuffle # Will cycle through if fewer locations than makers
 
-first_names = ["Adi", "Budi", "Citra", "Dewi", "Eka", "Fajar", "Gita", "Hendra", "Intan", "Joko"]
-types = ["shop", "hut", "shack", "store"]
-locations = ["Canggu", "Ubud", "Uluwatu", "Kuta", "Seminyak"]
-descriptions = ["A nice little shop", "Maker selling their own produce", "Super local maker", "A local legend", "A local maker which has been around for decades"]
+MAKER_NAMES_BASE.each_with_index do |base_name, index|
+  # Cycle through locations if there are fewer locations than makers
+  location = MAKER_LOCATIONS[index % MAKER_LOCATIONS.length]
 
-maker_image_links = {
-  "meat" =>[
-    "https://live-production.wcms.abc-cdn.net.au/1b4abc68c6c4fdca870a79508c8ff991?impolicy=wcms_crop_resize&cropH=719&cropW=1280&xPos=0&yPos=0&width=862&height=485",
-    "https://dam.mediacorp.sg/image/upload/s--QMWnmhWZ--/c_crop,h_843,w_1500,x_0,y_123/c_fill,g_auto,h_468,w_830/fl_relative,g_south_east,l_mediacorp:cna:watermark:2021-08:cna,w_0.1/f_auto,q_auto/v1/mediacorp/cna/image/2022/06/01/tiong_bahru_02.jpg?itok=YQxTym9D"],
-  "seafood" => [
-    "https://indonesiaexpat.id/wp-content/uploads/2013/01/Various_tuna_and_mackerel_for_sale_in_Jimbaran.jpg.webp",
-    "https://balibuddies.com/wp-content/uploads/2024/08/Seller-cutting-fishes-at-Jimbaran-Fish-Market-min-1024x768.jpeg"],
-  "vegetables" => [
-    "https://cdn.iklimku.org/wp-content/uploads/2023/11/23160908/IL-MALINO-02.jpg",
-    "https://files.globalgiving.org/pfil/53284/pict_featured_jumbo.jpg?t=1659462732000"],
-  "fruits" => [
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2sXgxzcxyB82xbgb-2MrzCZOKntRJnd1Ncw&s",
-    "https://media.istockphoto.com/id/470519520/photo/roadside-fruit-market-in-bali-indonesia.jpg?s=612x612&w=0&k=20&c=w8plqJ6r3okHP9tBFyT8DFRjNanroa4PrOr16M73PhE="],
-  "dairy" => [
-    "https://cdn.antaranews.com/cache/1200x800/2011/03/20110311111242hargasusu080311-3.jpg",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBpJVrqJckftsx5JkFntl0dm15kfQGPUsulA&s"],
-  "other" => [
-    "https://anekamarket.com/cdn/shop/files/Inside_1_2048x.jpg?v=1614893803",
-    "https://149346090.v2.pressablecdn.com/wp-content/uploads/2021/09/20210915_ROW_WARUNG_PINTAR_00171-1-scaled.jpg"],
-  "drinks" => [
-    "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/27/67/68/51/empty.jpg?w=1400&h=800&s=1",
-    "https://www.ministryofvillas.com/wp-content/uploads/2018/02/bali-canggu-popular-deli-wine.jpg"],
-  "grains" => [
-    "https://img.jakpost.net/c/2020/03/19/2020_03_19_89936_1584591042._large.jpg",
-    "https://assets.rikolto.org/styles/universal_metatag_opengraph_image/s3/project/images/_mg_8096-2_0.jpg?itok=fqtd9eDa"],
-  "bakery & pastries" => [
-    "https://lh5.googleusercontent.com/p/AF1QipPq4LrxQGpRESWdHlZdM_7oR25gvEaNeqnJlhYR=w408-h306-k-no",
-    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEioUWeX1Sl8pVO5HLtp8wsDrrYyMjDXQ_u4d5RGx-I0Ps3WhIUVpQV824j_mqiUYXudbZJ1SQI2oWrqeuYeK-9QuPNT8G5yxg6SSKUIBNfGItdjV8UOnIDxTuez1tjYpylyWbJGbqtGa6wbtFHlclut8yYEokvoO-NrS9oxUnq8eacyLt-WbKV3/w640-h428/01%20TWN_9661%20Innland%20Bakery%20@%20George%20Town%20in%20Penang%20%5BMalaysia%5D%20.JPG"],
-  "eggs" => [
-    "https://media.licdn.com/dms/image/v2/C4E12AQH1-BSSiaCSnA/article-inline_image-shrink_1500_2232/article-inline_image-shrink_1500_2232/0/1521635189099?e=1754524800&v=beta&t=Dy4Abfw4OTNFNzx2pvvEE-4ZVzsxzvz9W57e8K1n8AE",
-    "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEix85NoybpnxjjHnKcttQvJDoftmapdubKkLELmudVew-8Q69ZSqlO9cUMQ0HHlzqhxfO4J1bj0U3tPGMQaiHf9lz6TDWhL29KIKwR7eNQCzt77Lew3s_AwFTHZlQY5ZFQu7CUrmZxkdjM/s1600/chia-song-kun.jpg"]
+  # Randomly select 1 to 3 unique categories for the maker
+  num_categories = rand(1..[CATEGORIES.length, 3].min)
+  selected_categories = CATEGORIES.sample(num_categories).uniq
+
+  # Pick one of the selected categories to use in the maker's display name and description
+  display_category = selected_categories.sample
+
+  shop_type = SHOP_TYPES.sample
+  dynamic_name = "#{possessive(base_name)} #{display_category.capitalize} #{shop_type.capitalize}"
+
+  # Get a base description and enhance it
+  base_description = MAKER_DESCRIPTIONS_BASE.sample
+  enhanced_description = "#{base_description} You can find a wide range of fresh, local #{display_category} at our #{shop_type}."
+
+  # Weighted user assignment
+  weighted_user_ids = []
+  users.each_with_index do |user, u_index|
+    weight = (5 - u_index) # User 0 gets 5 parts, user 1 gets 4 parts, etc.
+    weight.times { weighted_user_ids << user.id }
+  end
+  user_to_assign = weighted_user_ids.sample
+
+  makers_data << {
+    name: dynamic_name,
+    location: location,
+    description: enhanced_description,
+    categories: selected_categories,
+    user_id: user_to_assign,
+    display_category_for_image: display_category # Used for image selection, not saved to DB
   }
-
-10.times do
-  temp_primary_category = Maker::CATEGORIES.sample
-  temp_name = "#{first_names.sample}'s #{temp_primary_category} #{types.sample}"
-
-  temp_categories = []
-  temp_categories << temp_primary_category
-
-  rand(0..2).times do
-    temp_categories << Maker::CATEGORIES.sample
-  end
-  temp_categories = temp_categories.uniq()
-
-  temp_maker = Maker.new(
-    name: temp_name,
-    location: locations.sample,
-    description: descriptions.sample,
-    categories: temp_categories,
-    user: users.sample
-  )
-
-  link = maker_image_links[temp_categories.sample].sample
-  file = URI.parse(link).open
-  temp_maker.photos.attach(io: file, filename: "photo.png", content_type: "image/png")
-  temp_maker.save!
-
-  makers << temp_maker
 end
+puts "#{makers_data.length} maker data sets prepared."
 
-puts "Created #{makers.count} makers"
+# --- Create Maker Objects and Attach Images ---
+puts "Creating makers with associated images..."
+makers = []
+maker_counter = 0
+makers_data.each do |maker_attributes|
+  maker_counter += 1
+  if (maker_counter % 1 == 0) || (maker_counter == makers_data.length)
+    puts "  #{maker_counter} of #{makers_data.length} Makers created..."
+    puts "  (#{ashley_message})" if maker_counter % rand(2..7) == 0
+  end
+  # Create a new Maker instance, excluding the temporary image helper attribute
+  temp_maker = Maker.new(maker_attributes.except(:display_category_for_image))
 
-puts "Creating reviews"
-reviews = []
+  # --- Image attachment logic ---
+  selected_image_filename = nil
+  # Prioritize the display_category for image matching, then other categories
+  categories_to_check = [maker_attributes[:display_category_for_image]] + maker_attributes[:categories].reject { |c| c == maker_attributes[:display_category_for_image] }
 
-comments = ["Best maker everrr!", "Food was soooo yummy", "Overall a great experience", "Nothing to complain about", "The maker even gave me some free samples!!"]
+  categories_to_check.each do |cat|
+    # Convert category name to match image file prefix (e.g., "bakery & pastries" to "bakery")
+    image_prefix = cat.split(' & ')[0].downcase.gsub(' ', '_')
+    matching_images = IMAGE_FILENAMES.select { |fn| fn.start_with?("#{image_prefix}_") }
+    if matching_images.any?
+      selected_image_filename = matching_images.sample
+      break # Found a suitable image, no need to check further categories
+    end
+  end
 
-makers.each do |maker|
-  rand(1..3).times do
-    temp_review = Review.create!(
-      comment: comments.sample,
-      overall_rating: rand(1..5),
-      freshness_rating: rand(1..5),
-      service_rating: rand(1..5),
-      product_range_rating: rand(1..5),
-      accuracy_rating: rand(1..5),
-      maker: maker,
-      user: users.sample
-    )
+  # Fallback if no specific category image found
+  unless selected_image_filename
+    general_images = IMAGE_FILENAMES.select { |fn| fn.start_with?("other_") }
+    selected_image_filename = general_images.empty? ? IMAGE_FILENAMES.sample : general_images.sample
+  end
 
-    reviews << temp_review
+  if selected_image_filename
+    file_path = Rails.root.join("app/assets/images/seeds", selected_image_filename)
+    if File.exist?(file_path)
+      # Determine content type based on file extension (simplified for .jpeg/.png)
+      content_type = selected_image_filename.end_with?(".png") ? "image/png" : "image/jpeg"
+      file = File.open(file_path)
+      temp_maker.photos.attach(io: file, filename: selected_image_filename, content_type: content_type)
+    else
+      puts "WARNING: Image file not found at #{file_path}. Maker #{temp_maker.name} will not have an image."
+    end
+  end
+
+  # Save the maker
+  if temp_maker.save
+    makers << temp_maker
+  else
+    puts "Error creating maker: #{temp_maker.errors.full_messages.to_sentence}"
   end
 end
+puts "#{makers.count} makers created!"
 
-puts "Created #{reviews.count} reviews"
+# ---------------- Create Products section ----------------
 
-puts "Creating products"
-products = []
-category_products = []
-products_hash = {}
-
-all_products = {
+# Define all products data
+ALL_PRODUCTS_HASH = {
   "meat" => ["chicken", "beef", "pork"],
   "seafood" => ["tuna", "salmon", "shrimp"],
   "vegetables" => ["broccoli", "tomato", "potato"],
   "fruits" => ["apple", "orange", "pineapple"],
   "dairy" => ["milk", "cheese", "yoghurt"],
-  "other" => ["cigis", "oat milk", "candy"],
+  "other" => ["cigis", "oat milk", "candy"], # Note: 'other' category is not in MAKER_CATEGORIES
   "drinks" => ["bintang", "juice", "lemonade"],
   "grains" => ["rice", "wheat", "quinoa"],
   "bakery & pastries" => ["baguette", "sourdough", "pretzel"],
   "eggs" => ["white egg", "brown egg", "ostrich egg"]
-  }
+}
 
-Maker::CATEGORIES.each do |category|
-  category_products = []
-  [0,1,2].each do |number|
-    temp_product = Product.create!(
-      name: all_products[category][number],
-      category: category
+# Create Products
+puts "Creating products..."
+products = []
+product_counter = 0
+ALL_PRODUCTS_HASH.each do |category, product_names|
+  product_names.each do |product_name|
+    product_counter += 1
+    if (product_counter % 5 == 0) || (product_counter == ALL_PRODUCTS_HASH.values.flatten.length)
+      puts "  #{product_counter} of #{ALL_PRODUCTS_HASH.values.flatten.length} Products created..."
+    end
+    # Special handling for "bakery & pastries" category to match product's single category column
+    # Also, ensure category names like "meat" become "Meat" etc.
+    product_category_for_db = (category == "bakery & pastries") ? "bakery" : category
+
+    product = Product.create!(
+      name: product_name.capitalize, # Capitalize product name for display
+      category: product_category_for_db.capitalize # Capitalize category name for display
     )
-    products << temp_product
-    category_products << temp_product
-  end
-  products_hash[category] = category_products
-end
-
-puts "Created #{products.count} products"
-
-puts "Creating reviews_products"
-reviews_products = []
-
-reviews.each do |review|
-  (0..rand(0..2)).to_a.each do |index|
-    temp_product = products_hash[review.maker.categories[0]][index]
-    temp_reviews_product = ReviewProduct.create!(
-      product: temp_product,
-      review: review
-    )
-    reviews_products << temp_reviews_product
+    products << product
+  rescue ActiveRecord::RecordInvalid => e
+    puts "Error creating product '#{product_name}': #{e.message}"
   end
 end
+puts "(#{ashley_message})"
+puts "#{products.count} products created!"
 
-puts "Created #{reviews_products.count} reviews_products"
+# ---------------- Create Reviews section ----------------
+
+# db/seeds.rb
+# ... (previous code for constants, user creation, maker creation, and product creation) ...
+
+# Base comments for dynamic review generation
+REVIEW_COMMENTS_BASE = [
+  "Fantastic experience! The food was incredibly fresh.",
+  "Highly recommend for their delicious offerings.",
+  "The item I got was superb. Will definitely return!",
+  "Great quality and friendly service. So glad to find this place.",
+  "Loved the product. Exactly what I was looking for.",
+  "A true gem! This place offers amazing goods and a wonderful atmosphere.",
+  "Couldn't be happier with the freshness. Quality is guaranteed.",
+  "The staff were so helpful, and the products were excellent.",
+  "My go-to place now. This spot never disappoints!",
+  "Found this place and tried their items. Absolutely delighted!",
+  "A local legend for quality. They truly deliver.",
+  "The product was so yummy, exactly what I hoped for.",
+  "Overall a great experience shopping here. The products were top-notch.",
+  "Nothing to complain about, this place is fantastic!",
+  "The maker even gave me some free samples!",
+  "Amazing products and lovely people. A must-visit!",
+  "So impressed with the quality available here.",
+  "This place has the best items in town. Thank you!",
+  "Fresh, local, and delicious. Can't ask for more.",
+  "Beyond expectations! They offer exquisite products.",
+  "Every visit is a pleasure, always finding fresh items.",
+  "Authentic local goods found here. A real taste of Bali.",
+  "The item was so good, I bought extra!",
+  "Fantastic range of products. Something for everyone.",
+  "The service made the experience even better, and the products were perfect."
+]
+
+# Helper to generate skewed ratings (1-5, biased towards 4s and 5s)
+def skewed_rating
+  # 70% chance of 4 or 5, 30% chance of 1-3
+  if rand(10) < 7 # 0-6 (7 out of 10 times)
+    rand(4..5)
+  else
+    rand(1..3)
+  end
+end
+
+# Create Reviews
+puts "Creating reviews and associating with products..."
+reviews_count = 0
+review_counter = 0
+num_reviews_to_create = 100 # Create around 60 reviews
+
+num_reviews_to_create.times do
+  review_counter += 1
+  if (review_counter % 25 == 0) || (review_counter == num_reviews_to_create)
+    puts "  #{review_counter} of #{num_reviews_to_create} Reviews created..."
+  end
+  user = users.sample # Select a random user
+  maker = makers.sample # Select a random maker
+
+  # Get a relevant category from the maker for comment personalization
+  maker_category_for_comment = maker.categories.sample
+
+  # Generate a dynamic and positive comment
+  base_comment = REVIEW_COMMENTS_BASE.sample
+  dynamic_comment = base_comment.sub("The item I got", "The #{maker_category_for_comment} I got") # Example enhancement
+  dynamic_comment = dynamic_comment.sub("This place", "#{maker.name.gsub("'", "")}") # Replace "This place" with maker's name
+  dynamic_comment = dynamic_comment.sub("their items", "#{maker_category_for_comment} items") # Another enhancement
+  dynamic_comment = dynamic_comment.sub("the products", "the #{maker_category_for_comment} products") # Another enhancement
+  dynamic_comment = dynamic_comment.sub("the food", "the #{maker_category_for_comment}") # Another enhancement
+  dynamic_comment = dynamic_comment.sub("The product", "The #{maker_category_for_comment} product") # Another enhancement
+
+
+  review = Review.new(
+    user: user,
+    maker: maker,
+    comment: dynamic_comment,
+    overall_rating: skewed_rating,
+    freshness_rating: skewed_rating,
+    service_rating: skewed_rating,
+    product_range_rating: skewed_rating,
+    accuracy_rating: skewed_rating
+  )
+
+  if review.save
+    reviews_count += 1
+
+    # Associate 1-2 products with the review, matching maker's categories
+    eligible_products = products.select do |product|
+      # Check if any of the product's categories are in the maker's categories
+      maker.categories.any? { |maker_cat| product.category.downcase == maker_cat.split(' & ')[0].downcase.gsub(' ', '_') }
+    end
+
+    num_products_to_associate = rand(1..[eligible_products.count, 2].min) # 1 or 2 products, max 2
+    products_for_review = eligible_products.sample(num_products_to_associate).uniq
+
+    products_for_review.each do |product|
+      ReviewProduct.create!(review: review, product: product)
+    rescue ActiveRecord::RecordInvalid => e
+      puts "Error creating ReviewProduct for review #{review.id} and product #{product.id}: #{e.message}"
+    end
+  else
+    puts "Error creating review: #{review.errors.full_messages.to_sentence}"
+  end
+end
+puts "(#{ashley_message})"
+puts "#{reviews_count} reviews and their product associations created!"

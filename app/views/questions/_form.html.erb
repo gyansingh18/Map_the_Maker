@@ -2,8 +2,8 @@
   html: { data: { controller: "reset-form", action: "turbo:submit-end->reset-form#reset" }} do |f| %>
   <div class="input-group mb-3 w-100">
     <div class="form-floating">
-      <%= f.input :user_question, label: false, placeholder: "Your question" %>
+      <%= f.input :user_question, label: false, placeholder: "Your question", input_html: { data: { rec_questions_target: "question" } } %>
     </div>
-    <%= f.submit "Ask", id: "new-question-button", class: "btn btn-primary", :style => "height: 61.6px;" %>
+    <%= f.submit "Ask", id: "new-question-button", class: "btn btn-primary", :style => "height: 61.6px;", data: { action: "click->rec-questions#disable" } %>
   </div>
 <% end %>
