@@ -56,7 +56,7 @@
               </div>
               <div class="star-box d-flex justify-content-end align-items-center">
                 <% if maker.reviews.any? %>
-                  <%= render "shared/star_rating_overall", maker: maker %> &nbsp <%= maker.average_rating %>
+                  <%= render "shared/star_rating_overall", maker: maker %> &nbsp <%= maker.average_rating.round(1) %>
                 <% end %>
               </div>
             </div>
