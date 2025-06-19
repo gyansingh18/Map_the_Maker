@@ -11,7 +11,7 @@ User.destroy_all
 puts "Database cleaned!"
 
 # --- Constants for data generation ---
-CATEGORIES = ["meat", "seafood", "vegetables", "fruits", "dairy", "drinks", "grains", "bakery & pastries", "eggs"]
+CATEGORIES = ["meat", "seafood", "vegetables", "fruit", "dairy", "drinks", "grains", "bakery & pastries", "eggs"]
 
 SHOP_TYPES = [
   "shop", "hut", "shack", "store", "warung", "kios",
@@ -212,7 +212,7 @@ ALL_PRODUCTS_HASH = {
   "meat" => ["chicken", "beef", "pork"],
   "seafood" => ["tuna", "salmon", "shrimp"],
   "vegetables" => ["broccoli", "tomato", "potato"],
-  "fruits" => ["apple", "orange", "pineapple"],
+  "fruit" => ["apple", "orange", "pineapple"],
   "dairy" => ["milk", "cheese", "yoghurt"],
   "other" => ["cigis", "oat milk", "candy"], # Note: 'other' category is not in MAKER_CATEGORIES
   "drinks" => ["bintang", "juice", "lemonade"],
