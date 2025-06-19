@@ -80,13 +80,15 @@
 
   <br>
   <div class="master_review_class">
-    <h4>  <strong> Ratings </strong> </h4>
-    <h4><span class = "review-overall-stars"> <strong><%= render "shared/star_rating_overall", maker: @maker %></strong><span></h4></p>
-    <br>
-    <p> Freshness  <%= render "shared/star_rating_freshness", maker: @maker %> <%= @maker.average_star_rating_freshness %></p>
-    <p> Service  <%= render "shared/star_rating_service", maker: @maker %> <%=@maker.average_star_rating_service %></p>
-    <p> Product Range  <%= render "shared/star_rating_product_range", maker: @maker %><%=@maker.average_star_rating_product_range %></p>
-    <p> Accuracy <%= render "shared/star_rating_accuracy", maker: @maker %> <%=@maker.average_star_rating_accuracy%></p>
+    <% if @maker.reviews.any? %>
+      <h4>  <strong> Ratings </strong> </h4>
+      <h4><span class = "review-overall-stars"> <strong><%= render "shared/star_rating_overall", maker: @maker %></strong><span></h4></p>
+      <br>
+      <p> Freshness  <%= render "shared/star_rating_freshness", maker: @maker %> <%= @maker.average_star_rating_freshness %></p>
+      <p> Service  <%= render "shared/star_rating_service", maker: @maker %> <%=@maker.average_star_rating_service %></p>
+      <p> Product Range  <%= render "shared/star_rating_product_range", maker: @maker %><%=@maker.average_star_rating_product_range %></p>
+      <p> Accuracy <%= render "shared/star_rating_accuracy", maker: @maker %> <%=@maker.average_star_rating_accuracy%></p>
+    <%  end %>
   </div>
 
   <br>
