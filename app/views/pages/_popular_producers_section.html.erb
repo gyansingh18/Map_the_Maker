@@ -24,7 +24,11 @@
                 </div>
               </div>
               <% if maker.categories.present? %>
-                <p class="producer-card-categories"><%= maker.categories.join(", ") %></p>
+                <div class="producer-card-categories">
+                  <% maker.categories.each do |category| %>
+                    <span class="category-tag-index"><%= category %></span>
+                  <% end %>
+                </div>
               <% end %>
             </div>
           <% end %>
