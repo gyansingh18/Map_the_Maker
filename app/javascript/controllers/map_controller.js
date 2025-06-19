@@ -248,7 +248,7 @@ export default class extends Controller {
     for (const coord of coordinates) {
       bounds.extend(coord);
     }
-    this.map.fitBounds(bounds, { padding: 75 });
+    this.map.fitBounds(bounds, { padding: 125 });
   }
 
   // clearRoute() { // ADD THIS ENTIRE METHOD
@@ -287,7 +287,7 @@ export default class extends Controller {
     // ];
     const bounds = new mapboxgl.LngLatBounds()
     this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
-    this.map.fitBounds(bounds, { padding: 100, maxZoom: 15, duration: 0 })
+    this.map.fitBounds(bounds, { padding: 50, maxZoom: 15, duration: 0 })
   }
 
    clearRoute() {
