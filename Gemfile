@@ -88,3 +88,4 @@ gem "hotwire-rails", "~> 0.1.3"
 gem "solid_cable", "~> 1.0.3"
 
 gem "solid_queue"
+gem 'pagy'
