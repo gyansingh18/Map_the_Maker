@@ -6,7 +6,6 @@ class Review < ApplicationRecord
   validates :overall_rating, presence: true
   validates :service_rating, presence: true
   validates :product_range_rating, presence: true
-  validates :accuracy_rating, presence: true
 
   after_create :award_maker_added_karma
 

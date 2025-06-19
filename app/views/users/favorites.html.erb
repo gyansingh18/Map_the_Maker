@@ -1,24 +1,24 @@
- <div style="height: 30px;"></div>
-<h3 class ="heading1">Your Favourite Makers</h3>
-<div class ="container sign-up">
+<div style="height: 30px;"></div>
+<h3 class ="text-center">Your <span class="highlight">Favourite</span> Makers</h3>
+<div class ="container">
   <div class ="search-results">
     <% if @makers.any? %>
-        <% @makers.each do |maker| %>
-         <div class="index-maker-card">
+      <% @makers.each do |maker| %>
+        <div class="index-maker-card">
           <div class ="full-card">
             <% if maker.photos.attached? %>
               <%= cl_image_tag maker.photos[0].key, class: "index-maker-card-photo" %>
             <% else %>
               <%= image_tag "placeholder.jpg", class: "img-thumbnail me-3", style: "width: 80px; height: 80px;" %>
             <% end %>
-              <div class="top-box">
-                  <p class="h3 mb-0"><%= maker.name %></p>
-              </div>
-             <div class="middle-box d-flex justify-content-between align-items-center ">
+            <div class="top-box">
+              <p class="h3 mb-0"><%= maker.name %></p>
+            </div>
+            <div class="middle-box d-flex justify-content-between align-items-center ">
               <p class="mb-0"><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
               <div class="star-box d-flex justify-content-end align-items-center">
                 <% if maker.reviews.any? %>
-                  <%= render "shared/star_rating_overall", maker: maker %> &nbsp <%= maker.average_rating %>
+                  <%= render "shared/star_rating_overall", maker: maker %> &nbsp <%= maker.average_rating.round(1) %>
                 <% end %>
               </div>
             </div>
@@ -26,14 +26,15 @@
               <% maker.categories.each do |category| %>
                 <span class="category-tag-index"><%= category %></span>
               <% end %>
-        <% end %>
-
-    <div style="height: 360px;"></div>
-    </div>
-    </div>
-    </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+      <div style="height: 360px;"></div>
     <% else %>
-    <h3 class="mt-5 text-muted" style="margin-bottom: 165%;">
-    You haven't favorited any makers yet.
-  </h3>
+      <h3 class="mt-5 text-muted" style="margin-bottom: 165%;">
+        You haven't favorited any makers yet.
+      </h3>
     <% end %>
+  </div>
+</div>

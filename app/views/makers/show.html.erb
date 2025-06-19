@@ -47,8 +47,8 @@
       <div class ="rating-box d-flex align-items-center">
         <% if @maker.reviews.any? %>
           <%= render "shared/star_rating_overall", maker: @maker %>
-          <span class ="average-rating ms-1"><%=@maker.average_rating.round(1)%></span>
         <% end %>
+        <span class ="average-rating ms-1"><%=@maker.average_rating.round(1)%></span>
       </div>
     </div>
     <div class="bottom-box p-2 px-0">
