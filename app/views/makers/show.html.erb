@@ -32,7 +32,7 @@
 </div>
 
 
-  <div class="index-maker-card">
+  <div class="show-maker-card">
     <div class="card-image-wrapper">
       <%= cl_image_tag @maker.photos[0].key, class: "card-image-top" %>
     </div>
@@ -46,14 +46,16 @@
     <div class="middle-box d-flex justify-content-between align-items-center">
       <p class="mb-0 location-text"><%= @maker.location %> </p>
       <div class ="rating-box d-flex align-items-center">
-        <%= render "shared/star_rating_overall", maker: @maker %>
+        <% if @maker.reviews.any? %>
+          <%= render "shared/star_rating_overall", maker: @maker %>
+        <% end %>
         <span class ="ms-1"><%=@maker.average_rating%></span>
       </div>
     </div>
 
     <div class="bottom-box">
       <% @maker.categories.each do |category| %>
-        <span class="category-tag"><%= category.capitalize %></span>
+        <span class="show-category-tag"><%= category.capitalize %></span>
       <% end %>
     </div>
   </div>
