@@ -13,12 +13,12 @@
 }
 
 // Mixin for card hover effect (keeping this as it's a good touch)
-@mixin card-hover-effect {
-  transition: transform 0.3s ease-in-out;
-  &:hover {
-    transform: scale(1.03); // Slightly less aggressive scale than before
-  }
-}
+// @mixin card-hover-effect {
+//   transition: transform 0.3s ease-in-out;
+//   &:hover {
+//     transform: scale(1.03); // Slightly less aggressive scale than before
+//   }
+// }
 
 // Mixin for the icon circle container (from homepage)
 @mixin icon-circle($size: 70px, $bg-color: $secondary-color) {
@@ -107,7 +107,7 @@
 
 .karma-summary-card {
   @include card-style(); // Apply updated card style
-  @include card-hover-effect; // Keep hover effect
+  // @include card-hover-effect; // Keep hover effect
 
   .karma-summary-header {
     display: flex;
@@ -223,7 +223,7 @@
 
 .karma-transactions-card {
   @include card-style(); // Apply updated card style
-  @include card-hover-effect; // Add hover effect
+  // @include card-hover-effect; // Add hover effect
   margin-bottom: 25px; // Ensure explicit bottom margin for separation
 
   h2 {
@@ -279,7 +279,7 @@
 
 .karma-leaderboard-card {
   @include card-style(); // Apply updated card style
-  @include card-hover-effect; // Add hover effect
+  // @include card-hover-effect; // Add hover effect
   border: 1px solid lighten($primary-color, 35%); // Specific border for leaderboard (keep this)
 
   h2 {
@@ -358,7 +358,7 @@
 
 .karma-explanation-card {
   @include card-style(); // Apply updated card style
-  @include card-hover-effect; // Add hover effect
+  // @include card-hover-effect; // Add hover effect
 
   h2 {
     @include card-main-heading($text-color: $font-color); // Card title using homepage h3 style
@@ -382,10 +382,10 @@
       text-decoration: none;
       transition: color 0.2s ease-in-out;
 
-      &:hover {
-        color: darken($primary-color, 10%);
-        text-decoration: underline;
-      }
+      // &:hover {
+      //   color: darken($primary-color, 10%);
+      //   text-decoration: underline;
+      // }
     }
   }
 }
