@@ -21,6 +21,8 @@
   </div>
 
     <%= yield %>
-  <%= render "shared/homebar"%>
+    <% if user_signed_in? %>
+      <%= render "shared/homebar"%>
+    <% end %>
   </body>
 </html>
