@@ -15,7 +15,9 @@
     <div class="middle-box d-flex justify-content-between align-items-center">
       <p class="mb-0 location-text"><%= @maker.location %> </p>
       <div class ="rating-box d-flex align-items-center">
-        <%= render "shared/star_rating_overall", maker: @maker %>
+        <% if @maker.reviews.any? %>
+          <%= render "shared/star_rating_overall", maker: @maker %>
+        <% end %>
         <span class ="ms-1"><%=@maker.average_rating%></span>
       </div>
     </div>
