@@ -103,18 +103,25 @@ def ashley_message
   ASHLEY_MESSAGES.sample
 end
 
-# --- Create Users ---
+# --- Create Users --- #
 puts "Creating users..."
-users = []
-5.times do |i|
-  users << User.create!(
-    email: "user#{i + 1}@example.com",
-    password: "password",
-    first_name: "User",
-    last_name: "#{i + 1}"
+first_names = ["Alizee", "Clint", "Ashley", "Gyan", "Jannis", "Dani", "Christina", "Vince"]
+last_names = ["Apple", "Cucumber", "Avocado", "Garlic", "Jackfruit", "Durian", "Cherry", "Vanilla"]
+
+users = [] # Initialize users array to store created user objects
+first_names.each_with_index do |first_name, index|
+  temp_user = User.create!(
+    first_name: first_name,
+    last_name: last_names[index],
+    email: "#{first_name.downcase}.#{last_names[index].downcase}@gmail.com", # Ensure email is lowercase
+    password: "superstrong"
   )
+  users << temp_user # Add the created user to the users array
+  puts "  Created user: #{temp_user.first_name} #{temp_user.last_name}"
+
 end
 puts "#{users.count} users created!"
+puts "(Perth is full of huge Bogans)"
 
 # --- Helper for possessive form ---
 def possessive(name)
@@ -172,9 +179,9 @@ makers = []
 maker_counter = 0
 makers_data.each do |maker_attributes|
   maker_counter += 1
-  if (maker_counter % 5 == 0) || (maker_counter == makers_data.length)
+  if (maker_counter % 1 == 0) || (maker_counter == makers_data.length)
     puts "  #{maker_counter} of #{makers_data.length} Makers created..."
-    puts "    (#{ashley_message})" if maker_counter % 10 == 0
+    puts "  (#{ashley_message})" if maker_counter % rand(2..7) == 0
   end
   # Create a new Maker instance, excluding the temporary image helper attribute
   temp_maker = Maker.new(maker_attributes.except(:display_category_for_image))
@@ -246,7 +253,6 @@ ALL_PRODUCTS_HASH.each do |category, product_names|
     product_counter += 1
     if (product_counter % 5 == 0) || (product_counter == ALL_PRODUCTS_HASH.values.flatten.length)
       puts "  #{product_counter} of #{ALL_PRODUCTS_HASH.values.flatten.length} Products created..."
-      puts "    (#{ashley_message})" if product_counter % 10 == 0
     end
     # Special handling for "bakery & pastries" category to match product's single category column
     # Also, ensure category names like "meat" become "Meat" etc.
@@ -261,8 +267,8 @@ ALL_PRODUCTS_HASH.each do |category, product_names|
     puts "Error creating product '#{product_name}': #{e.message}"
   end
 end
+puts "(#{ashley_message})"
 puts "#{products.count} products created!"
-
 
 # ---------------- Create Reviews section ----------------
 
@@ -316,9 +322,8 @@ num_reviews_to_create = 100 # Create around 60 reviews
 
 num_reviews_to_create.times do
   review_counter += 1
-  if (review_counter % 10 == 0) || (review_counter == num_reviews_to_create)
+  if (review_counter % 25 == 0) || (review_counter == num_reviews_to_create)
     puts "  #{review_counter} of #{num_reviews_to_create} Reviews created..."
-    puts "    (#{ashley_message})"
   end
   user = users.sample # Select a random user
   maker = makers.sample # Select a random maker
@@ -368,4 +373,5 @@ num_reviews_to_create.times do
     puts "Error creating review: #{review.errors.full_messages.to_sentence}"
   end
 end
+puts "(#{ashley_message})"
 puts "#{reviews_count} reviews and their product associations created!"
