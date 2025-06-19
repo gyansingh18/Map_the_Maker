@@ -65,11 +65,12 @@
 </div>
 
 <div class="mapbox-maker mt-0">
-  <div class="mapbox-container mt-0"
+  <div class="w-100" style="height:280px;"
       data-controller="map"
       data-map-markers-value="<%= @markers.to_json %>"
       data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
   </div>
+  <div class="d-none" id="instructions"></div>
 </div>
     <%# <%= render "search_bar", search_path: map_makers_path %>
 
