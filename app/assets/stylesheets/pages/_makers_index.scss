@@ -92,3 +92,28 @@ a {
  top: 32px;
  right: 12px;
 }
+
+.big-heart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px;
+  transition: transform 0.2s ease;
+}
+.big-heart:hover {
+  transform: scale(1.1);
+}
+.big-heart i {
+  font-size: 22px !important;
+  text-shadow:
+    -1px -1px 0 white,
+    1px -1px 0 white,
+    -1px 1px 0 white,
+    1px 1px 0 white;
+}
+.big-heart i[style*="#d01111"] {
+  color: #e00038 !important;
+}
+.big-heart i[style*="#d6d6d6"] {
+  color: rgba(90, 90, 90, 0.8) !important;
+}
