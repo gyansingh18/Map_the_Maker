@@ -48,15 +48,46 @@ html, body {
   position: static !important;
 }
 
+.mapboxgl-popup-close-button {
+  color: $background-color;
+}
+
 #instructions {
   position: absolute;
-  margin: 20px;
-  height: 60vh;
-  width: 25%;
-  top: 20%;
-  bottom: 20%;
+  margin: 5px;
+  width: 200px;
+  height: 100px;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 20px;
-  background-color: #ffffff66;
+  background-color: $background-color;
   overflow-y: scroll;
   font-family: sans-serif;
+  opacity: 90%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the trip summary box */
+.trip-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+/* Style for the clear route button */
+.clear-route-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.clear-route-button:hover {
+  color: #000;
 }
