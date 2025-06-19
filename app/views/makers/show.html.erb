@@ -80,13 +80,15 @@
 
   <br>
   <div class="master_review_class">
-    <h4>  <strong> Ratings </strong> </h4>
-    <h4><span class = "review-overall-stars"> <strong><%= render "shared/star_rating_overall", maker: @maker %></strong><span></h4></p>
-    <br>
-    <p> Freshness  <%= render "shared/star_rating_freshness", maker: @maker %> <%= @maker.average_star_rating_freshness %></p>
-    <p> Service  <%= render "shared/star_rating_service", maker: @maker %> <%=@maker.average_star_rating_service %></p>
-    <p> Product Range  <%= render "shared/star_rating_product_range", maker: @maker %><%=@maker.average_star_rating_product_range %></p>
-    <p> Accuracy <%= render "shared/star_rating_accuracy", maker: @maker %> <%=@maker.average_star_rating_accuracy%></p>
+    <% if @maker.reviews.any? %>
+      <h4>  <strong> Ratings </strong> </h4>
+      <h4><span class = "review-overall-stars"> <strong><%= render "shared/star_rating_overall", maker: @maker %></strong><span></h4></p>
+      <br>
+      <p> Freshness  <%= render "shared/star_rating_freshness", maker: @maker %> <%= @maker.average_star_rating_freshness %></p>
+      <p> Service  <%= render "shared/star_rating_service", maker: @maker %> <%=@maker.average_star_rating_service %></p>
+      <p> Product Range  <%= render "shared/star_rating_product_range", maker: @maker %><%=@maker.average_star_rating_product_range %></p>
+      <p> Accuracy <%= render "shared/star_rating_accuracy", maker: @maker %> <%=@maker.average_star_rating_accuracy%></p>
+    <%  end %>
   </div>
 
   <br>
@@ -154,17 +156,19 @@
 
   <%# <div class="review_box mb-5"> %>
   <br>
-  <h2 class="text-center">Add a review!</h2>
-
-  <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#addReview">
-    Submit
-  </button>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
+  <h2>Add a review!</h2>
+    <% if params[:auto_click] == "true" %>
+      <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#addReview" data-controller="auto-click">
+        Submit
+      </button>
+    <% else %>
+      <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#addReview">
+        Submit
+      </button>
+    <% end %>
+  <%# <%= link_to "Submit", new_maker_review_path(@maker), class:"button-primary" %>
 </div>
+
 
 <%# </div> %>
 <%# DONT TOUCH !!! %>
@@ -172,7 +176,11 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
+        <% if @maker.reviews.any?%>
         <h5 class="modal-title" id="staticBackdropLabel">Review <%= @maker.name %>!</h5>
+        <%else%>
+        <h5 class="modal-title" id="staticBackdropLabel">Leave your first Review to <%= @maker.name %>!</h5>
+        <%end%>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
