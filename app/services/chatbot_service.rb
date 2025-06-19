@@ -11,7 +11,7 @@ class ChatbotService
         messages: questions_formatted_for_openai
       }
     )
-    new_content = chatgpt_response["choices"][0]["message"]["content"]
+    new_content = chatgpt_response["choices"][0]["message"]["content"].gsub("**", "")
 
     @question.update(ai_answer: new_content)
     Turbo::StreamsChannel.broadcast_update_to(
