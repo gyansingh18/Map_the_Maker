@@ -9,7 +9,7 @@
             <% if maker.photos.attached? %>
               <%= cl_image_tag maker.photos[0].key, class: "index-maker-card-photo" %>
             <% else %>
-              <%= image_tag "placeholder.jpg", class: "img-thumbnail me-3", style: "width: 80px; height: 80px;" %>
+              <%= image_tag "default-maker-placeholder.png", class: "index-maker-card-photo" %>
             <% end %>
             <div class="top-box">
               <p class="h3 mb-0"><%= maker.name %></p>
