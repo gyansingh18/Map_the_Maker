@@ -134,13 +134,15 @@ html, body {
 
 #instructions {
   position: absolute;
-  margin: 20px;
-  height: 60vh;
+  right: 20px; /* Aligns to the left with a 20px margin */
   width: 25%;
-  top: 20%;
-  bottom: 20%;
+  height: 10%; /* Sets the height to half of its parent's height */
+  top: 25%; /* Moves the top edge of the element to the vertical center */
+  transform: translateY(-25%); /* Moves the element up by half of its own height to truly center it */
   padding: 20px;
-  background-color: #ffffff66;
+  background-color: #fff;
   overflow-y: scroll;
   font-family: sans-serif;
+  // display: none;
+  opacity: 0.5;
 }
