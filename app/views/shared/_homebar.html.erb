@@ -1,13 +1,13 @@
 <div class="homebar">
   <div class="homebutton d-flex justify-content-center align-items-end">
-    <%= link_to map_makers_path do %>
+    <%= link_to map_makers_path(request.params) do %>
       <div class="<%= 'highlight-gold' if params["controller"] == 'makers' && params["action"] == 'map' %>">
         <i class="fa-solid fa-map homeicon"></i> <p class="mb-0">Map</p>
       </div>
     <% end %>
   </div>
   <div class="homebutton d-flex justify-content-center align-items-end">
-    <%= link_to makers_path do %>
+    <%= link_to makers_path(request.params) do %>
       <div class="<%= 'highlight-gold' if params["controller"] == 'makers' && params["action"] == 'index'  %>">
         <i class="fa-solid fa-list-ul"></i> <p class="mb-0">Makers</p>
       </div>
