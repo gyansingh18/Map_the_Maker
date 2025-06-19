@@ -72,6 +72,6 @@ class Maker < ApplicationRecord
     )
     embedding = response['data'][0]['embedding']
     update(embedding: embedding)
-    p self
+
   end
 end
