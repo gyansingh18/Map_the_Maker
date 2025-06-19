@@ -25,6 +25,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users do
+    get :favorites, on: :collection
+  end
+
   # Products
   resources :products, only: [:new, :create]
 
