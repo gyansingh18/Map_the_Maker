@@ -45,7 +45,7 @@ class MakersController < ApplicationController
     @maker = Maker.new(maker_params)
     @maker.user = current_user
     if @maker.save
-      redirect_to maker_path(@maker ,auto_click: true)
+      redirect_to maker_path(@maker, auto_click: true)
 
       current_user.add_karma_points(:maker_added, source: @maker)
     else
