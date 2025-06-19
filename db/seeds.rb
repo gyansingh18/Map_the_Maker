@@ -2,10 +2,11 @@
 
 # Clear existing data to prevent duplicates on re-seeding
 puts "Cleaning up database..."
+KarmaTransaction.destroy_all
 ReviewProduct.destroy_all
 Review.destroy_all
 Maker.destroy_all
-Product.destroy_all # Even if not seeding products, it's good practice to clear if they exist
+Product.destroy_all
 User.destroy_all
 puts "Database cleaned!"
 
