@@ -8,10 +8,16 @@ html, body {
 
 .mapbox-container {
   width: 100vw;
-  height: 77vh;
+  height: 100vh;
+  left: 0;
+  top: 0;
   overflow: hidden;
-  position: relative;
+  position: absolute;
   z-index: 0;
+}
+
+.map-transparent {
+  height: 1000px
 }
 
 .float-search {

@@ -1,6 +1,10 @@
 <%# app/views/makers/map.html.erb %>
-<%= render "search_bar", search_path: map_makers_path, class: "mapsearch"%>
-<div class="mapbox-container" data-controller="map" data-map-markers-value="<%= @markers.to_json %>" data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+<div class="container">
+  <%= render "search_bar", search_path: map_makers_path, class: "mapsearch"%>
+  <div class="map-transparent"></div>
+  <div class="mapbox-container" data-controller="map" data-map-markers-value="<%= @markers.to_json %>" data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+</div>
+
 <%# <div id="instructions"></div> %>
 
 
