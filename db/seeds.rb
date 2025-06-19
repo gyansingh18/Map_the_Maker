@@ -149,7 +149,7 @@ MAKER_NAMES_BASE.each_with_index do |base_name, index|
   display_category = selected_categories.sample
 
   shop_type = SHOP_TYPES.sample
-  dynamic_name = "#{possessive(base_name)} #{display_category.capitalize} #{shop_type.capitalize}"
+  dynamic_name = "#{possessive(base_name)} #{shop_type.capitalize}"
 
   # Get a base description and enhance it
   base_description = MAKER_DESCRIPTIONS_BASE.sample

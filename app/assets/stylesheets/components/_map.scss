@@ -8,10 +8,16 @@ html, body {
 
 .mapbox-container {
   width: 100vw;
-  height: 77vh;
+  height: 100vh;
+  left: 0;
+  top: 0;
   overflow: hidden;
-  position: relative;
+  position: absolute;
   z-index: 0;
+}
+
+.map-transparent {
+  height: 1000px
 }
 
 .float-search {
@@ -24,92 +30,6 @@ html, body {
   padding: 10px 15px;
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.float-body {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
-  background-color: $background-color;
-  padding: 10px 15px;
-  border-radius: 5px;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-.mapboxgl-popup {
-  max-width: 200px;
-  padding: 0;
-  border-radius: 5%;
-
-}
-
-.mapboxgl-popup-content {
-  // text-align: center;
-  // font-family: "Open Sans", sans-serif;
-  padding: 0;
-  border-radius: 5%;
-}
-
-.info-window-producer-card {
-  width: 250px;
-  max-width: 100%;
-  background-color: $background-color;
-  border-radius: 5px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-.info-window-producer-card .producer-card-image {
-  width: 100%;
-  height: 120px;
-  object-fit: cover;
-}
-
-.info-window-producer-card .producer-card-info {
-  padding: 10px;
-  text-align: left;
-}
-
-.info-window-producer-card .producer-card-info h3 {
-  font-size: 1.2rem;
-  margin-top: 0;
-  margin-bottom: 5px;
-  color: $font-color;
-}
-
-.info-window-producer-card .producer-card-details-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 5px;
-}
-
-.info-window-producer-card .producer-card-location,
-.info-window-producer-card .producer-card-rating {
-  font-size: 0.9rem;
-  color: #666;
-  white-space: nowrap;
-}
-
-.info-window-producer-card .producer-card-location i {
-  color: $secondary-color;
-  margin-right: 3px;
-}
-
-.info-window-producer-card .producer-card-rating i {
-  color: $primary-color;
-  margin-right: 3px;
-}
-.info-window-producer-card .producer-card-categories {
-  font-size: 0.8rem;
-  color: #888;
-  margin-top: 5px;
-  margin-bottom: 0;
 }
 
 .mapsearch {
@@ -134,13 +54,40 @@ html, body {
 
 #instructions {
   position: absolute;
-  margin: 20px;
-  height: 60vh;
-  width: 25%;
-  top: 20%;
-  bottom: 20%;
+  margin: 5px;
+  width: 200px;
+  height: 100px;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 20px;
-  background-color: #ffffff66;
+  background-color: $background-color;
   overflow-y: scroll;
   font-family: sans-serif;
+  opacity: 90%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the trip summary box */
+.trip-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+/* Style for the clear route button */
+.clear-route-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.clear-route-button:hover {
+  color: #000;
 }

@@ -1,34 +1,40 @@
 <%# app/views/makers/_info_window.html.erb %>
 
-<div class="producer-card info-window-producer-card">
-  <%= link_to maker_path(maker) do %>
-    <% if maker.photos.attached? && maker.photos.any? %>
-      <%= cl_image_tag maker.photos.first.key, class: "producer-card-image" %>
-    <% else %>
-      <%= image_tag "default-maker-placeholder.png", class: "producer-card-image" %>
-    <% end %>
-    <div class="producer-card-info">
-      <h3><%= maker.name %></h3>
-      <div class="producer-card-details-row">
-        <p class="producer-card-location"><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
-        <div class="producer-card-rating">
+<div class="iw-producer-card">
+  <%= link_to maker_path(maker), style: "outline: none" do %>
+    <div class="clickable-card">
+      <div class="photo">
+        <% if maker.photos.attached? && maker.photos.any? %>
+          <%= cl_image_tag maker.photos.first.key, class: "iw-producer-card-image" %>
+        <% else %>
+          <%= image_tag "default-maker-placeholder.png", class: "iw-producer-card-image" %>
+        <% end %>
+      </div>
+      <div class="iw-info-box">
+        <p><strong><%= maker.name %></strong></p>
+        <p><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
+        <p class="iw-stars">
           <% if maker.reviews.present? %>
-            <i class="fas fa-star"></i> <%= maker.average_rating %> (<%= maker.reviews.count %> reviews)
-          <% else %>
-            No reviews yet
+            <i class="fas fa-star"></i> <%= maker.average_rating.round(1) %> (<%= maker.reviews.count %> reviews)
+          <% end %>
+        </p>
+        <div class="iw-tags">
+          <% maker.categories.each_with_index do |category, index| %>
+            <% if index <= 1 %>
+              <span class="category-tag-index"><%= category %></span>
+            <% elsif index == 2 %>
+              <span class="category-tag-index"><%= "..." %></span>
+            <% else %>
+              <% "do nothing" %>
+            <% end %>
           <% end %>
         </div>
-      </div>
-      <div class="producer-card-categories">
-        <% maker.categories.each do |category| %>
-          <span class="category-tag-index"><%= category %></span>
-        <% end %>
       </div>
     </div>
   <% end %>
 
-  <div class="info-window-actions">
-    <button class="button-primary"
+  <div class="iw-button-box d-flex justify-content-center">
+    <button class="button-primary iw-button"
             data-action="click->map#getDirections" <%# This line connects to Stimulus, if you're using it %>
             data-map-target-lat="<%= maker.latitude %>" <%# Maker's latitude %>
             data-map-target-lng="<%= maker.longitude %>"> <%# Maker's longitude %>

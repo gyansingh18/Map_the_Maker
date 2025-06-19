@@ -33,7 +33,11 @@
 </div>
 
 <div>
-  <%= cl_image_tag @maker.photos[0].key, class: "maker-image" %>
+  <% if @maker.photos.attached? %>
+    <%= cl_image_tag @maker.photos[0].key, class: "maker-image" %>
+  <% else %>
+    <%= image_tag "default-maker-placeholder.png", class: "maker-image" %>
+  <% end %>
 </div>
 
 <div class="container p-3">

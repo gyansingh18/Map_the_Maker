@@ -54,14 +54,9 @@ class MakersController < ApplicationController
   end
 
   def map
-    # Start with all geocoded makers. This is crucial for map display.
     @makers = Maker.geocoded
-
-    # Apply map-specific filters to the @makers collection
     apply_map_filters
 
-    # Now, @makers will be the filtered and geocoded set of makers,
-    # ready to be converted into markers.
     @markers = @makers.map do |maker|
       {
         lat: maker.latitude,

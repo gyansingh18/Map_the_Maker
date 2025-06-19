@@ -1,6 +1,6 @@
 .homebar {
   position: sticky;
-  bottom: 0;
+  bottom: -1px;
   background: $background-color;
   height: 68px;
   box-shadow: 0 -2px 4px 0 rgba(0,0,0,.2);
