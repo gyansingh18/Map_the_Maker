@@ -45,8 +45,9 @@ class MakersController < ApplicationController
     @maker = Maker.new(maker_params)
     @maker.user = current_user
     if @maker.save
+      redirect_to maker_path(@maker ,auto_click: true)
+
       current_user.add_karma_points(:maker_added, source: @maker)
-      redirect_to maker_path(@maker)
     else
       render :new, status: :unprocessable_entity
     end
@@ -73,12 +74,12 @@ class MakersController < ApplicationController
 
   def favorite
     current_user.favorite(@maker)
-    redirect_to makers_path, alert: "Added to favorites"
+    redirect_to request.referer&.include?(maker_path(@maker)) ? maker_path(@maker) : makers_path, notice: "Added to favorites"
   end
 
   def unfavorite
     current_user.unfavorite(@maker)
-    redirect_to makers_path, alert: "Removed from favorites"
+    redirect_to request.referer&.include?(maker_path(@maker)) ? maker_path(@maker) : makers_path, notice: "Removed from favorites"
   end
 
 
