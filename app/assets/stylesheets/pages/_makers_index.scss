@@ -92,3 +92,28 @@ a {
  top: 32px;
  right: 12px;
 }
+.big-heart {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 42px; /* ⬆️ from 36 */
+  height: 42px;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 50%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.big-heart:hover {
+  transform: scale(1.12);
+  background: white;
+}
+.big-heart i {
+  font-size: 22px !important;
+}
+.big-heart i[style*="#d01111"] {
+  color: #ff385c !important;
+}
+.big-heart i[style*="#d6d6d6"] {
+  color: rgba(120, 120, 120, 0.6) !important;
+}
