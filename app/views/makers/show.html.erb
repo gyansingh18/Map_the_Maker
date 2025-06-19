@@ -56,7 +56,6 @@
     </div>
   </div>
   <div>
-    <h4 class="my-2 p-0">Description:</h4>
     <p class="maker-description"><%= @maker.description %></p>
   </div>
 </div>
@@ -83,31 +82,31 @@
         <h3>Rating</h3>
         <h4><span class="review-overall-stars"> <strong><%= render "shared/star_rating_overall", maker: @maker %></strong><span></h4>
       </div>
-      <div class="d-flex justify-content-between mb-1 mb-0">
+      <div class="d-flex justify-content-between mt-3">
         <p class="">Freshness</p>
-        <p> <%= @maker.average_star_rating_freshness %></p>
+        <p> <%= @maker.average_star_rating_freshness.round(1) %></p>
       </div>
       <div class="progress mt-0">
       <% freshness_pcnt = @maker.average_star_rating_freshness * 20 %>
         <div class="progress-bar bg-secondary" role="progressbar" style="width:<%= freshness_pcnt %>%" aria-valuenow="<%= @maker.average_star_rating_freshness %>" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
 
-      <div class="d-flex justify-content-between mt-2">
+      <div class="d-flex justify-content-between mt-4">
         <p class="">Service</p>
-        <p> <%= @maker.average_star_rating_service %></p>
+        <p> <%= @maker.average_star_rating_service.round(1) %></p>
       </div>
       <div class="progress mt-0">
       <% service_pcnt = @maker.average_star_rating_service * 20 %>
         <div class="progress-bar bg-secondary" role="progressbar" style="width:<%= service_pcnt %>%" aria-valuenow="<%= @maker.average_star_rating_service %>" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
 
-      <div class="d-flex justify-content-between mt-2">
+      <div class="d-flex justify-content-between mt-4">
         <p class="">Product Range</p>
-        <p> <%= @maker.average_star_rating_product_range %></p>
+        <p> <%= @maker.average_star_rating_product_range.round(1) %></p>
       </div>
       <div class="progress mt-0">
       <% service_pcnt = @maker.average_star_rating_product_range * 20 %>
-        <div class="progress-bar bg-secondary" role="progressbar" style="width:<%= service_pcnt %>%" aria-valuenow="<%= @maker.average_star_rating_product_range %>" aria-valuemin="0" aria-valuemax="100"></div>
+        <div class="progress-bar bg-secondary" role="progressbar" style="width:<%= service_pcnt %>%" aria-valuenow="<%= @maker.average_star_rating_product_range.round %>" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
     <%  end %>
   </div>
@@ -139,27 +138,24 @@
       </div>
     </div>
   </div>
-
+  <br>
+  <br>
   <div class="">
     <br>
-    <h3> Reviews </h3>
-
-    <h5>  <strong> What people are saying about <span class="maker-highlight"><%= @maker.name %></span></strong></h5>
+    <h3>What people are saying about <span class="maker-highlight"><%= @maker.name %></span></h3>
     <br>
-    <%if @maker.reviews.any? %>
-
-      <% @maker.reviews.order(created_at: :desc).first(3).each do |review| %>
-        <div class = "review-card border rounded p-3 mb-3">
+    <%if @makers_reviews.any? %>
+      <% @makers_reviews.each do |review| %>
+        <div class = "review-card border mb-3">
           <%= render "shared/star_rating_overall", maker: review.maker%>
-
           <% if review.comment.present?%>
             <p class="review-quote"><em>"<%= review.comment %>" </em></p>
             <% end %>
-
             <p class ="review-footer">- <cite><%= review.user.first_name%></cite></p>
-
         </div>
       <% end %>
+      <div class="d-flex justify-content-center mt-3"><%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %></div>
+       <%# <%== pagy_info(@pagy) %>
     <% else %>
       <p> No reviews yet for this maker.</p>
     <% end %>
@@ -169,8 +165,13 @@
 
   <%# <div class="review_box mb-5"> %>
   <br>
+  <br>
   <h3>How was <%= @maker.name %>?</h3>
   <br>
+    <div class="d-flex justify-content-center mt-0">
+    <%= image_tag "review_icon", class: "illustration" %>
+    </div>
+    <br>
     <% if params[:auto_click] == "true" %>
       <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#addReview" data-controller="auto-click">
         Leave your own review!
@@ -184,7 +185,7 @@
 </div>
 <br>
 <%# </div> %>
-<%# DONT TOUCH !!! %>
+
 <div class="modal fade" id="addReview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
