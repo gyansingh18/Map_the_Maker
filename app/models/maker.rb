@@ -11,7 +11,7 @@ class Maker < ApplicationRecord
   after_create :set_embedding
   after_create :distribute_karma_points
 
-  CATEGORIES = ["meat", "seafood", "vegetables", "fruits", "dairy", "other", "drinks", "grains", "bakery & pastries", "eggs"]
+  CATEGORIES = ["meat", "seafood", "vegetables", "fruit", "dairy", "other", "drinks", "grains", "bakery & pastries", "eggs"]
 
   def average_rating
     if reviews.present?
