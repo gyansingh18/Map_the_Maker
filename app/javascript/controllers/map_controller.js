@@ -4,6 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 import mapboxgl from 'mapbox-gl'
 
 export default class extends Controller {
+  // static targets = [ "instructions" ]
   static values = {
     apiKey: String,
     markers: Array
@@ -14,6 +15,8 @@ export default class extends Controller {
 
   connect() {
     console.log("stimulus map")
+    this.instructions = document.getElementById('instructions');
+    this.instructions.classList.add('d-none');
     mapboxgl.accessToken = this.apiKeyValue
 
     this.map = new mapboxgl.Map({
@@ -144,7 +147,7 @@ export default class extends Controller {
         if (data.routes && data.routes.length > 0) {
           const route = data.routes[0];
           const geo = route.geometry;
-          const instructions = document.getElementById('instructions');
+          // const instructions = document.getElementById('instructions');
           const steps = route.legs[0].steps;
 
           // instructionsDiv.style.display = 'block'; // Show the display block
@@ -154,7 +157,17 @@ export default class extends Controller {
               // tripInstructions += `<li>${step.maneuver.instruction}</li>`;
             // }
 
-            instructions.innerHTML = `<p id="prompt">📍${Math.floor(data.routes[0].duration / 60)} min 🚴 </strong></p>`;
+          const duration = Math.floor(route.duration / 60); // in minutes
+          const distance = (route.distance / 1000).toFixed(1); // in kilometers
+
+          this.instructions.innerHTML = `
+            <div class="trip-summary">
+              <span>🛵 <strong>${duration} min</strong> (${distance} km)</span>
+              <button class="clear-route-button" data-action="click->map#clearRoute">×</button>
+            </div>
+          `;
+          this.instructions.classList.remove('d-none');
+
           console.log("Route received from Mapbox API:", geo);
           this.#addRouteToMap(geo);
         } else {
@@ -199,13 +212,43 @@ export default class extends Controller {
       }
     });
 
+    // Add starting point to the map
+    if (this.map.getLayer('start')) {
+      this.map.removeLayer('start');
+      this.map.removeSource('start');
+    }
+
+    this.map.addSource('start', {
+      type: 'geojson',
+      data: {
+        type: 'Feature',
+        geometry: {
+          type: 'Point',
+          // Get the first coordinate from the route, which is the start
+          coordinates: route.coordinates[0]
+        }
+      }
+    });
+
+    this.map.addLayer({
+      id: 'start',
+      type: 'circle',
+      source: 'start',
+      paint: {
+        'circle-radius': 7,
+        'circle-color': '#3887be', // A clear blue for the start point
+        'circle-stroke-width': 2,
+        'circle-stroke-color': '#ffffff' // White outline for visibility
+      }
+    });
+
      // Optional: Fit the map to the route's bounds
     const coordinates = route.coordinates;
     const bounds = new mapboxgl.LngLatBounds();
     for (const coord of coordinates) {
       bounds.extend(coord);
     }
-    this.map.fitBounds(bounds, { padding: 250 });
+    this.map.fitBounds(bounds, { padding: 75 });
   }
 
   // clearRoute() { // ADD THIS ENTIRE METHOD
@@ -245,6 +288,29 @@ export default class extends Controller {
     const bounds = new mapboxgl.LngLatBounds()
     this.markersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
+  }
+
+   clearRoute() {
+    // Hide the instructions panel by clearing its content
+    const instructionsDiv = document.getElementById('instructions');
+    instructionsDiv.innerHTML = '';
+    this.instructions.classList.add('d-none'); // Add this line
+
+
+    // Remove the route line from the map
+    if (this.map.getSource('route')) {
+      this.map.removeLayer('route');
+      this.map.removeSource('route');
+    }
+
+    // Remove the start marker from the map
+    if (this.map.getLayer('start')) {
+        this.map.removeLayer('start');
+        this.map.removeSource('start');
+    }
+
+    // Optional: Fit map back to all markers
+    this.#fitMapToMarkers();
   }
 
 }
