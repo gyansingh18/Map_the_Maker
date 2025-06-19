@@ -21,21 +21,29 @@
       <div class = "full-card">
 
         <div class = "hearts">
-          <% if user_signed_in? %>
+         <% if user_signed_in? %>
+          <div data-controller="favorite" data-favorite-favorited-value="<%= current_user.favorited?(maker) %>">
             <% if current_user.favorited?(maker) %>
-              <%= link_to  unfavorite_maker_path(maker), class: "big-heart", data: {turbo_method: :post} do %>
-                <i class="fa-solid fa-heart fa-2xl" style="color: #d01111;"></i>
-              <% end %>
-            <% else %>
-              <%= link_to  favorite_maker_path(maker),  class: "big-heart", data: {turbo_method: :post} do %>
-                <i class="fa-solid fa-heart fa-2xl" style="color: #d6d6d6;"></i>
-              <% end %>
+              <%= link_to unfavorite_maker_path(maker),class: "big-heart",
+                  data: { turbo_method: :post, action: "click->favorite#toggle" } do %>
+                  <i class="fa-solid fa-heart fa-2xl" style="color: #d01111;" data-favorite-target="icon"></i>
             <% end %>
           <% else %>
-            <%= link_to new_user_session_path,  class: "big-heart", data: {turbo_method: :post} do %>
-              <i class="fa-solid fa-heart fa-2xl" style="color: #d6d6d6;"></i>
-            <% end %>
+             <%= link_to favorite_maker_path(maker),
+                class: "big-heart",
+                data: { turbo_method: :post, action: "click->favorite#toggle" } do %>
+                  <i class="fa-solid fa-heart fa-2xl" style="color: #555555;" data-favorite-target="icon"></i>
           <% end %>
+          <% end %>
+        </div>
+        <% else %>
+            <%= link_to new_user_session_path,
+              class: "big-heart",
+              data: { turbo_method: :post } do %>
+          <i class="fa-regular fa-heart fa-2xl" style="color: #d6d6d6;"></i>
+          <% end %>
+        <% end %>
+
         </div>
 
         <%= link_to maker_path(maker)  do %>
