@@ -19,7 +19,7 @@ class ReviewsController < ApplicationController
           ReviewProduct.create(product: @product, review: @review)
         end
       end
-      current_user.add_karma_points(:review_submitted, source: @review)
+      # current_user.add_karma_points(:review_submitted, source: @review)
       redirect_to maker_path(@maker)
     else
       render :new, status: :unprocessable_entity

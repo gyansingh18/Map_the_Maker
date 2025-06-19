@@ -32,5 +32,8 @@ class KarmaController < ApplicationController
     # --- Leaderboard logic ---
     @top_users = User.order(karma_points: :desc).limit(10)
     @user_rank = User.where('karma_points > ?', @user_karma_points).count + 1
+
+    # --- Pagy logic ---
+    @pagy, @karma_transactions = pagy(@user.karma_transactions.order(created_at: :desc), items: 5)
   end
 end

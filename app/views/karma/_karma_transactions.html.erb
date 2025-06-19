@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody>
-          <% user.karma_transactions.order(created_at: :desc).each do |transaction| %>
+          <% @karma_transactions.each do |transaction| %>
             <tr>
               <td>
                 <strong><%= transaction.user.first_name %></strong>
@@ -23,6 +23,8 @@
           <% end %>
         </tbody>
       </table>
+      <div class="d-flex justify-content-center mt-3"><%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %></div>
+      <%== pagy_info(@pagy) %>
     <% else %>
       <p class="no-transactions-message">No transactions recorded yet. Start contributing to earn Karma!</p>
     <% end %>
