@@ -67,37 +67,19 @@
                 </div>
               </div>
               <div data-wizard-target="step" class="d-none step-form">
-                <%= f.input :accuracy_rating, collection: (1..5).to_a, label: "Did the profile match what you experienced?", input_html: {data: {controller: "star-rating"}} %>
-                <div class="mt-4 d-flex justify-content-around">
-                    <%= button_tag "Previous", type: "button",
-                      data: {
-                        action: "click->wizard#goToPrevious",
-                        previous_step: "4"
-                      },
-                      class: "button-secondary review-btn" %>
-
-                    <%= button_tag "Next", type: "button",
-                      data: {
-                        action: "click->wizard#goToNext",
-                        next_step: "5"
-                      },
-                      class: "button-primary review-btn" %>
-                </div>
-              </div>
-              <div data-wizard-target="step" class="d-none step-form">
                 <%= f.input :products, label: "What product did you buy?", collection: @products, input_html: {multiple: true, data: {controller: "tom-select", tom_select_options_value: {tags: true}}}, value_method: :name %>
                 <div class="mt-4 d-flex justify-content-around">
                       <%= button_tag "Previous", type: "button",
                         data: {
                           action: "click->wizard#goToPrevious",
-                          previous_step: "5"
+                          previous_step: "4"
                         },
                         class: "button-secondary review-btn" %>
 
                       <%= button_tag "Next", type: "button",
                         data: {
                           action: "click->wizard#goToNext",
-                          next_step: "6"
+                          next_step: "5"
                         },
                         class: "button-primary review-btn" %>
                 </div>
@@ -108,7 +90,7 @@
                       <%= button_tag "Previous", type: "button",
                         data: {
                           action: "click->wizard#goToPrevious",
-                          previous_step: "6"
+                          previous_step: "5"
                         },
                         class: "button-secondary review-btn" %>
                   <%= f.submit "Publish", class:"button-primary review-btn" %>

@@ -1,5 +1,5 @@
 <div>
-  <div class ="container sign-up">
+  <div class ="container py-3">
     <h2 class ="heading1">Add a Maker</h2>
     <%= simple_form_for @maker do |f| %>
       <%= f.input :name %>
@@ -25,5 +25,6 @@
       <%= f.input :photos, local: true ,as: :file, input_html: { multiple: true ,required: true } %>
       <%= f.button :submit, "Save", class: "button-primary"%>
     <% end %>
+    <br>
   </div>
 </div>

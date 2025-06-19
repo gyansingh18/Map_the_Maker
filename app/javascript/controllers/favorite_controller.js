@@ -5,7 +5,7 @@ export default class extends Controller {
   static values = { favorited: Boolean }
 
   toggle(event) {
-    event.preventDefault();
+
 
     const icon = this.iconTarget;
 
