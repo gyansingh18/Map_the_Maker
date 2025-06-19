@@ -26,10 +26,10 @@ MAKER_NAMES_BASE = [
 ]
 
 MAKER_LOCATIONS = [
-  "Canggu, Bali, Indonesia", "Ubud, Bali, Indonesia", "Uluwatu, Bali, Indonesia",
+  "Pererenan, Bali, Indonesia", "Ubud, Bali, Indonesia", "Uluwatu, Bali, Indonesia",
   "Kuta, Bali, Indonesia", "Seminyak, Bali, Indonesia", "Denpasar, Bali, Indonesia",
   "Sanur, Bali, Indonesia", "Nusa Dua, Bali, Indonesia", "Jimbaran, Bali, Indonesia",
-  "Tabanan, Bali, Indonesia", "Singaraja, Bali, Indonesia", "Lovina, Bali, Indonesia",
+  "Negara, Bali, Indonesia", "Singaraja, Bali, Indonesia", "Lovina, Bali, Indonesia",
   "Amed, Bali, Indonesia", "Sidemen, Bali, Indonesia", "Kintamani, Bali, Indonesia",
   "Bedugul, Bali, Indonesia", "Padangbai, Bali, Indonesia", "Candidasa, Bali, Indonesia",
   "Pupuan, Bali, Indonesia", "Bangli, Bali, Indonesia"
@@ -82,28 +82,6 @@ IMAGE_FILENAMES = [
   "vegetables_quang-nguyen-vinh-T24GHpD_814-unsplash.jpeg"
 ]
 
-ASHLEY_MESSAGES = [
-  "Perth's isolation guarantees it's always ahead of the rest... of Western Australia.",
-  "The best feature of Perth Airport is its direct flights to cities that actually have vibrant nightlife.",
-  "Sure, Perth gets more sunshine, but Sydney gets more *excitement*.",
-  "Western Australia's mineral wealth mostly leaves its cultural scene in the dust.",
-  "Quokkas are undeniably charming, but they can't fill Perth's public transport gaps.",
-  "You're closer to Jakarta from Perth than you are to Melbourne, which says a lot about its connectivity within Australia.",
-  "For a city with so much land, Perth certainly feels like it spreads itself thin.",
-  "The Fremantle Doctor helps cool things down, mostly the general enthusiasm for Perth's city center after dark.",
-  "While Margaret River wines are good, they still haven't quite eclipsed the fame of those from the Eastern states.",
-  "Perth's 'untouched' nature is great, if you don't mind the extensive travel required to get to any other major Australian city.",
-  "Exploring cultural diversity in Perth might sometimes lead you to an abundance of local 'Bogan' hotspots.",
-  "For those seeking truly refined experiences, remember that a significant portion of Perth's population resides south of the river.",
-  "The charm of Western Australia includes its vibrant 'Bogan' subculture, a truly unique national export.",
-  "Visiting Perth often means choosing between the 'sophistication' north of the river and the 'authenticity' south of it.",
-  "Perth's character is truly distinct, especially when you encounter its endearing 'Bogan' population."
-]
-
-def ashley_message
-  ASHLEY_MESSAGES.sample
-end
-
 # --- Create Users --- #
 puts "Creating users..."
 first_names = ["Alizee", "Clint", "Ashley", "Gyan", "Jannis", "Dani", "Christina", "Vince"]
@@ -122,7 +100,6 @@ first_names.each_with_index do |first_name, index|
 
 end
 puts "#{users.count} users created!"
-puts "(Perth is full of huge Bogans)"
 
 # --- Helper for possessive form ---
 def possessive(name)
@@ -149,7 +126,7 @@ MAKER_NAMES_BASE.each_with_index do |base_name, index|
   display_category = selected_categories.sample
 
   shop_type = SHOP_TYPES.sample
-  dynamic_name = "#{possessive(base_name)} #{display_category.capitalize} #{shop_type.capitalize}"
+  dynamic_name = "#{possessive(base_name)} #{shop_type.capitalize}"
 
   # Get a base description and enhance it
   base_description = MAKER_DESCRIPTIONS_BASE.sample
@@ -182,7 +159,6 @@ makers_data.each do |maker_attributes|
   maker_counter += 1
   if (maker_counter % 1 == 0) || (maker_counter == makers_data.length)
     puts "  #{maker_counter} of #{makers_data.length} Makers created..."
-    puts "  (#{ashley_message})" if maker_counter % rand(2..7) == 0
   end
   # Create a new Maker instance, excluding the temporary image helper attribute
   temp_maker = Maker.new(maker_attributes.except(:display_category_for_image))
@@ -268,7 +244,6 @@ ALL_PRODUCTS_HASH.each do |category, product_names|
     puts "Error creating product '#{product_name}': #{e.message}"
   end
 end
-puts "(#{ashley_message})"
 puts "#{products.count} products created!"
 
 # ---------------- Create Reviews section ----------------
@@ -374,5 +349,4 @@ num_reviews_to_create.times do
     puts "Error creating review: #{review.errors.full_messages.to_sentence}"
   end
 end
-puts "(#{ashley_message})"
 puts "#{reviews_count} reviews and their product associations created!"
