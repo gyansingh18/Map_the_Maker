@@ -34,8 +34,20 @@
 
   <div class="show-maker-card">
     <div class="card-image-wrapper">
-      <%= cl_image_tag @maker.photos[0].key, class: "card-image-top" %>
+          <% if @maker.photos.attached? %>
+            <%= cl_image_tag @maker.photos[0].key, class: "card-image-top" %>
+          <% else %>
+            <%= image_tag "default-maker-placeholder.png", class: "card-image-top" %>
+          <% end %>
     </div>
+  </div>
+
+
+
+
+
+
+
 
     <div class="top-box d-flex justify-content-between align-items-center">
       <div class="name-box">

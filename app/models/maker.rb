@@ -9,6 +9,7 @@ class Maker < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_location?
   has_neighbors :embedding
   after_create :set_embedding
+  after_create :distribute_karma_points
 
   CATEGORIES = ["meat", "seafood", "vegetables", "fruits", "dairy", "other", "drinks", "grains", "bakery & pastries", "eggs"]
 
@@ -73,5 +74,9 @@ class Maker < ApplicationRecord
     embedding = response['data'][0]['embedding']
     update(embedding: embedding)
 
+  end
+
+  def distribute_karma_points
+    user.add_karma_points(:maker_added, source: self)
   end
 end
