@@ -48,9 +48,12 @@
 
         <%= link_to maker_path(maker)  do %>
           <div class="index-maker-card">
-            <% if maker.photos.any? %>
+             <% if maker.photos.attached? %>
               <%= cl_image_tag maker.photos[0].key, class: "index-maker-card-photo" %>
+            <% else %>
+              <%= image_tag "default-maker-placeholder.png", class: "index-maker-card-photo" %>
             <% end %>
+
             <div class="top-box">
               <p class="h3 mb-0"><%= maker.name %></p>
             </div>
