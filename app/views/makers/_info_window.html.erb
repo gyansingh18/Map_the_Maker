@@ -15,7 +15,7 @@
         <p><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
         <p class="iw-stars">
           <% if maker.reviews.present? %>
-            <i class="fas fa-star"></i> <%= maker.average_rating %> (<%= maker.reviews.count %> reviews)
+            <i class="fas fa-star"></i> <%= maker.average_rating.round(1) %> (<%= maker.reviews.count %> reviews)
           <% end %>
         </p>
         <div class="iw-tags">
