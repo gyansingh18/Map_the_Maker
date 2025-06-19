@@ -191,6 +191,7 @@
   /* ... (rest of your producer-card styles) ... */
 }
 
+
 .producer-card:hover {
   transform: translateY(-5px); /* Lift card slightly on hover */
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
@@ -218,6 +219,7 @@
   margin-top: 0;
   margin-bottom: 8px;
   color: #333;
+  text-align: start;
 }
 
 .producer-card-location,
@@ -230,19 +232,37 @@
   align-items: center;
 }
 
+.home-category-tag {
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  background-color: $primary-color ;
+  opacity: 1.0;
+  color: $background-color;
+  padding: 5px 7px 5px 7px;
+  margin-right: 10px;
+  text-transform: capitalize;
+}
+
+
 .producer-card-location i {
   margin-right: 5px;
   color: $secondary-color;
 }
 .producer-card-rating i {
   margin-right: 5px;
-  color: #FFD700; /* Gold for map marker and stars */
+  color: $primary-color; /* Gold for map marker and stars */
 }
 
 .producer-placeholder {
   font-style: italic;
   color: #888;
   padding: 20px;
+}
+
+.producer-card-categories {
+  display: flex;
+  row-gap: 9px;
+  flex-wrap: wrap;
 }
 
 
@@ -295,7 +315,7 @@
 
 .how-it-works-section {
   padding: 40px 20px;
-  background-color: $background-color;
+  background-color: #f0f0f0;
   text-align: center;
 }
 
@@ -337,6 +357,20 @@
   align-items: center;
 }
 
+.step-item h3 {
+  font-size: 1.6em;
+  color: $primary-color;
+  margin-bottom: 10px;
+}
+
+.step-item p {
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+
+
+
+
 .step-item .step-icon {
   position: relative; /* For positioning the number */
   width: 70px; /* Size of the circle */
@@ -347,6 +381,11 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
+}
+
+.step-icon .fa-puzzle-piece{
+  position:relative;
+  left:3px;
 }
 
 .step-item .step-icon i {
@@ -371,16 +410,6 @@
   border: 2px solid white;
 }
 
-.step-item h3 {
-  font-size: 1.3em;
-  color: $primary-color;
-  margin-bottom: 10px;
-}
-
-.step-item p {
-  font-size: 1em;
-  line-height: 1.5;
-}
 
 /* ------------ join_community_section ------------ */
 
@@ -599,7 +628,7 @@
 
 .category-stars .fas,
 .category-stars .far {
-  color: #FFD700;
+  color: blue;
 }
 
 /* ------------ call_to_action_section ------------ */
