@@ -35,6 +35,7 @@ class MakersController < ApplicationController
         marker_html: render_to_string(partial: "marker", locals: {maker: maker})
       }
     end
+    @pagy, @makers_reviews = pagy(@maker.reviews.order(created_at: :desc), items: 3)
   end
 
   def new

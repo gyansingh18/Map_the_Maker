@@ -1,164 +1,165 @@
-<div class="container p-3 mb-5">
-  <div class="secondary_header_maker_show d-flex justify-content-between align-items-center mb-3">
+<div class="container p-3">
+  <div class="secondary_header_maker_show d-flex justify-content-between align-items-center my-3 p-0">
   <!-- Maker Name -->
-  <div class="maker-name">
-    <h2 class="mb-0"><%= @maker.name %></h2>
-  </div>
+    <div class="maker-name">
+      <h2 class="mb-0"><%= @maker.name %></h2>
+    </div>
 
-  <!-- Heart and Share -->
-  <div class="header-icons d-flex align-items-center">
-    <!-- Heart -->
-    <% if user_signed_in? %>
-      <% if current_user.favorited?(@maker) %>
-        <%= link_to unfavorite_maker_path(@maker), data: { turbo_method: :post }, class: "ms-3" do %>
-          <i class="fa-solid fa-heart fa-xl" style="color: #d01111;"></i>
+    <!-- Heart and Share -->
+    <div class="header-icons d-flex align-items-center mb-0">
+      <!-- Heart -->
+      <% if user_signed_in? %>
+        <% if current_user.favorited?(@maker) %>
+          <%= link_to unfavorite_maker_path(@maker), data: { turbo_method: :post }, class: "ms-3" do %>
+            <i class="fa-solid fa-heart fa-xl" style="color: #d01111;"></i>
+          <% end %>
+        <% else %>
+          <%= link_to favorite_maker_path(@maker), data: { turbo_method: :post }, class: "ms-3" do %>
+            <i class="fa-solid fa-heart fa-xl" style="color: #d6d6d6;"></i>
+          <% end %>
         <% end %>
       <% else %>
-        <%= link_to favorite_maker_path(@maker), data: { turbo_method: :post }, class: "ms-3" do %>
+        <%= link_to new_user_session_path, class: "ms-3" do %>
           <i class="fa-solid fa-heart fa-xl" style="color: #d6d6d6;"></i>
         <% end %>
       <% end %>
-    <% else %>
-      <%= link_to new_user_session_path, class: "ms-3" do %>
-        <i class="fa-solid fa-heart fa-xl" style="color: #d6d6d6;"></i>
-      <% end %>
-    <% end %>
 
-    <!-- Share -->
-    <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="ms-3">
-      <i class="fa-solid fa-link fa-xl" style="color: #6c757d;"></i>
-    </a>
+      <!-- Share -->
+      <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="ms-3">
+        <i class="fa-solid fa-share-from-square" style="color: #2D4E34;"></i>
+      </a>
+    </div>
   </div>
 </div>
 
+<div>
+  <% if @maker.photos.attached? %>
+    <%= cl_image_tag @maker.photos[0].key, class: "maker-image" %>
+  <% else %>
+    <%= image_tag "default-maker-placeholder.png", class: "maker-image" %>
+  <% end %>
+</div>
 
+<div class="container p-3">
   <div class="show-maker-card">
-    <div class="card-image-wrapper">
-          <% if @maker.photos.attached? %>
-            <%= cl_image_tag @maker.photos[0].key, class: "card-image-top" %>
-          <% else %>
-            <%= image_tag "default-maker-placeholder.png", class: "card-image-top" %>
-          <% end %>
-    </div>
-  </div>
-
-
-
-
-
-
-
-
-    <div class="top-box d-flex justify-content-between align-items-center">
-      <div class="name-box">
-        <p class="h4 mb-1"><%= @maker.name %></p>
-        </div>
-      </div>
-
-    <div class="middle-box d-flex justify-content-between align-items-center">
-      <p class="mb-0 location-text"><%= @maker.location %> </p>
+    <div class="middle-box d-flex justify-content-between align-items-center mb-2">
+      <p class="p-0 mb-0 location-text"><i class="fa-solid fa-location-dot" style="color: #2D4E34;"></i> <%= @maker.location %> </p>
       <div class ="rating-box d-flex align-items-center">
         <% if @maker.reviews.any? %>
           <%= render "shared/star_rating_overall", maker: @maker %>
         <% end %>
-        <span class ="ms-1"><%=@maker.average_rating%></span>
+        <span class ="average-rating ms-1"><%=@maker.average_rating.round(1)%></span>
       </div>
     </div>
-
-    <div class="bottom-box">
-      <% @maker.categories.each do |category| %>
+    <div class="bottom-box p-2 px-0">
+      <% categories = @maker.categories %>
+      <% categories.delete("") %>
+      <% categories.each do |category| %>
         <span class="show-category-tag"><%= category.capitalize %></span>
       <% end %>
     </div>
   </div>
+  <div>
+    <p class="maker-description"><%= @maker.description %></p>
+  </div>
+</div>
 
-  <div class="mapbox-maker mt-4">
-    <div class="mapbox-container"
-        data-controller="map"
-        data-map-markers-value="<%= @markers.to_json %>"
-        data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-
+<div class="mapbox-maker mt-0">
+  <div class="mapbox-container mt-0"
+      data-controller="map"
+      data-map-markers-value="<%= @markers.to_json %>"
+      data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+  </div>
+</div>
     <%# <%= render "search_bar", search_path: map_makers_path %>
 
-    <div class="fixed-bottom float-body d-flex justify-content-around align-items-center">
-      <%= link_to new_maker_path, class: "btn button-add" do %>
-        <i class="fa-solid fa-plus"></i> Add
-      <% end %>
-      <%= link_to makers_path, class: "btn button-map" do %>
-        <i class="fa-solid fa-list"></i> List
-      <% end %>
-    </div>
-  </div>
-
+<div class="container p-3 mb-5">
+<button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Share this profile
+</button>
+  <br>
+  <br>
   <br>
   <div class="master_review_class">
     <% if @maker.reviews.any? %>
-      <h4>  <strong> Ratings </strong> </h4>
-      <h4><span class = "review-overall-stars"> <strong><%= render "shared/star_rating_overall", maker: @maker %></strong><span></h4></p>
-      <br>
-      <p> Freshness  <%= render "shared/star_rating_freshness", maker: @maker %> <%= @maker.average_star_rating_freshness %></p>
-      <p> Service  <%= render "shared/star_rating_service", maker: @maker %> <%=@maker.average_star_rating_service %></p>
-      <p> Product Range  <%= render "shared/star_rating_product_range", maker: @maker %><%=@maker.average_star_rating_product_range %></p>
-      <p> Accuracy <%= render "shared/star_rating_accuracy", maker: @maker %> <%=@maker.average_star_rating_accuracy%></p>
+      <div class="d-flex align-items-center">
+        <h3>Rating</h3>
+        <h4><span class="review-overall-stars"> <strong><%= render "shared/star_rating_overall", maker: @maker %></strong><span></h4>
+      </div>
+      <div class="d-flex justify-content-between mt-3">
+        <p class="">Freshness</p>
+        <p> <%= @maker.average_star_rating_freshness.round(1) %></p>
+      </div>
+      <div class="progress mt-0">
+      <% freshness_pcnt = @maker.average_star_rating_freshness * 20 %>
+        <div class="progress-bar bg-secondary" role="progressbar" style="width:<%= freshness_pcnt %>%" aria-valuenow="<%= @maker.average_star_rating_freshness %>" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+
+      <div class="d-flex justify-content-between mt-4">
+        <p class="">Service</p>
+        <p> <%= @maker.average_star_rating_service.round(1) %></p>
+      </div>
+      <div class="progress mt-0">
+      <% service_pcnt = @maker.average_star_rating_service * 20 %>
+        <div class="progress-bar bg-secondary" role="progressbar" style="width:<%= service_pcnt %>%" aria-valuenow="<%= @maker.average_star_rating_service %>" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
+
+      <div class="d-flex justify-content-between mt-4">
+        <p class="">Product Range</p>
+        <p> <%= @maker.average_star_rating_product_range.round(1) %></p>
+      </div>
+      <div class="progress mt-0">
+      <% service_pcnt = @maker.average_star_rating_product_range * 20 %>
+        <div class="progress-bar bg-secondary" role="progressbar" style="width:<%= service_pcnt %>%" aria-valuenow="<%= @maker.average_star_rating_product_range.round %>" aria-valuemin="0" aria-valuemax="100"></div>
+      </div>
     <%  end %>
   </div>
 
   <br>
   <!-- Button trigger modal -->
-  <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Share
-  </button>
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-header border-none">
-          <h2 class="modal-title" id="exampleModalLabel">Share...</h2>
+          <h3 class="modal-title" id="exampleModalLabel">Share...</h3>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-
-        <div class="modal-footer">
-
-        <a  href="https://wa.me/?text=<%= ERB::Util.url_encode(request.original_url)%>" target="_blank"><i class="fa-brands fa-whatsapp fa-5x" style="color: #25D366;"></i> </a>
-      <a  href="https://twitter.com/intent/tweet?url=<%= ERB::Util.url_encode(request.original_url) %>" target="_blank"><i class="fa-brands fa-x-twitter fa-5x" style="color: #1DA1F2;"></i> </a>
-      <a  href="https://www.facebook.com/sharer/sharer.php?u=<%= ERB::Util.url_encode(request.original_url) %>" target="_blank"><i class="fa-brands fa-facebook fa-5x" style="color: #1877F2;"> </i></a>
-        <a href = "#"  onclick ="copyLink()"><i class="fa-solid fa-link fa-5x" style="color: #6c757d;"></i> </a>
-      <script>
-        function copyLink(){
-          const url = window.location.href;
-          navigator.clipboard.writeText(url)
-          alert("Link copied!")
-        }
+        <div class="modal-footer justify-content-around">
+          <a  href="https://wa.me/?text=<%= ERB::Util.url_encode(request.original_url)%>" target="_blank"><i class="fa-brands fa-whatsapp fa-3x" style="color: #25D366;"></i> </a>
+          <a  href="https://twitter.com/intent/tweet?url=<%= ERB::Util.url_encode(request.original_url) %>" target="_blank"><i class="fa-brands fa-x-twitter fa-3x" style="color: #1DA1F2;"></i> </a>
+          <a  href="https://www.facebook.com/sharer/sharer.php?u=<%= ERB::Util.url_encode(request.original_url) %>" target="_blank"><i class="fa-brands fa-facebook fa-3x" style="color: #1877F2;"> </i></a>
+          <a href = "#"  onclick ="copyLink()"><i class="fa-solid fa-link fa-3x" style="color: #6c757d;"></i> </a>
+        <script>
+          function copyLink(){
+            const url = window.location.href;
+            navigator.clipboard.writeText(url)
+            alert("Link copied!")
+          }
         </script>
         </div>
       </div>
     </div>
   </div>
-
   <br>
-
-
+  <br>
   <div class="">
     <br>
-    <h3> Reviews </h3>
-
-    <h5>  <strong> What people are saying about <span class="maker-highlight"><%= @maker.name %></span></strong></h5>
+    <h3>What people are saying about <span class="maker-highlight"><%= @maker.name %></span></h3>
     <br>
-    <%if @maker.reviews.any? %>
-
-      <% @maker.reviews.each do |review| %>
-        <div class = "review-card border rounded p-3 mb-3">
+    <%if @makers_reviews.any? %>
+      <% @makers_reviews.each do |review| %>
+        <div class = "review-card border mb-3">
           <%= render "shared/star_rating_overall", maker: review.maker%>
-
           <% if review.comment.present?%>
             <p class="review-quote"><em>"<%= review.comment %>" </em></p>
             <% end %>
-
             <p class ="review-footer">- <cite><%= review.user.first_name%></cite></p>
-
         </div>
       <% end %>
+      <div class="d-flex justify-content-center mt-3"><%== pagy_bootstrap_nav(@pagy) if @pagy.pages > 1 %></div>
+       <%# <%== pagy_info(@pagy) %>
     <% else %>
       <p> No reviews yet for this maker.</p>
     <% end %>
@@ -168,22 +169,27 @@
 
   <%# <div class="review_box mb-5"> %>
   <br>
-  <h2>Add a review!</h2>
+  <br>
+  <h3>How was <%= @maker.name %>?</h3>
+  <br>
+    <div class="d-flex justify-content-center mt-0">
+    <%= image_tag "review_icon", class: "illustration" %>
+    </div>
+    <br>
     <% if params[:auto_click] == "true" %>
       <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#addReview" data-controller="auto-click">
-        Submit
+        Leave your own review!
       </button>
     <% else %>
       <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#addReview">
-        Submit
+        Leave your own review!
       </button>
     <% end %>
   <%# <%= link_to "Submit", new_maker_review_path(@maker), class:"button-primary" %>
 </div>
-
-
+<br>
 <%# </div> %>
-<%# DONT TOUCH !!! %>
+
 <div class="modal fade" id="addReview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
