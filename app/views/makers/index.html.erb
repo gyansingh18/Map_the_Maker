@@ -47,7 +47,13 @@
               <p class="h3 mb-0"><%= maker.name %></p>
             </div>
             <div class="middle-box d-flex justify-content-between align-items-center ">
-              <p class="mb-0"><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
+              <div class="location-box">
+                <% location = maker.location %>
+                <% if location.length >= 25 %>
+                  <% location = location[0..25] + "..." %>
+                <% end %>
+                <p class="mb-0"><i class="fas fa-map-marker-alt"></i> <%= location %></p>
+              </div>
               <div class="star-box d-flex justify-content-end align-items-center">
                 <% if maker.reviews.any? %>
                   <%= render "shared/star_rating_overall", maker: maker %> &nbsp <%= maker.average_rating %>
@@ -55,7 +61,9 @@
               </div>
             </div>
             <div class="bottom-box-index">
-              <% maker.categories.each do |category| %>
+              <% categories = maker.categories %>
+              <% categories.delete("") %>
+              <% categories.each do |category| %>
                 <span class="category-tag-index"><%= category %></span>
               <% end %>
             </div>
