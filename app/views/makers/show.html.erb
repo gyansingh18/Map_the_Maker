@@ -1,12 +1,12 @@
 <div class="container p-3 mb-5">
-  <div class="secondary_header_maker_show d-flex justify-content-between align-items-center mb-3">
+  <div class="secondary_header_maker_show d-flex justify-content-between align-items-center mb-2 p-0">
   <!-- Maker Name -->
   <div class="maker-name">
     <h2 class="mb-0"><%= @maker.name %></h2>
   </div>
 
   <!-- Heart and Share -->
-  <div class="header-icons d-flex align-items-center">
+  <div class="header-icons d-flex align-items-center mb-0">
     <!-- Heart -->
     <% if user_signed_in? %>
       <% if current_user.favorited?(@maker) %>
@@ -37,22 +37,26 @@
       <%= cl_image_tag @maker.photos[0].key, class: "card-image-top mb-3" %>
     </div>
 
-    <div class="middle-box d-flex justify-content-between align-items-center px-2">
-      <p class="mb-0 location-text"><%= @maker.location %> </p>
+    <div class="middle-box d-flex justify-content-between align-items-center mb-2">
+      <p class="p-0 mb-0 location-text"><i class="fa-solid fa-location-dot" style="color: #2D4E34;"></i> <%= @maker.location %> </p>
       <div class ="rating-box d-flex align-items-center">
         <% if @maker.reviews.any? %>
           <%= render "shared/star_rating_overall", maker: @maker %>
         <% end %>
-        <span class ="ms-1"><%=@maker.average_rating%></span>
+        <span class ="average-rating ms-1"><%=@maker.average_rating%></span>
       </div>
     </div>
-    <div class="bottom-box px-2">
+    <div class="bottom-box p-2 px-0">
       <% categories = @maker.categories %>
       <% categories.delete("") %>
       <% categories.each do |category| %>
         <span class="show-category-tag"><%= category.capitalize %></span>
       <% end %>
     </div>
+  </div>
+  <div>
+    <h4 class="mb-2 p-0">Description:</h4>
+    <p class="maker-description"><%= @maker.description %></p>
   </div>
 
   <div class="mapbox-maker mt-4">
@@ -63,15 +67,7 @@
 
     <%# <%= render "search_bar", search_path: map_makers_path %>
 
-    <div class="fixed-bottom float-body d-flex justify-content-around align-items-center">
-      <%= link_to new_maker_path, class: "btn button-add" do %>
-        <i class="fa-solid fa-plus"></i> Add
-      <% end %>
-      <%= link_to makers_path, class: "btn button-map" do %>
-        <i class="fa-solid fa-list"></i> List
-      <% end %>
-    </div>
-  </div>
+
 
   <br>
   <div class="master_review_class">
@@ -151,7 +147,7 @@
 
   <%# <div class="review_box mb-5"> %>
   <br>
-  <h2>Add a review!</h2>
+  <h3>Add a review!</h3>
     <% if params[:auto_click] == "true" %>
       <button type="button" class="button-primary" data-bs-toggle="modal" data-bs-target="#addReview" data-controller="auto-click">
         Submit
@@ -163,8 +159,8 @@
     <% end %>
   <%# <%= link_to "Submit", new_maker_review_path(@maker), class:"button-primary" %>
 </div>
-
-
+<br>
+<br>
 <%# </div> %>
 <%# DONT TOUCH !!! %>
 <div class="modal fade" id="addReview" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
