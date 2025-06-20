@@ -1,6 +1,6 @@
 <section class="popular-producers-section">
-  <h2>Popular Producers</h2>
-  <p class="section-description">Explore the most beloved local producers, hand-picked by our community for their quality and dedication.</p>
+  <h2>Popular Makers</h2>
+  <p class="section-description">Explore the most sought-after local producers, hand-picked by our community for their quality and dedication.</p>
   <div class="popular-producers-list">
     <% if @popular_makers.present? %>
       <% @popular_makers.each do |maker| %>
@@ -14,7 +14,11 @@
             <div class="producer-card-info">
               <h3><%= maker.name %></h3>
               <div class="producer-card-details-row"> <%# New container for location and rating %>
-                <p class="producer-card-location"><i class="fas fa-map-marker-alt"></i> <%= maker.location %></p>
+                <% location = maker.location %>
+                  <% if location.length >= 25 %>
+                    <% location = location[0..25] + "..." %>
+                  <% end %>
+                <p class="producer-card-location"><i class="fas fa-map-marker-alt"></i> <%= location %></p>
                 <div class="producer-card-rating"> <%# Changed from <p> to <div> for more flexible styling %>
                   <% if maker.reviews.present? %>
                     <i class="fas fa-star"></i> <%= maker.average_rating %> (<%= maker.reviews.count %> reviews)
@@ -25,8 +29,16 @@
               </div>
               <% if maker.categories.present? %>
                 <div class="producer-card-categories">
-                  <% maker.categories.each do |category| %>
-                    <span class="category-tag-index"><%= category %></span>
+                  <% categories = maker.categories %>
+                  <% categories.delete("") %>
+                  <% categories.each_with_index do |category, index| %>
+                    <% if index <= 1 %>
+                      <span class="category-tag-index"><%= category %></span>
+                    <% elsif index == 2 %>
+                      <span class="category-tag-index"><%= "..." %></span>
+                    <% else %>
+                      <% "do nothing" %>
+                    <% end %>
                   <% end %>
                 </div>
               <% end %>

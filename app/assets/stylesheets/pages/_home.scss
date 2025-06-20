@@ -191,10 +191,6 @@
   /* ... (rest of your producer-card styles) ... */
 }
 
-.producer-card:hover {
-  transform: translateY(-5px); /* Lift card slightly on hover */
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Enhance shadow on hover */
-}
 
 .producer-card a {
   text-decoration: none; /* Remove underline from link */

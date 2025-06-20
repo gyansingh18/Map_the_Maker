@@ -74,8 +74,14 @@
             <div class="bottom-box-index">
               <% categories = maker.categories %>
               <% categories.delete("") %>
-              <% categories.each do |category| %>
-                <span class="category-tag-index"><%= category %></span>
+              <% categories.each_with_index do |category, index| %>
+                <% if index <= 1 %>
+                  <span class="category-tag-index"><%= category %></span>
+                <% elsif index == 2 %>
+                  <span class="category-tag-index"><%= "..." %></span>
+                <% else %>
+                  <% "do nothing" %>
+                <% end %>
               <% end %>
             </div>
           </div>
