@@ -19,7 +19,9 @@
           <% end %>
         </p>
         <div class="iw-tags">
-          <% maker.categories.each_with_index do |category, index| %>
+        <% categories = maker.categories %>
+        <% categories.delete("") %>
+          <% categories.each_with_index do |category, index| %>
             <% if index <= 1 %>
               <span class="category-tag-index"><%= category %></span>
             <% elsif index == 2 %>
