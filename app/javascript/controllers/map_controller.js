@@ -163,7 +163,7 @@ export default class extends Controller {
           this.instructions.innerHTML = `
             <div class="trip-summary">
               <span>🛵 <strong>${duration} min</strong> (${distance} km)</span>
-              <button class="clear-route-button" data-action="click->map#clearRoute">×</button>
+              <button class="clear-route-button" data-action="click->map-reset#close">×</button>
             </div>
           `;
           this.instructions.classList.remove('d-none');

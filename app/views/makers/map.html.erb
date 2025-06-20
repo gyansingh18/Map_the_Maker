@@ -3,7 +3,7 @@
   <%= render "search_bar", search_path: map_makers_path, class: "mapsearch"%>
   <div class="map-transparent"></div>
   <div class="mapbox-container" data-controller="map" data-map-markers-value="<%= @markers.to_json %>" data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
-  <div class="d-none" id="instructions"></div>
+  <div class="d-none" id="instructions" data-controller="map-reset"></div>
 
 </div>
 
