@@ -1,0 +1,34 @@
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="container-fluid">
+
+    <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+      <%= image_tag "logo3.png", class: "me-3"%>
+      <h1 class="mt-2">Map the <span class="highlight bold">Makers</span></h1>
+    <% end %>
+
+
+    <%# <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button> %>
+
+    <%# <div class="collapse navbar-collapse" id="navbarSupportedContent"> %>
+      <ul class="navbar-nav d-flex justify-content-between">
+        <% if user_signed_in? %>
+          <li class="nav-item" style="position: relative;">
+            <a href="#" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= image_tag "user_avatar.png", class: "avatar", alt: "dropdown menu" %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="position: absolute; bottom:0px; left: -137px; height: 80px;">
+              <%= link_to "My Favourites", favorites_users_path, class: "dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %>
+          </li>
+        <% end %>
+      </ul>
+    <%# </div> %>
+  </div>
+</div>

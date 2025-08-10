@@ -1,0 +1,653 @@
+// app/assets/stylesheets/pages/_home.scss
+
+/* ------------ hero_section ------------ */
+
+.hero-section {
+  width: 100%;
+  height: auto;
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: $background-color;
+  text-align: center;
+  padding: 50px;
+}
+
+.hero-content-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: $background-color;
+  text-align: center;
+  padding: 10px;
+  z-index: 2;
+}
+
+.hero-background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  min-width: unset;
+  min-height: unset;
+  transform: unset;
+  z-index: 0;
+}
+
+.hero-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.hero-section h1 {
+  font-size: 3em;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.hero-section p {
+  font-size: 1.2em;
+  margin-bottom: 30px;
+}
+
+.hero-section .button-primary,
+.hero-section .button-secondary {
+  width: 100%;
+  padding: 15px 30px;
+  font-size: 1.1em;
+  border-radius: 8px;
+}
+
+.hero-section .button-primary {
+  margin-right: 10px;
+}
+
+/* ------------ local_discovery_section ------------ */
+
+.local-discovery-section {
+  padding: 20px;
+  background-color: $background-color;
+  text-align: center;
+}
+
+.local-discovery-section .section-headline {
+  color: $font-color;
+  margin-bottom: 20px;
+}
+
+.search-bar-container {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.location-search-input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px 0 0 5px;
+  font-size: 1em;
+  color: $font-color;
+}
+
+.search-button {
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 0 5px 5px 0;
+  cursor: pointer;
+  font-size: 1em;
+}
+
+.search-button i {
+  color: white;
+}
+
+.category-filter-label {
+  color: $font-color;
+  margin-bottom: 15px;
+  font-size: 1.1em;
+}
+
+.category-icons-container {
+  display: flex;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 10px;
+  gap: 15px;
+  justify-content: flex-start;
+}
+
+.category-icon-item {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  min-width: 90px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  color: $font-color;
+}
+
+.category-icon-item i {
+  font-size: 2.2em;
+  color: $secondary-color;
+  margin-bottom: 8px;
+}
+
+.category-icon-item span {
+  font-size: 0.85em;
+  white-space: nowrap;
+}
+
+/* ------------ popular_producers_section.scss ------------ */
+
+.popular-producers-section {
+  padding: 40px 20px; /* Consistent padding with other sections */
+  text-align: center;
+  background-color: #f0f0f0; /* Slightly different background for contrast */
+}
+
+.popular-producers-section h2 {
+  margin-bottom: 30px;
+  color: #333;
+}
+
+.popular-producers-list {
+  display: flex; /* 1. Change to flexbox */
+  flex-direction: row; /* 2. Arrange items in a row */
+  overflow-x: auto; /* 3. Enable horizontal scrolling when content overflows */
+  -webkit-overflow-scrolling: touch; /* 4. Improve scrolling on iOS */
+  gap: 25px;
+  padding-bottom: 20px; /* 5. Add padding for scrollbar visibility */
+  margin-bottom: 30px;
+  justify-content: initial; /* 6. Remove central alignment */
+  align-items: flex-start; /* Align items to the top if they have different heights */
+}
+
+.producer-card {
+  flex-shrink: 0; /* 7. Prevent cards from shrinking */
+  width: 280px; /* 8. Give cards a fixed width to enable scrolling */
+  max-width: none; /* Override previous max-width */
+  /* ... (rest of your producer-card styles) ... */
+}
+
+
+.producer-card a {
+  text-decoration: none; /* Remove underline from link */
+  color: inherit; /* Inherit text color */
+  display: block; /* Make the entire card clickable */
+}
+
+.producer-card-image {
+  width: 100%;
+  height: 180px; /* Fixed height for consistent image size */
+  object-fit: cover; /* Cover the area, cropping if necessary */
+  border-bottom: 1px solid #eee; /* Subtle separation */
+}
+
+.producer-card-info {
+  padding: 15px; /* Padding inside the info area */
+}
+
+.producer-card-info h3 {
+  font-size: 1.4em;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #333;
+  text-align: start;
+}
+
+.producer-card-location,
+.producer-card-categories,
+.producer-card-rating {
+  font-size: 0.95em;
+  color: #666;
+  margin-bottom: 5px;
+  display: flex; /* For aligning icon and text */
+  align-items: center;
+}
+
+.home-category-tag {
+  border: 1px solid $primary-color;
+  border-radius: 5px;
+  background-color: $primary-color ;
+  opacity: 1.0;
+  color: $background-color;
+  padding: 5px 7px 5px 7px;
+  margin-right: 10px;
+  text-transform: capitalize;
+}
+
+.producer-card-location i {
+  margin-right: 5px;
+  color: $secondary-color;
+}
+.producer-card-rating i {
+  margin-right: 5px;
+  color: $primary-color; /* Gold for map marker and stars */
+}
+
+.producer-placeholder {
+  font-style: italic;
+  color: #888;
+  padding: 20px;
+}
+
+.producer-card-categories {
+  display: flex;
+  row-gap: 9px;
+  flex-wrap: wrap;
+}
+
+/* ------------ our_promise_section ------------ */
+
+.our-promise-section {
+  padding: 40px 20px; /* Increased padding for more vertical space */
+  background-color: white; /* White background for contrast with previous section */
+  text-align: center;
+}
+
+.our-promise-section .section-headline {
+  color: $font-color;
+  margin-bottom: 30px; /* More space below headline */
+  font-size: 1.6em; /* Mobile-first sizing */
+}
+
+.pillars-container {
+  display: flex;
+  flex-direction: column; /* Stack pillars vertically on mobile */
+  gap: 25px; /* Space between pillar items */
+}
+
+.pillar-item {
+  background-color: $background-color; /* Use background color for card feel */
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* More prominent shadow for cards */
+  color: $font-color;
+}
+
+.pillar-item i {
+  font-size: 3em; /* Larger icons */
+  color: $primary-color; /* Use primary color for icons */
+  margin-bottom: 15px;
+}
+
+.pillar-item h3 {
+  font-size: 1.3em;
+  color: $secondary-color; /* Secondary color for pillar headlines */
+  margin-bottom: 10px;
+}
+
+.pillar-item p {
+  font-size: 1em;
+  line-height: 1.5;
+}
+
+/* ------------ how_it_works_section ------------ */
+
+.how-it-works-section {
+  padding: 40px 20px;
+  background-color: $background-color;
+  text-align: center;
+}
+
+.video-mockup video {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.how-it-works-section .section-headline {
+  margin-bottom: 30px;
+}
+
+.why-it-matters {
+  text-align: center;
+}
+
+.quote {
+  font-size: 22px;
+  background-color: #f0f0f0;
+  font-style: italic;
+  font-weight: lighter;
+  color:#555;
+}
+
+.steps-container {
+  display: flex;
+  flex-direction: column; /* Stack vertically on mobile */
+  gap: 25px; /* Space between step items */
+}
+
+.step-item {
+  background-color: $background-color;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Consistent card shadow */
+  color: $font-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.step-item h3 {
+  font-size: 1.6em;
+  color: $primary-color;
+  margin-bottom: 10px;
+}
+
+.step-item p {
+  font-size: 1.1em;
+  line-height: 1.5;
+}
+
+.step-item .step-icon {
+  position: relative; /* For positioning the number */
+  width: 70px; /* Size of the circle */
+  height: 70px;
+  border-radius: 50%;
+  background-color: $secondary-color; /* Background color of the icon circle */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.step-item .step-icon i {
+  font-size: 2.8em;
+  color: white;
+}
+
+.step-icon .fa-puzzle-piece{
+  position:relative;
+  left:3px;
+}
+
+.step-item .step-icon .step-number {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  background-color: $primary-color;
+  color: white;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.9em;
+  font-weight: bold;
+  border: 2px solid white;
+}
+
+/* ------------ join_community_section ------------ */
+
+.join-community-section {
+  padding: 40px 20px;
+  background-color: $background-color;
+  text-align: center;
+}
+
+.join-community-section .section-headline {
+  color: $font-color;
+  margin-bottom: 30px;
+  font-size: 1.6em;
+}
+
+.community-paths-container {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.community-path-item {
+  background-color: white;
+  padding: 30px 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  color: $font-color;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.community-path-item i {
+  font-size: 3em;
+  color: $secondary-color;
+  margin-bottom: 15px;
+}
+
+.community-path-item h3 {
+  font-size: 1.3em;
+  color: $primary-color;
+  margin-bottom: 10px;
+}
+
+.community-path-item p {
+  font-size: 1em;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+/* ------------ the_trust_we_build_section ------------ */
+
+.trust-section {
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.section-headline {
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.section-description {
+  font-size: 1em;
+  color: #666;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reviews-container {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  gap: 20px;
+  padding-bottom: 20px;
+  justify-content: initial;
+  align-items: flex-start;
+}
+
+.review-card {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: none;
+}
+
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.review-card-top {
+  display: flex;
+  align-items: flex-start;
+  padding: 20px 20px 15px 20px;
+  border-bottom: 1px solid #eee;
+}
+
+.quote-icon-wrapper {
+  font-size: 1.8em;
+  color: #FFD700;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.quote-text-author {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.review-content {
+  font-size: 1.1em;
+  font-style: italic;
+  color: #333;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  display: block;
+}
+
+.review-author {
+  font-size: 0.95em;
+  font-weight: bold;
+  color: #555;
+  text-align: left;
+  display: block;
+}
+
+.review-card-bottom {
+  padding: 0;
+  flex-grow: 1;
+}
+
+.review-card-bottom a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.review-maker-image {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
+}
+
+.review-maker-info {
+  padding: 15px;
+}
+
+.review-maker-info h3 {
+  font-size: 1.3em;
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.review-maker-details-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.review-maker-location,
+.review-maker-categories {
+  font-size: 0.95em;
+  color: #666;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.review-maker-location i,
+.review-overall-rating i {
+  margin-right: 5px;
+  color: #FFD700;
+}
+
+.review-overall-rating {
+  font-size: 0.95em;
+  font-weight: bold;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.review-category-breakdown {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed #eee;
+}
+
+.review-category-breakdown h4 {
+  font-size: 0.9em;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.category-rating-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+  color: #666;
+}
+
+.category-stars .fas,
+.category-stars .far {
+  color: blue;
+}
+
+/* ------------ call_to_action_section ------------ */
+
+.call-to-action-section {
+  padding: 50px 20px;
+  background-color: $secondary-color;
+  text-align: center;
+  color: white;
+}
+
+.call-to-action-section .section-headline {
+  color: white;
+  margin-bottom: 30px;
+  font-size: 1.8em;
+}
+
+.call-to-action-section .cta-button {
+  width: auto;
+  padding: 15px 30px;
+  font-size: 1.1em;
+  border-radius: 8px;
+}
+
+
+.footer {
+  background-color: $secondary-color;
+  color: $background-color;
+  font-weight: 300;
+  height: 15%;
+  align-content: center;
+  border: none;
+}

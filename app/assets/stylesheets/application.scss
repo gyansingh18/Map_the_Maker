@@ -1,0 +1,56 @@
+// Graphical variables
+@import "config/fonts";
+@import "config/colors";
+@import "config/bootstrap_variables";
+
+// External libraries
+@import "bootstrap";
+@import "font-awesome";
+
+// Your CSS partials
+@import "components/index";
+@import "pages/index";
+@import "pages/makers_new";
+@import "components/map";
+@import url("https://api.mapbox.com/mapbox-gl-js/v3.1.2/mapbox-gl.css");
+@import "pages/karma_dashboard";
+
+h1 {
+  font-size: 42px;
+  font-weight: 650;
+  font-style: bold;
+}
+
+h2 {
+  font-size: 36px;
+  font-weight: 600;
+  font-style: normal;
+}
+
+h3 {
+  font-size: 32px;
+  font-weight: 600;
+  font-style: normal;
+}
+
+p {
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.highlight {
+  color: $primary-color;
+}
+
+
+.gl-star-rating.gl-star-rating--ltr {
+  justify-content: center;
+}
+
+.star-icon-white {
+  opacity: 1.0;
+  color: $background-color;
+  font-size: medium;
+  padding: 0px 2px 0px 0px;
+}

@@ -1,0 +1,84 @@
+.chatbot {
+  background: $background-color;
+  margin-top: 9px;
+  height: calc(100vh - 144px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+
+  h1 {
+    border-bottom: 1px solid $gray-200;
+    margin-bottom: 0;
+    padding: 1rem;
+  }
+
+  #questions {
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    padding: 1rem;
+  }
+
+  .question {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-question, .ai-answer {
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    max-width: 70%;
+    width: fit-content;
+    word-wrap: break-word;
+  }
+
+  .user-question {
+    align-self: flex-end;
+    background: $secondary-color;
+    color: $background-color;
+  }
+
+  .ai-answer {
+    align-self: flex-start;
+    background: $gray-200;
+    color: $font-color;
+  }
+
+  #new_question {
+    border-top: 1px solid $gray-200;
+    padding: 1rem;
+
+    .form-group {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.back-from-chat {
+  margin-left: 1rem;
+}
+
+.chat-top-buttons {
+  padding-top: 10px;
+}
+
+.rec-question {
+  border: 1px solid $font-color;
+  border-radius: 5px;
+  opacity: 1.0;
+  color: $font-color;
+  padding: 5px 7px 5px 7px;
+  margin-left: 16px;
+}
+
+.rec-question-1 {
+  position: fixed;
+  bottom: 244px;
+}
+
+.rec-question-2 {
+  position: fixed;
+  bottom: 195px;
+}

@@ -1,0 +1,24 @@
+<header class="hero-section" data-controller="hero-video">
+  <%= video_tag "hero-background-video.mp4", data: { hero_video_target: "video" },
+                autoplay: true,
+                loop: true,
+                muted: true,
+                playsinline: true,
+                poster: image_path("hero-background.jpeg"),
+                class: "hero-background-video" %>
+
+  <div class="hero-content-wrapper">
+    <h1>
+      Find local. <br>
+      <br>
+      Share local.<br>
+      <br>
+      All on one map.</h1><br><br>
+    <p>Find and support local farmers, artisans, and producers near you,
+       shared by locals and expats.</p><br><br>
+    <div class="hero-buttons">
+      <%= link_to "Explore the map", map_makers_path, class: "button-primary mb-3" %>
+      <%= link_to "Recommend a local Maker", new_maker_path, class:"button-secondary mb-0" %>
+    </div>
+  </div>
+</header>

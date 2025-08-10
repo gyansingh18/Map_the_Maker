@@ -1,0 +1,54 @@
+<section class="popular-producers-section">
+  <h2>Popular Makers</h2>
+  <p class="section-description">Explore the most sought-after local producers, hand-picked by our community for their quality and dedication.</p>
+  <div class="popular-producers-list">
+    <% if @popular_makers.present? %>
+      <% @popular_makers.each do |maker| %>
+        <div class="producer-card">
+          <%= link_to maker_path(maker) do %>
+            <% if maker.photos.attached? %>
+              <%= image_tag maker.photos.first.url, class: "producer-card-image" %>
+            <% else %>
+              <%= image_tag "default-maker-placeholder.png", class: "producer-card-image" %>
+            <% end %>
+            <div class="producer-card-info">
+              <h3><%= maker.name %></h3>
+              <div class="producer-card-details-row"> <%# New container for location and rating %>
+                <% location = maker.location %>
+                  <% if location.length >= 25 %>
+                    <% location = location[0..25] + "..." %>
+                  <% end %>
+                <p class="producer-card-location"><i class="fas fa-map-marker-alt"></i> <%= location %></p>
+                <div class="producer-card-rating"> <%# Changed from <p> to <div> for more flexible styling %>
+                  <% if maker.reviews.present? %>
+                    <i class="fas fa-star"></i> <%= maker.average_rating %> (<%= maker.reviews.count %> reviews)
+                  <% else %>
+                    No reviews yet
+                  <% end %>
+                </div>
+              </div>
+              <% if maker.categories.present? %>
+                <div class="producer-card-categories">
+                  <% categories = maker.categories %>
+                  <% categories.delete("") %>
+                  <% categories.each_with_index do |category, index| %>
+                    <% if index <= 1 %>
+                      <span class="category-tag-index"><%= category %></span>
+                    <% elsif index == 2 %>
+                      <span class="category-tag-index"><%= "..." %></span>
+                    <% else %>
+                      <% "do nothing" %>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="producer-placeholder">No popular producers to display yet!</div>
+    <% end %>
+  </div>
+  <%= link_to "Explore producers near you", makers_path, class: "button-primary" %>
+</section>

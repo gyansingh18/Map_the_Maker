@@ -1,0 +1,30 @@
+<div>
+  <div class ="container py-3">
+    <h2 class ="heading1">Add a Maker</h2>
+    <%= simple_form_for @maker do |f| %>
+      <%= f.input :name %>
+      <%= f.input :location,
+                  input_html: {data: {location_autocomplete_target: "location"}, class: "d-none"},
+                  wrapper_html: {data: {
+                    controller: "location-autocomplete",
+                    location_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"],
+                    location_autocomplete_image_link_value: image_path("pin.png")
+                  }} %>
+      <div id="map" style="height: 300px; width: 100%; margin-top: 1rem;"></div>
+      <div style="margin-top: 2rem;"></div>
+      <label class="form-label">Categories</label>
+      <div class="categories-box">
+        <%= f.collection_check_boxes(:categories, Maker::CATEGORIES, :to_s, :to_s) do |b| %>
+          <div class="category-element">
+            <%= b.check_box class:"check-box" %>
+            <%= b.label class:"box-label" %>
+          </div>
+        <% end %>
+      </div>
+      <%= f.input :description %>
+      <%= f.input :photos, local: true ,as: :file, input_html: { multiple: true ,required: true } %>
+      <%= f.button :submit, "Save", class: "button-primary"%>
+    <% end %>
+    <br>
+  </div>
+</div>

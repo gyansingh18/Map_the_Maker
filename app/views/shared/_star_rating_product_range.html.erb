@@ -1,0 +1,20 @@
+<% ratings = [] %>
+<% rating_sum = 0 %>
+<% maker.reviews.each do |review| %>
+  <% ratings << review.product_range_rating %>
+  <% rating_sum += review.product_range_rating %>
+<% end %>
+<% product_range_rating = rating_sum.fdiv(ratings.count) %>
+<% full_stars = product_range_rating.floor %>
+<% full_stars.times do %>
+  <i class="fa-solid fa-star star-icon-white"></i>
+<% end %>
+<% post_digit = product_range_rating - product_range_rating.floor %>
+<% half_stars = post_digit.round(0) %>
+<% half_stars.times do %>
+  <i class="fa-solid fa-star-half-stroke star-icon-white"></i>
+<% end %>
+<% empty_stars = 5 - full_stars - half_stars %>
+<% empty_stars.times do %>
+  <i class="fa-regular fa-star star-icon-white"></i>
+<% end %>

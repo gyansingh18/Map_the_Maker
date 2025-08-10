@@ -1,0 +1,60 @@
+    <button type="button" class="btn text-start button-search" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <% results = [] %>
+      <% if params[:name].present? %>
+        <% results << params[:name].capitalize %>
+      <% end %>
+      <% if params[:location].present? %>
+        <% results << params[:location].capitalize %>
+      <% end %>
+      <% if params[:category] != [""] && params[:category] != nil %>
+        <% results << params[:category].drop(1).map!(&:capitalize).join(", ") %>
+      <% end %>
+      <% if results == [] %>
+        <% results = ["Search makers"] %>
+      <% end %>
+      <% results = results.join(", ") %>
+      <% if results.length >= 30 %>
+        <% results = results[0..30] + "..." %>
+      <% end %>
+      <%= results %>
+    </button>
+
+  <%# <div class="top-placeholder">
+  </div> %>
+
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title" id="staticBackdropLabel">
+            <span class="highlight">Search</span> makers
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <%= form_with url: makers_path, method: :get, class: "" do |f| %>
+            <%= text_field_tag :location,
+                  params[:location],
+                  class: "form-control search-box",
+                  placeholder: "Location"
+              %>
+            <%= text_field_tag :name,
+                  params[:name],
+                  class: "form-control search-box",
+                  placeholder: "Maker name"
+              %>
+            <div class="categories-box">
+              <%= f.collection_check_boxes(:category, Maker::CATEGORIES, :to_s, :to_s) do |b| %>
+                <div class="category-element">
+                  <%= b.check_box class:"check-box" %>
+                  <%= b.label class:"box-label" %>
+                </div>
+              <% end %>
+            </div>
+            <%= submit_tag "Search", name: "Submit", class: "btn button-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>

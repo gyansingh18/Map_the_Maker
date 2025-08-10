@@ -1,0 +1,93 @@
+/* app/assets/stylesheets/components/_map.scss */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.mapbox-container {
+  width: 100vw;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: 0;
+}
+
+.map-transparent {
+  height: 1000px
+}
+
+.float-search {
+  position: fixed;
+  top: 70px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background-color: $background-color;
+  padding: 10px 15px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.mapsearch {
+  position: fixed;
+  top: 10px;
+  z-index: 20;
+}
+
+.bottom-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 20;
+}
+
+.mapboxgl-canvas {
+  position: static !important;
+}
+
+.mapboxgl-popup-close-button {
+  color: $background-color;
+}
+
+#instructions {
+  position: absolute;
+  margin: 5px;
+  width: 200px;
+  height: 100px;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 20px;
+  background-color: $background-color;
+  overflow-y: scroll;
+  font-family: sans-serif;
+  opacity: 90%;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style for the trip summary box */
+.trip-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+}
+
+/* Style for the clear route button */
+.clear-route-button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #888;
+  cursor: pointer;
+  padding: 0 5px;
+}
+
+.clear-route-button:hover {
+  color: #000;
+}

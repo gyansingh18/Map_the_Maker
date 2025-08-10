@@ -1,0 +1,21 @@
+<%# app/views/makers/map.html.erb %>
+<div class="container">
+  <%= render "search_bar", search_path: map_makers_path, class: "mapsearch"%>
+  <div class="map-transparent"></div>
+  <div class="mapbox-container" data-controller="map" data-map-markers-value="<%= @markers.to_json %>" data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+  <div class="d-none" id="instructions" data-controller="map-reset"></div>
+
+</div>
+
+
+<%# <div id="instructions"></div> %>
+
+
+<%# <div class="fixed-bottom float-body d-flex justify-content-around align-items-center">
+  <%= link_to new_maker_path, class: "btn button-add" do %>
+    <%# <i class="fa-solid fa-plus"></i> Add
+  <% end %>
+  <%# <%= link_to makers_path, class: "btn button-map" do %>
+    <%# <i class="fa-solid fa-list"></i> List
+  <% end %>
+<%# </div> %>

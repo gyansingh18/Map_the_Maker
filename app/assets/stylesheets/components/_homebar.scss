@@ -1,0 +1,28 @@
+.homebar {
+  position: sticky;
+  bottom: -1px;
+  background: $background-color;
+  height: 68px;
+  box-shadow: 0 -2px 4px 0 rgba(0,0,0,.2);
+  display: flex;
+  justify-content: space-between;
+  z-index: 20;
+}
+
+.homebutton {
+  height: 68px;
+  color: $font-color;
+  width: 25%;
+  text-align: center;
+  align-self: flex-end;
+  padding: 10px 0px 5px 0px;
+  text-decoration: none;
+}
+
+.homeicon {
+  font-size: x-large;
+}
+
+.highlight-gold {
+  color: $primary-color;
+}

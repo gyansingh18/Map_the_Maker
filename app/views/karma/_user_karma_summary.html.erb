@@ -1,0 +1,41 @@
+<%# app/views/karma/_user_karma_summary.html.erb %>
+
+<div class="karma-summary-card">
+  <div class="karma-summary-header">
+    <div class="main-icon-wrapper">
+      <i class="fas fa-star"></i>
+    </div>
+    <h2>Your Karma Summary</h2>
+    <span class="karma-rank">Rank: <%= user_rank %></span>
+  </div>
+
+  <div class="karma-stats-grid">
+    <div class="karma-stat-item points">
+      <p><%= user_karma_points %></p>
+      <p>Total Karma Points</p>
+    </div>
+
+    <div class="karma-stat-item tier">
+      <p><%= current_karma_tier[:display_name] %></p>
+      <p>Current Tier</p>
+    </div>
+  </div>
+
+  <% if next_karma_tier.present? %>
+    <div class="karma-progress-section">
+      <h3>Progress to <%= next_karma_tier[:display_name] %></h3>
+      <div class="progress-bar-container">
+        <div class="progress-bar" style="width: <%= progress_percentage %>%"></div>
+      </div>
+      <p class="progress-text">
+        <%= progress_percentage %>% towards <%= next_karma_tier[:min_points] %> points
+      </p>
+    </div>
+  <% end %>
+
+  <div class="karma-cta">
+    <p>
+      Keep contributing to unlock new tiers and become a <span class="highlight"><%= KarmaConfig::TIERS.values.last[:display_name] %></span>!
+    </p>
+  </div>
+</div>

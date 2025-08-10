@@ -1,0 +1,26 @@
+<div class="container chatbot" data-controller="rec-questions">
+  <h1>Chat with us</h1>
+
+  <div class="chat-top-buttons">
+    <%= link_to reset_questions_path do %>
+      <span class="back-from-chat"><i class="fa-solid fa-arrows-spin"></i> Restart conversation</span>
+    <% end %>
+  </div>
+
+  <div id="questions">
+    <%= render @questions %>
+  </div>
+
+  <%= render "form", question: @question %>
+
+  <% if @questions.last.nil? %>
+    <div class="rec-questions-box">
+      <div class="rec-question rec-question-1" data-rec-questions-target="rec1" data-action="click->rec-questions#insert">
+        Where can I find fresh fruit?
+      </div>
+      <div class="rec-question rec-question-2" data-rec-questions-target="rec2" data-action="click->rec-questions#insert">
+        Which makers are most popular?
+      </div>
+    </div>
+  <% end %>
+</div>

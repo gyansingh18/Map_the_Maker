@@ -1,0 +1,51 @@
+.button-primary {
+  background-color: $primary-color;
+  color: $font-color;
+  width:  100%;
+  margin-bottom: 5px;
+  border-radius: $border-radius;
+  border: 0;
+  font-family: $headers-font;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 8px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.button-primary.review-btn-alone {
+    width: 90%;
+}
+.button-primary.review-btn {
+    width: 40%;
+}
+.button-secondary {
+  background-color: $secondary-color;
+  color: $background-color;
+  width:  100%;
+  font-family: $headers-font;
+  font-weight: 700;
+  border: 2px solid;
+  border-radius: $border-radius;
+  border-color: $secondary-color;
+  padding: 8px;
+  margin-bottom: 5px;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.button-secondary.review-btn {
+  width: 40%;
+}
+
+@media(min-width: 440px) {
+  .button-primary {
+    width:  auto;
+  }
+
+  .button-secondary {
+    width:  auto;
+  }
+}
